@@ -9,6 +9,8 @@ import Pricing from './components/Pricing'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import TrainerProfile from './pages/TrainerProfile'
+import AdminApp from './pages/admin/AdminApp'
+import { AdminProvider } from './data/adminStore.jsx'
 
 function HomePage() {
   return (
@@ -30,11 +32,14 @@ function HomePage() {
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/trainer/:id" element={<TrainerProfile />} />
-      </Routes>
-    </BrowserRouter>
+    <AdminProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/trainer/:id" element={<TrainerProfile />} />
+          <Route path="/admin/*" element={<AdminApp />} />
+        </Routes>
+      </BrowserRouter>
+    </AdminProvider>
   )
 }
