@@ -1,4 +1,5 @@
 import Logo from './Logo'
+import { useAdmin } from '../data/adminStore.jsx'
 
 const InstagramIcon = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -21,137 +22,156 @@ const YoutubeIcon = () => (
   </svg>
 )
 
-const socials = [
-  { icon: <InstagramIcon />, label: 'اینستاگرام', href: '#', color: '#E1306C' },
-  { icon: <TelegramIcon />,  label: 'تلگرام',     href: '#', color: '#229ED9' },
-  { icon: <WhatsappIcon />,  label: 'واتساپ',     href: '#', color: '#25D366' },
-  { icon: <YoutubeIcon />,   label: 'یوتیوب',     href: '#', color: '#FF0000' },
+const navLinks = [
+  { label: 'خانه',      href: '/#hero' },
+  { label: 'درباره ما', href: '/#about' },
+  { label: 'خدمات',     href: '/#services' },
+  { label: 'مربیان',    href: '/#trainers' },
+  { label: 'کلاس‌ها',   href: '/classes' },
+  { label: 'گالری',     href: '/#gallery' },
+  { label: 'قیمت‌ها',   href: '/#pricing' },
+  { label: 'تماس با ما',href: '/#contact' },
 ]
 
-const CSS = `
-  .footer-social-btn {
-    width: 42px; height: 42px; border-radius: 12px;
-    background: var(--color-bg-white);
-    border: 1.5px solid var(--color-border);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--color-foreground-muted);
-    transition: all 0.22s ease;
-    text-decoration: none;
-  }
-  .footer-social-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-  }
-  .footer-link {
-    font-size: 13px; color: var(--color-foreground-muted);
-    transition: color 0.2s; text-decoration: none;
-    display: flex; align-items: center; gap: 6px;
-  }
-  .footer-link:hover { color: var(--color-primary); }
-  .footer-link::before {
-    content: ''; display: inline-block;
-    width: 4px; height: 4px; border-radius: 50%;
-    background: var(--color-border);
-    transition: background 0.2s;
-    flex-shrink: 0;
-  }
-  .footer-link:hover::before { background: var(--color-primary); }
-`
+const MobilePhoneIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+    <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/>
+  </svg>
+)
+const PhoneIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+    <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .82h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7a2 2 0 011.72 2z"/>
+  </svg>
+)
+const LocationIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+  </svg>
+)
+const ClockIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+    <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+  </svg>
+)
 
 export default function Footer() {
+  const { settings } = useAdmin()
+
+  const allSocials = [
+    { key: 'instagram', icon: <InstagramIcon />, label: 'اینستاگرام', href: settings.instagram, color: '#E1306C', visKey: 'instagramVisible' },
+    { key: 'telegram',  icon: <TelegramIcon />,  label: 'تلگرام',     href: settings.telegram,  color: '#229ED9', visKey: 'telegramVisible' },
+    { key: 'whatsapp',  icon: <WhatsappIcon />,  label: 'واتساپ',     href: settings.whatsapp ? `https://wa.me/${settings.whatsapp.replace(/\D/g,'')}` : '', color: '#25D366', visKey: 'whatsappVisible' },
+    { key: 'youtube',   icon: <YoutubeIcon />,   label: 'یوتیوب',     href: settings.youtube,   color: '#FF0000', visKey: 'youtubeVisible' },
+  ]
+
+  const visibleSocials = allSocials.filter(s => settings[s.visKey] !== false && s.href)
+
+  const contactItems = [
+    { icon: <LocationIcon />, label: 'آدرس',   value: settings.address || 'تهران، خیابان ولیعصر' },
+    { icon: <PhoneIcon />,    label: 'تلفن',   value: settings.phone   || '۰۲۱-۸۸۸۸-۰۰۰۰' },
+    { icon: <ClockIcon />,    label: 'ساعات',  value: settings.hours   || 'شنبه تا پنجشنبه ۸–۲۲' },
+  ]
+
   return (
-    <footer style={{ background: '#111', color: '#fff', direction: 'rtl' }}>
-      <style>{CSS}</style>
+    <footer style={{ background: '#0f0f0f', color: '#fff', direction: 'rtl' }}>
 
-      {/* Main footer */}
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '64px 2.5rem 48px' }}>
-        <div className="footer-grid">
+      {/* Main grid */}
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '56px 2rem 40px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 64, marginBottom: 48 }}>
 
-          {/* Brand col */}
+          {/* Brand */}
           <div>
-            <div style={{ marginBottom: 20 }}>
+            <div style={{ marginBottom: 18 }}>
               <Logo size={1.1} dark />
             </div>
-            <p style={{ fontSize: 14, color: 'rgba(255,255,255,.5)', lineHeight: 1.85, maxWidth: 260, marginBottom: 28 }}>
+            <p style={{ fontSize: 13.5, color: 'rgba(255,255,255,.4)', lineHeight: 2, marginBottom: 28, maxWidth: 320 }}>
               از ۱۳۹۴ تاکنون، خانه‌ی سنگنوردان تهران. بزرگ‌ترین باشگاه سنگنوردی سرپوشیده با ۱۸ مسیر و ۱۵ متر ارتفاع.
             </p>
 
-            {/* Social icons */}
-            <div style={{ display: 'flex', gap: 10 }}>
-              {socials.map(s => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  className="footer-social-btn"
-                  aria-label={s.label}
-                  style={{ background: 'rgba(255,255,255,.06)', border: '1px solid rgba(255,255,255,.1)', color: 'rgba(255,255,255,.55)' }}
-                  onMouseEnter={e => { e.currentTarget.style.background = s.color; e.currentTarget.style.borderColor = s.color; e.currentTarget.style.color = '#fff'; }}
-                  onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,.06)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,.1)'; e.currentTarget.style.color = 'rgba(255,255,255,.55)'; }}
+            {/* Phone numbers */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 24 }}>
+              {settings.phone && (
+                <a href={`tel:${settings.phone}`} style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 8,
+                  background: 'rgba(234,68,60,.1)', border: '1px solid rgba(234,68,60,.2)',
+                  borderRadius: 12, padding: '9px 14px', textDecoration: 'none',
+                  color: '#fff', transition: 'background .2s',
+                }}
+                  onMouseEnter={e => e.currentTarget.style.background = 'rgba(234,68,60,.18)'}
+                  onMouseLeave={e => e.currentTarget.style.background = 'rgba(234,68,60,.1)'}
                 >
-                  {s.icon}
+                  <span style={{ color: '#EA443C', display: 'flex' }}><PhoneIcon /></span>
+                  <div>
+                    <div style={{ fontSize: 10, color: 'rgba(255,255,255,.4)', fontWeight: 600, marginBottom: 1 }}>تلفن ثابت</div>
+                    <div style={{ fontSize: 14, fontWeight: 700 }}>{settings.phone}</div>
+                  </div>
                 </a>
+              )}
+              {settings.mobile && (
+                <a href={`tel:${settings.mobile}`} style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 8,
+                  background: 'rgba(34,197,94,.08)', border: '1px solid rgba(34,197,94,.2)',
+                  borderRadius: 12, padding: '9px 14px', textDecoration: 'none',
+                  color: '#fff', transition: 'background .2s',
+                }}
+                  onMouseEnter={e => e.currentTarget.style.background = 'rgba(34,197,94,.15)'}
+                  onMouseLeave={e => e.currentTarget.style.background = 'rgba(34,197,94,.08)'}
+                >
+                  <span style={{ color: '#22C55E', display: 'flex' }}><MobilePhoneIcon /></span>
+                  <div>
+                    <div style={{ fontSize: 10, color: 'rgba(255,255,255,.4)', fontWeight: 600, marginBottom: 1 }}>تلفن همراه</div>
+                    <div style={{ fontSize: 14, fontWeight: 700 }}>{settings.mobile}</div>
+                  </div>
+                </a>
+              )}
+            </div>
+
+            {/* Social icons */}
+            {visibleSocials.length > 0 && (
+              <div style={{ display: 'flex', gap: 8 }}>
+                {visibleSocials.map(s => (
+                  <a key={s.key} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}
+                    style={{ width: 40, height: 40, borderRadius: 10, background: 'rgba(255,255,255,.07)', border: '1px solid rgba(255,255,255,.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(255,255,255,.5)', transition: 'all .2s', textDecoration: 'none' }}
+                    onMouseEnter={e => { e.currentTarget.style.background = s.color; e.currentTarget.style.borderColor = s.color; e.currentTarget.style.color = '#fff'; e.currentTarget.style.transform = 'translateY(-2px)' }}
+                    onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,.07)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,.1)'; e.currentTarget.style.color = 'rgba(255,255,255,.5)'; e.currentTarget.style.transform = 'none' }}
+                  >{s.icon}</a>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Contact */}
+          <div>
+            <p style={{ fontSize: 11, fontWeight: 800, color: 'rgba(255,255,255,.25)', letterSpacing: 1.5, textTransform: 'uppercase', marginBottom: 24 }}>اطلاعات تماس</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+              {contactItems.map((item, i) => (
+                <div key={item.label} style={{
+                  display: 'flex', alignItems: 'center', gap: 16,
+                  padding: '16px 0',
+                  borderBottom: i < contactItems.length - 1 ? '1px solid rgba(255,255,255,.06)' : 'none',
+                }}>
+                  <div style={{ width: 36, height: 36, borderRadius: 10, background: 'rgba(234,68,60,.1)', border: '1px solid rgba(234,68,60,.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#EA443C', flexShrink: 0 }}>
+                    {item.icon}
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 11, color: 'rgba(255,255,255,.3)', fontWeight: 600, marginBottom: 2 }}>{item.label}</div>
+                    <div style={{ fontSize: 14, color: 'rgba(255,255,255,.7)', fontWeight: 500 }}>{item.value}</div>
+                  </div>
+                </div>
               ))}
             </div>
           </div>
 
-          {/* Links cols */}
-          {[
-            { title: 'خدمات', links: ['سنگنوردی مبتدی', 'بولدرینگ', 'Lead کلایمینگ', 'کلاس کودکان', 'تمرین خصوصی'] },
-            { title: 'باشگاه',  links: ['درباره ما', 'تیم مربیان', 'گالری', 'مسابقات', 'اخبار'] },
-            { title: 'پشتیبانی', links: ['سوالات متداول', 'تماس با ما', 'شرایط عضویت', 'حریم خصوصی'] },
-          ].map(col => (
-            <div key={col.title}>
-              <h4 style={{ fontSize: 13, fontWeight: 800, marginBottom: 20, color: 'rgba(255,255,255,.9)', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
-                {col.title}
-              </h4>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                {col.links.map(link => (
-                  <a key={link} href="#" className="footer-link"
-                    style={{ fontSize: 13, color: 'rgba(255,255,255,.45)', transition: 'color 0.2s', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 6 }}
-                    onMouseEnter={e => e.currentTarget.style.color = '#fff'}
-                    onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,.45)'}
-                  >{link}</a>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Contact strip */}
-        <div style={{
-          display: 'flex', gap: 32, flexWrap: 'wrap',
-          borderTop: '1px solid rgba(255,255,255,.08)',
-          borderBottom: '1px solid rgba(255,255,255,.08)',
-          padding: '28px 0', marginTop: 48,
-        }}>
-          {[
-            { icon: '📍', text: 'تهران، خیابان ولیعصر، خیابان داوینو، پلاک ۲۴' },
-            { icon: '📞', text: '۰۲۱-۸۸۸۸-۰۰۰۰' },
-            { icon: '⏰', text: 'شنبه تا پنجشنبه ۸ صبح تا ۱۰ شب' },
-          ].map(item => (
-            <div key={item.text} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <span style={{ fontSize: 16 }}>{item.icon}</span>
-              <span style={{ fontSize: 13, color: 'rgba(255,255,255,.45)' }}>{item.text}</span>
-            </div>
-          ))}
         </div>
 
         {/* Bottom bar */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12, paddingTop: 24 }}>
-          <p style={{ fontSize: 13, color: 'rgba(255,255,255,.3)' }}>
+        <div style={{ borderTop: '1px solid rgba(255,255,255,.07)', paddingTop: 24, display: 'flex', justifyContent: 'center' }}>
+          <p style={{ fontSize: 12, color: 'rgba(255,255,255,.2)' }}>
             © ۱۴۰۳ داوینو کلایمینگ — تمامی حقوق محفوظ است
           </p>
-          <div style={{ display: 'flex', gap: 24 }}>
-            {['حریم خصوصی', 'شرایط استفاده', 'نقشه سایت'].map(item => (
-              <a key={item} href="#"
-                style={{ fontSize: 12, color: 'rgba(255,255,255,.3)', textDecoration: 'none', transition: 'color .2s' }}
-                onMouseEnter={e => e.target.style.color = 'rgba(255,255,255,.7)'}
-                onMouseLeave={e => e.target.style.color = 'rgba(255,255,255,.3)'}
-              >{item}</a>
-            ))}
-          </div>
         </div>
       </div>
+
     </footer>
   )
 }

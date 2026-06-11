@@ -1,6 +1,6 @@
 import { useParams, Link } from 'react-router-dom'
-import { trainers } from '../data/trainers'
-import Logo from '../components/Logo'
+import { useAdmin } from '../data/adminStore.jsx'
+import Navbar from '../components/Navbar'
 
 const CSS = `
   @keyframes trainer-spin { to { transform: rotate(360deg); } }
@@ -57,6 +57,29 @@ const CSS = `
     padding: 6px 16px; border-radius: 999px;
     font-family: 'Vazirmatn', sans-serif;
   }
+
+  /* photo card */
+  .trainer-photo-card {
+    width: 280px;
+    flex-shrink: 0;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 16px 48px rgba(0,0,0,.18), 0 4px 16px rgba(234,68,60,.15);
+    position: relative;
+    aspect-ratio: 3/4;
+  }
+  .trainer-photo-card img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  .trainer-photo-badge {
+    position: absolute; bottom: 12px; right: 12px;
+    background: #EA443C; color: #fff;
+    border-radius: 999px; padding: 5px 12px;
+    font-size: 11px; font-weight: 800;
+    font-family: 'Vazirmatn', sans-serif;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 8px rgba(234,68,60,.4);
+  }
 `
 
 const BadgeIcon = () => (
@@ -67,6 +90,7 @@ const BadgeIcon = () => (
 
 export default function TrainerProfile() {
   const { id } = useParams()
+  const { trainers } = useAdmin()
   const trainer = trainers.find(t => t.id === id)
 
   if (!trainer) {
@@ -80,78 +104,84 @@ export default function TrainerProfile() {
     )
   }
 
+  const hasPhoto = !!trainer.photo
+
   return (
     <div style={{ minHeight: '100vh', background: '#F5F3F0', fontFamily: 'Vazirmatn, sans-serif', direction: 'rtl' }}>
       <style>{CSS}</style>
+      <Navbar />
 
-      {/* Navbar */}
-      <header style={{
-        position: 'sticky', top: 0, zIndex: 100,
-        background: 'rgba(255,255,255,0.95)', backdropFilter: 'blur(20px)',
-        borderBottom: '1px solid #E8E3DC',
-        padding: '0 2.5rem', height: 72,
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        boxShadow: '0 2px 20px rgba(0,0,0,0.06)',
-      }}>
-        <Link to="/"><Logo size={1.1} /></Link>
-        <Link to="/#trainers" className="back-btn">
+      <div style={{ maxWidth: 900, margin: '0 auto', padding: '100px 2rem 100px' }}>
+        {/* Back button */}
+        <Link to="/#trainers" className="back-btn" style={{ display: 'inline-flex', marginBottom: 28 }}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
             <path d="M19 12H5M12 5l-7 7 7 7"/>
           </svg>
           بازگشت به مربیان
         </Link>
-      </header>
-
-      <div style={{ maxWidth: 900, margin: '0 auto', padding: '60px 2rem 100px' }}>
 
         {/* Hero card */}
-        <div className="profile-hero-grid" style={{
+        <div style={{
           background: '#fff', borderRadius: 24,
           border: '1.5px solid #e8e8e8',
           boxShadow: '0 4px 32px rgba(0,0,0,0.07)',
           padding: '40px 32px',
           marginBottom: 28,
+          display: 'flex',
+          gap: 36,
+          alignItems: 'flex-start',
+          flexWrap: 'wrap',
         }}>
-          {/* Avatar */}
-          <div style={{ position: 'relative', width: 160, height: 160, flexShrink: 0 }}>
-            <div className="profile-ring" />
-            <div className="profile-arc" />
-            <div style={{
-              width: 160, height: 160, borderRadius: '50%',
-              overflow: 'hidden', border: '5px solid #fff',
-              boxShadow: '0 6px 24px rgba(234,68,60,.2)',
-              position: 'relative', zIndex: 1,
-              background: `linear-gradient(150deg, ${trainer.gradFrom}, ${trainer.gradTo})`,
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-            }}>
-              <span style={{ fontSize: 56, fontWeight: 900, color: 'rgba(255,255,255,.18)' }}>{trainer.initial}</span>
+
+          {/* Avatar — photo card or circle */}
+          {hasPhoto ? (
+            <div className="trainer-photo-card">
+              <img src={trainer.photo} alt={trainer.name} />
+              <div className="trainer-photo-badge">{trainer.tag}</div>
             </div>
-            <div style={{
-              position: 'absolute', bottom: 4, left: 4, zIndex: 2,
-              width: 40, height: 40, borderRadius: '50%',
-              background: '#EA443C', border: '3px solid #fff',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              boxShadow: '0 2px 10px rgba(234,68,60,.4)',
-            }}>
-              <BadgeIcon />
+          ) : (
+            <div style={{ position: 'relative', width: 160, height: 160, flexShrink: 0 }}>
+              <div className="profile-ring" />
+              <div className="profile-arc" />
+              <div style={{
+                width: 160, height: 160, borderRadius: '50%',
+                overflow: 'hidden', border: '5px solid #fff',
+                boxShadow: '0 6px 24px rgba(234,68,60,.2)',
+                position: 'relative', zIndex: 1,
+                background: `linear-gradient(150deg, ${trainer.gradFrom}, ${trainer.gradTo})`,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}>
+                <span style={{ fontSize: 56, fontWeight: 900, color: 'rgba(255,255,255,.18)' }}>{trainer.initial}</span>
+              </div>
+              <div style={{
+                position: 'absolute', bottom: 4, left: 4, zIndex: 2,
+                width: 40, height: 40, borderRadius: '50%',
+                background: '#EA443C', border: '3px solid #fff',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                boxShadow: '0 2px 10px rgba(234,68,60,.4)',
+              }}>
+                <BadgeIcon />
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Info */}
-          <div>
-            {/* Tag */}
-            <div style={{
-              display: 'inline-block',
-              background: 'rgba(234,68,60,.08)', border: '1px solid rgba(234,68,60,.2)',
-              borderRadius: 999, padding: '4px 14px', marginBottom: 12,
-              fontSize: 12, fontWeight: 800, color: '#EA443C',
-            }}>{trainer.tag}</div>
+          <div style={{ flex: 1, minWidth: 220 }}>
+            {/* Tag — only show here if no photo (photo card has its own badge) */}
+            {!hasPhoto && (
+              <div style={{
+                display: 'inline-block',
+                background: 'rgba(234,68,60,.08)', border: '1px solid rgba(234,68,60,.2)',
+                borderRadius: 999, padding: '4px 14px', marginBottom: 12,
+                fontSize: 12, fontWeight: 800, color: '#EA443C',
+              }}>{trainer.tag}</div>
+            )}
 
             <h1 style={{ fontSize: 32, fontWeight: 900, color: '#111', marginBottom: 6 }}>{trainer.name}</h1>
             <p style={{ fontSize: 15, fontWeight: 700, color: '#EA443C', marginBottom: 20 }}>{trainer.role}</p>
 
             {/* Meta row */}
-            <div className="profile-meta-row" style={{ display: 'flex', gap: 24, flexWrap: 'wrap', marginBottom: 24 }}>
+            <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap', marginBottom: 24 }}>
               {[
                 { label: 'تجربه', val: trainer.exp },
                 { label: 'جلسات', val: trainer.sessions },
@@ -177,7 +207,7 @@ export default function TrainerProfile() {
             </div>
 
             {/* Days */}
-            <div className="profile-days" style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
               {trainer.days.map(d => <span key={d} className="day-pill-lg">{d}</span>)}
             </div>
           </div>

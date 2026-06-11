@@ -51,8 +51,8 @@ img { max-width: 100%; display: block; }
 /* Hero */
 .hero-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 3rem;
   align-items: center;
 }
 .hero-visual { display: flex; }

@@ -7,6 +7,7 @@ import AdminTrainers from './AdminTrainers'
 import AdminPricing from './AdminPricing'
 import AdminGallery from './AdminGallery'
 import AdminSettings from './AdminSettings'
+import AdminClasses from './AdminClasses'
 
 const SESSION_KEY = 'davino_admin_auth'
 
@@ -25,6 +26,7 @@ export default function AdminApp() {
         <Route path="/trainers" element={<AdminTrainers />} />
         <Route path="/pricing" element={<AdminPricing />} />
         <Route path="/gallery" element={<AdminGallery />} />
+        <Route path="/classes" element={<AdminClasses />} />
         <Route path="/settings" element={<AdminSettings />} />
         <Route path="*" element={<Navigate to="/admin" replace />} />
       </Routes>

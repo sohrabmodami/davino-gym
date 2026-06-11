@@ -1,4 +1,7 @@
+import { useAdmin } from '../data/adminStore.jsx'
+
 export default function Hero() {
+  const { settings } = useAdmin()
   return (
     <section id="hero" style={{
       minHeight: '100vh',
@@ -34,23 +37,24 @@ export default function Hero() {
             borderRadius: '50px', padding: '6px 16px', marginBottom: '28px',
           }}>
             <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#22C55E', display: 'inline-block' }} />
-            <span style={{ fontSize: '13px', color: 'var(--color-primary)', fontWeight: 700 }}>باشگاه سنگنوردی حرفه‌ای تهران</span>
+            <span style={{ fontSize: '13px', color: 'var(--color-primary)', fontWeight: 700 }}>{settings.heroBadge || 'باشگاه سنگنوردی حرفه‌ای تهران'}</span>
           </div>
 
           <h1 style={{
             fontSize: 'clamp(2.4rem, 4.5vw, 3.8rem)', fontWeight: 900,
             lineHeight: 1.2, marginBottom: '24px', letterSpacing: '-1px',
-            color: 'var(--color-foreground)',
+            color: 'var(--color-foreground)', whiteSpace: 'pre-line',
           }}>
-            به قله برس،<br />
-            <span style={{ color: 'var(--color-primary)' }}>داوینو</span> همراهته
+            {(settings.heroTitle || 'به قله برس،\nداوینو همراهته').split('\n').map((line, i, arr) => (
+              <span key={i}>{line}{i < arr.length - 1 && <br/>}</span>
+            ))}
           </h1>
 
           <p style={{
             fontSize: '17px', color: 'var(--color-foreground-muted)',
             lineHeight: 1.8, marginBottom: '40px', maxWidth: '460px',
           }}>
-            از مبتدی تا حرفه‌ای — با مربیان مجرب، دیواره‌های متنوع و فضای امن، مسیر سنگنوردی‌ات رو شروع کن.
+            {settings.heroSubtitle || 'از مبتدی تا حرفه‌ای — با مربیان مجرب، دیواره‌های متنوع و فضای امن، مسیر سنگنوردی‌ات رو شروع کن.'}
           </p>
 
           <div style={{ display: 'flex', gap: '14px', alignItems: 'center' }}>
@@ -63,7 +67,7 @@ export default function Hero() {
             }}
               onMouseEnter={e => { e.target.style.transform = 'translateY(-2px)'; e.target.style.boxShadow = '0 12px 32px rgba(234,68,60,0.5)'; }}
               onMouseLeave={e => { e.target.style.transform = 'translateY(0)'; e.target.style.boxShadow = '0 8px 24px rgba(234,68,60,0.4)'; }}
-            >عضویت رایگان</a>
+            >ثبت‌نام</a>
             <a href="#about" style={{
               color: 'var(--color-foreground)', fontWeight: 600, fontSize: '15px',
               padding: '14px 28px', borderRadius: '50px',
@@ -92,8 +96,8 @@ export default function Hero() {
         </div>
 
         {/* Visual */}
-        <div className="hero-visual" style={{ justifyContent: 'center', animation: 'fade-up 0.7s 0.15s ease both' }}>
-          <div style={{ position: 'relative', width: '380px', height: '480px' }}>
+        <div className="hero-visual" style={{ animation: 'fade-up 0.7s 0.15s ease both' }}>
+          <div style={{ position: 'relative', width: '100%', height: '480px' }}>
             {/* Main card */}
             <div style={{
               width: '100%', height: '100%', borderRadius: '28px',
@@ -101,14 +105,18 @@ export default function Hero() {
               overflow: 'hidden', position: 'relative',
               boxShadow: '0 40px 80px rgba(0,0,0,0.2), 0 0 0 1px rgba(234,68,60,0.15)',
             }}>
-              {/* Climbing wall illustration */}
-              <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0.12 }} viewBox="0 0 380 480" xmlns="http://www.w3.org/2000/svg">
-                {[...Array(8)].map((_, r) =>
-                  [...Array(6)].map((_, c) => (
-                    <circle key={`${r}-${c}`} cx={40 + c * 55 + (r % 2) * 27} cy={40 + r * 55} r="8" fill="#EA443C"/>
-                  ))
-                )}
-              </svg>
+              {settings.heroImage
+                ? <img src={settings.heroImage} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+                : (
+                  <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0.12 }} viewBox="0 0 380 480" xmlns="http://www.w3.org/2000/svg">
+                    {[...Array(8)].map((_, r) =>
+                      [...Array(6)].map((_, c) => (
+                        <circle key={`${r}-${c}`} cx={40 + c * 55 + (r % 2) * 27} cy={40 + r * 55} r="8" fill="#EA443C"/>
+                      ))
+                    )}
+                  </svg>
+                )
+              }
 
               <div style={{
                 position: 'absolute', inset: 0,
@@ -123,7 +131,7 @@ export default function Hero() {
                   DAVINO CLIMBING GYM
                 </div>
                 <div style={{ fontSize: '22px', fontWeight: 900, color: '#fff', marginBottom: '16px' }}>
-                  دیواره‌های حرفه‌ای
+                  {settings.heroCardTitle || 'دیواره‌های حرفه‌ای'}
                 </div>
                 <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap' }}>
                   {['مبتدی', 'متوسط', 'حرفه‌ای', 'مسابقاتی'].map(lvl => (
@@ -146,7 +154,7 @@ export default function Hero() {
               animation: 'float 3.5s ease-in-out infinite',
             }}>
               <div style={{ fontSize: '11px', color: 'var(--color-foreground-muted)', fontWeight: 500 }}>ارتفاع دیواره</div>
-              <div style={{ fontSize: '20px', fontWeight: 900, color: 'var(--color-primary)' }}>۱۵ متر</div>
+              <div style={{ fontSize: '20px', fontWeight: 900, color: 'var(--color-primary)' }}>{settings.heroWallHeight || '۱۵ متر'}</div>
             </div>
 
             <div style={{
@@ -156,7 +164,7 @@ export default function Hero() {
               animation: 'float 4s 1s ease-in-out infinite',
             }}>
               <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.8)', fontWeight: 500 }}>امتیاز کاربران</div>
-              <div style={{ fontSize: '22px', fontWeight: 900, color: '#fff' }}>۴.۹ ★</div>
+              <div style={{ fontSize: '22px', fontWeight: 900, color: '#fff' }}>{settings.heroRating || '۴.۹ ★'}</div>
             </div>
           </div>
         </div>

@@ -8,7 +8,9 @@ import Gallery from './components/Gallery'
 import Pricing from './components/Pricing'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import ClassesPreview from './components/ClassesPreview'
 import TrainerProfile from './pages/TrainerProfile'
+import Classes from './pages/Classes'
 import AdminApp from './pages/admin/AdminApp'
 import { AdminProvider } from './data/adminStore.jsx'
 
@@ -21,6 +23,7 @@ function HomePage() {
         <About />
         <Services />
         <Trainers />
+        <ClassesPreview />
         <Gallery />
         <Pricing />
         <Contact />
@@ -37,6 +40,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/trainer/:id" element={<TrainerProfile />} />
+          <Route path="/classes" element={<Classes />} />
           <Route path="/admin/*" element={<AdminApp />} />
         </Routes>
       </BrowserRouter>

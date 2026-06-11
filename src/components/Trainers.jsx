@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { trainers } from '../data/trainers'
+import { useAdmin } from '../data/adminStore.jsx'
 
 const CSS = `
   @keyframes trainer-spin { to { transform: rotate(360deg); } }
@@ -141,6 +141,7 @@ const ChevronLeft = () => (
 )
 
 export default function Trainers() {
+  const { trainers } = useAdmin()
   return (
     <section id="trainers" style={{ padding: '100px 2.5rem', background: 'var(--color-bg)' }}>
       <style>{CSS}</style>
@@ -175,15 +176,16 @@ export default function Trainers() {
                 <div className="avatar-ring" />
                 <div className="avatar-arc" />
                 <div className="avatar-circle">
-                  <div style={{
-                    position: 'absolute', inset: 0, display: 'flex',
-                    alignItems: 'center', justifyContent: 'center',
-                    background: `linear-gradient(150deg, ${t.gradFrom}, ${t.gradTo})`,
-                  }}>
-                    <span style={{ fontSize: 42, fontWeight: 900, color: 'rgba(255,255,255,.18)', lineHeight: 1 }}>
-                      {t.initial}
-                    </span>
-                  </div>
+                  {t.photo
+                    ? <img src={t.photo} alt={t.name} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+                    : <div style={{
+                        position: 'absolute', inset: 0, display: 'flex',
+                        alignItems: 'center', justifyContent: 'center',
+                        background: `linear-gradient(150deg, ${t.gradFrom}, ${t.gradTo})`,
+                      }}>
+                        <span style={{ fontSize: 42, fontWeight: 900, color: 'rgba(255,255,255,.18)', lineHeight: 1 }}>{t.initial}</span>
+                      </div>
+                  }
                 </div>
                 <div className="avatar-badge"><BadgeIcon /></div>
               </div>
