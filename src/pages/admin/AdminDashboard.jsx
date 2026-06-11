@@ -60,9 +60,16 @@ export default function AdminDashboard() {
       <style>{CSS}</style>
 
       {/* Page header */}
-      <div style={{ marginBottom: 32 }}>
-        <h1 style={{ fontSize: 22, fontWeight: 900, color: '#111', marginBottom: 4 }}>داشبورد</h1>
-        <p style={{ fontSize: 13, color: '#999' }}>خلاصه وضعیت باشگاه داوینو</p>
+      <div style={{ marginBottom: 32, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+        <div>
+          <h1 style={{ fontSize: 22, fontWeight: 900, color: '#111', marginBottom: 4 }}>داشبورد</h1>
+          <p style={{ fontSize: 13, color: '#999' }}>خلاصه وضعیت باشگاه داوینو</p>
+        </div>
+        <div style={{ background: '#f5f0ea', borderRadius: 10, padding: '7px 14px', textAlign: 'left' }}>
+          <div style={{ fontSize: 10, color: '#bbb', fontWeight: 600, marginBottom: 2 }}>نسخه سایت</div>
+          <div style={{ fontSize: 13, fontWeight: 800, color: '#555', fontFamily: 'monospace' }}>v1.1.0</div>
+          <div style={{ fontSize: 10, color: '#bbb', marginTop: 1 }}>2026-06-11</div>
+        </div>
       </div>
 
       {/* Stats */}
