@@ -3,7 +3,7 @@ import { useAdmin } from '../data/adminStore.jsx'
 
 export default function Contact() {
   const { settings } = useAdmin()
-  const [form, setForm] = useState({ name: '', phone: '', message: '' })
+  const [form, setForm] = useState({ name: '', phone: '', message: '', company: '' })
   const [submitted, setSubmitted] = useState(false)
   const [sending, setSending] = useState(false)
   const [error, setError] = useState('')
@@ -20,7 +20,7 @@ export default function Contact() {
       })
       if (!res.ok) throw new Error('failed')
       setSubmitted(true)
-      setForm({ name: '', phone: '', message: '' })
+      setForm({ name: '', phone: '', message: '', company: '' })
       setTimeout(() => setSubmitted(false), 5000)
     } catch {
       setError('ارسال پیام ناموفق بود. لطفاً دوباره تلاش کن یا تماس بگیر.')
@@ -148,6 +148,13 @@ export default function Contact() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                {/* honeypot — برای انسان نامرئی؛ فقط بات‌ها پرش می‌کنند */}
+                <input
+                  type="text" name="company" tabIndex={-1} autoComplete="off" aria-hidden="true"
+                  value={form.company}
+                  onChange={e => setForm(p => ({ ...p, company: e.target.value }))}
+                  style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0, pointerEvents: 'none' }}
+                />
                 <div>
                   <label style={{ display: 'block', fontSize: '14px', fontWeight: 600, marginBottom: '8px', color: 'var(--color-foreground-muted)' }}>
                     نام و نام خانوادگی

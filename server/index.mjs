@@ -92,6 +92,22 @@ function noteLoginFail(ip) {
   loginAttempts.set(ip, rec)
 }
 
+// ── محدودیت ارسال پیام فرم تماس (ضد اسپم) — در حافظه ──
+const msgSubmits = new Map() // ip → [timestamp, ...]
+const MSG_WINDOW_MS = 10 * 60 * 1000 // پنجره‌ی ۱۰ دقیقه‌ای
+const MSG_MAX = 5                     // حداکثر ۵ پیام در هر پنجره از هر IP
+function msgRateLimited(ip) {
+  const now = Date.now()
+  const arr = (msgSubmits.get(ip) || []).filter(t => now - t < MSG_WINDOW_MS)
+  msgSubmits.set(ip, arr)
+  return arr.length >= MSG_MAX
+}
+function noteMsgSubmit(ip) {
+  const arr = (msgSubmits.get(ip) || []).filter(t => Date.now() - t < MSG_WINDOW_MS)
+  arr.push(Date.now())
+  msgSubmits.set(ip, arr)
+}
+
 const server = http.createServer(async (req, res) => {
   const url = new URL(req.url, 'http://localhost')
   const p = url.pathname
@@ -132,8 +148,12 @@ const server = http.createServer(async (req, res) => {
   }
   // ── پیام جدید از فرم تماس (عمومی) ──
   if (p === '/api/messages' && req.method === 'POST') {
+    const ip = clientIp(req)
+    if (msgRateLimited(ip)) return sendJson(res, 429, { ok: false, error: 'تعداد پیام‌ها زیاد است — کمی بعد دوباره تلاش کن' })
     try {
       const body = JSON.parse((await readBody(req)) || '{}')
+      // honeypot: فیلد مخفی که فقط بات‌ها پر می‌کنند → وانمود به موفقیت، بدون ذخیره
+      if (String(body.company || '').trim()) return sendJson(res, 200, { ok: true })
       const name = String(body.name || '').trim().slice(0, 120)
       const phone = String(body.phone || '').trim().slice(0, 40)
       const message = String(body.message || '').trim().slice(0, 2000)
@@ -147,6 +167,7 @@ const server = http.createServer(async (req, res) => {
       })
       if (msgs.length > 1000) msgs.length = 1000 // سقف نگه‌داری
       writeMessages(msgs)
+      noteMsgSubmit(ip)
       return sendJson(res, 200, { ok: true })
     } catch { return sendJson(res, 400, { ok: false, error: 'دادهٔ نامعتبر' }) }
   }
