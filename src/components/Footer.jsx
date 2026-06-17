@@ -59,6 +59,7 @@ export default function Footer() {
 
   const allSocials = [
     { key: 'instagram', icon: <InstagramIcon />, label: 'اینستاگرام', href: settings.instagram, color: '#E1306C', visKey: 'instagramVisible' },
+    { key: 'instagram2', icon: <InstagramIcon />, label: 'اینستاگرام دوم', href: settings.instagram2, color: '#E1306C', visKey: 'instagram2Visible' },
     { key: 'telegram',  icon: <TelegramIcon />,  label: 'تلگرام',     href: settings.telegram,  color: '#229ED9', visKey: 'telegramVisible' },
     { key: 'whatsapp',  icon: <WhatsappIcon />,  label: 'واتساپ',     href: settings.whatsapp ? `https://wa.me/${settings.whatsapp.replace(/\D/g,'')}` : '', color: '#25D366', visKey: 'whatsappVisible' },
     { key: 'youtube',   icon: <YoutubeIcon />,   label: 'یوتیوب',     href: settings.youtube,   color: '#FF0000', visKey: 'youtubeVisible' },
@@ -73,11 +74,12 @@ export default function Footer() {
   ]
 
   return (
-    <footer style={{ background: '#0f0f0f', color: '#fff', direction: 'rtl' }}>
+    // فوتر همیشه تیره — انتخاب دیزاین، مستقل از تم
+    <footer style={{ background: '#070608', color: '#fff', direction: 'rtl', borderTop: '1px solid rgba(255,255,255,.07)' }}>
 
       {/* Main grid */}
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '56px 2rem 40px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 64, marginBottom: 48 }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '56px clamp(24px, 4vw, 40px) 36px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 'clamp(36px, 5vw, 64px)', marginBottom: 44 }}>
 
           {/* Brand */}
           <div>
@@ -132,7 +134,7 @@ export default function Footer() {
                 {visibleSocials.map(s => (
                   <a key={s.key} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}
                     style={{ width: 40, height: 40, borderRadius: 10, background: 'rgba(255,255,255,.07)', border: '1px solid rgba(255,255,255,.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(255,255,255,.5)', transition: 'all .2s', textDecoration: 'none' }}
-                    onMouseEnter={e => { e.currentTarget.style.background = s.color; e.currentTarget.style.borderColor = s.color; e.currentTarget.style.color = '#fff'; e.currentTarget.style.transform = 'translateY(-2px)' }}
+                    onMouseEnter={e => { e.currentTarget.style.background = '#EA443C'; e.currentTarget.style.borderColor = '#EA443C'; e.currentTarget.style.color = '#fff'; e.currentTarget.style.transform = 'translateY(-2px)' }}
                     onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,.07)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,.1)'; e.currentTarget.style.color = 'rgba(255,255,255,.5)'; e.currentTarget.style.transform = 'none' }}
                   >{s.icon}</a>
                 ))}

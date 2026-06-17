@@ -1,22 +1,43 @@
 import { useState } from 'react'
 import Logo from '../../components/Logo'
 
-const PASS = 'davino1394'
-
 export default function AdminLogin({ onLogin }) {
   const [pass, setPass] = useState('')
   const [show, setShow] = useState(false)
   const [error, setError] = useState(false)
+  const [errorMsg, setErrorMsg] = useState('رمز عبور اشتباه است')
   const [shake, setShake] = useState(false)
+  const [loading, setLoading] = useState(false)
 
-  const submit = (e) => {
+  const fail = (msg = 'رمز عبور اشتباه است') => {
+    setErrorMsg(msg)
+    setError(true)
+    setShake(true)
+    setTimeout(() => setShake(false), 500)
+  }
+
+  const submit = async (e) => {
     e.preventDefault()
-    if (pass === PASS) {
-      onLogin()
-    } else {
-      setError(true)
-      setShake(true)
-      setTimeout(() => setShake(false), 500)
+    if (loading) return
+    setLoading(true)
+    try {
+      // بررسی رمز فقط روی سرور (هیچ رمزی در کد سمت کاربر نیست)
+      const r = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: pass }),
+      })
+      if (r.ok) {
+        const { token } = await r.json()
+        onLogin(token) // توکن برای نوشتن روی سرور
+        return
+      }
+      if (r.status === 429) { fail('تلاش زیاد — کمی صبر کن'); return }
+      fail()
+    } catch {
+      fail('ارتباط با سرور برقرار نشد')
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -97,16 +118,14 @@ export default function AdminLogin({ onLogin }) {
             {error && (
               <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 7 }}>
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f87171" strokeWidth="2.5" strokeLinecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                <span style={{ color: '#f87171', fontSize: 12, fontWeight: 500 }}>رمز عبور اشتباه است</span>
+                <span style={{ color: '#f87171', fontSize: 12, fontWeight: 500 }}>{errorMsg}</span>
               </div>
             )}
           </div>
-          <button type="submit" className="admin-login-btn">ورود به پنل</button>
+          <button type="submit" className="admin-login-btn" disabled={loading} style={{ opacity: loading ? 0.7 : 1 }}>
+            {loading ? 'در حال بررسی…' : 'ورود به پنل'}
+          </button>
         </form>
-
-        <p style={{ textAlign: 'center', marginTop: 20, fontSize: 11, color: 'rgba(255,255,255,.18)' }}>
-          رمز پیش‌فرض: davino1394
-        </p>
       </div>
     </div>
   )

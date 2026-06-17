@@ -9,17 +9,26 @@ No TypeScript — plain JSX.
 ## Dev Server
 
 ```bash
-npm run dev        # http://localhost:5173
+npm run dev        # Vite UI on http://localhost:5173 (proxies /api → :3001)
+npm run server     # Node API + static server on http://localhost:3001
 npm run build      # output: dist/
-npm run preview    # preview built dist
+npm start          # build + run server (production: serves dist + API on :3001)
 ```
+
+For local full-stack dev, run `npm run server` and `npm run dev` in two terminals.
 
 ## Key Architecture
 
 ### State / Data
-- All admin data lives in `src/data/adminStore.jsx` via React Context + localStorage (`davino_admin` key).
-- Hook: `useAdmin()` — gives `trainers`, `classes`, `gallery`, `pricing`, `settings`, and their mutators.
-- Default data is in the same file (`defaultClasses`, `defaultSettings`, etc.) and is only used when localStorage is empty.
+- Content is persisted **server-side** in `server/data/content.json` via the Node API (`server/index.js`).
+- `src/data/adminStore.jsx` (React Context, hook `useAdmin()`) hydrates from `GET /api/content` on mount, and the admin (when logged in, token in `sessionStorage.davino_admin_token`) auto-saves changes via `PUT /api/content` (debounced). `localStorage` (`davino_admin`) is kept only as an offline cache/fallback.
+- `useAdmin()` gives `trainers`, `classes`, `gallery`, `pricing`, `settings`, and their mutators.
+- Default data (`defaultClasses`, `defaultSettings`, etc.) is used only when neither the server nor localStorage has content.
+- Migrations: pricing without `kind` → replaced by new 7-package default; classes without `trainerId` → linked to a trainer by name match.
+
+### Backend (`server/index.js`)
+- Express. `GET /api/content` (public), `POST /api/login` (checks `ADMIN_PASSWORD` env), `PUT /api/content` (requires `Authorization: Bearer <password>`).
+- Stores to `server/data/content.json` (gitignored — survives deploys). See `DEPLOY.md` for VPS setup.
 
 ### Routing
 - `src/App.jsx` — public routes: `/`, `/trainer/:id`, `/classes`

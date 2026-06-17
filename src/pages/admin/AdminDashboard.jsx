@@ -2,11 +2,11 @@ import { useAdmin } from '../../data/adminStore.jsx'
 import { Link } from 'react-router-dom'
 
 const CSS = `
-  @keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
-  .stat-card { background: #fff; border-radius: 16px; padding: 24px; border: 1px solid #ede8e0; transition: box-shadow .2s, transform .2s; animation: fadeUp .4s ease both; }
-  .stat-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,.08); transform: translateY(-2px); }
-  .admin-table-row { border-top: 1px solid #f5f0ea; transition: background .15s; }
-  .admin-table-row:hover { background: #fafaf9; }
+  @keyframes adUp { from{transform:translateY(12px)} to{transform:translateY(0)} }
+  .stat-card { background: var(--ad-card); border-radius: 16px; padding: 24px; border: 1px solid var(--ad-card-b); transition: box-shadow .2s, transform .2s, background .3s; animation: adUp .4s ease both; }
+  .stat-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,.12); transform: translateY(-2px); }
+  .admin-table-row { border-top: 1px solid var(--ad-side-b); transition: background .15s; }
+  .admin-table-row:hover { background: var(--ad-rowh); }
   .admin-link { color: #EA443C; text-decoration: none; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 4px; transition: gap .15s; }
   .admin-link:hover { gap: 8px; }
 `
@@ -26,8 +26,8 @@ function StatCard({ label, value, icon, color, sub, delay = 0 }) {
           </span>
         )}
       </div>
-      <div style={{ fontSize: 30, fontWeight: 900, color: '#111', lineHeight: 1, marginBottom: 4 }}>{value}</div>
-      <div style={{ fontSize: 13, color: '#888', fontWeight: 500 }}>{label}</div>
+      <div style={{ fontSize: 30, fontWeight: 900, color: 'var(--text)', lineHeight: 1, marginBottom: 4 }}>{value}</div>
+      <div style={{ fontSize: 13, color: 'var(--ad-text2)', fontWeight: 500 }}>{label}</div>
     </div>
   )
 }
@@ -60,15 +60,15 @@ export default function AdminDashboard() {
       <style>{CSS}</style>
 
       {/* Page header */}
-      <div style={{ marginBottom: 32, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+      <div style={{ marginBottom: 32, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 16, flexWrap: 'wrap' }}>
         <div>
-          <h1 style={{ fontSize: 22, fontWeight: 900, color: '#111', marginBottom: 4 }}>داشبورد</h1>
-          <p style={{ fontSize: 13, color: '#999' }}>خلاصه وضعیت باشگاه داوینو</p>
+          <h1 style={{ fontSize: 22, fontWeight: 900, color: 'var(--text)', marginBottom: 4 }}>داشبورد</h1>
+          <p style={{ fontSize: 13, color: 'var(--ad-text3)' }}>خلاصه وضعیت باشگاه داوینو</p>
         </div>
-        <div style={{ background: '#f5f0ea', borderRadius: 10, padding: '7px 14px', textAlign: 'left' }}>
-          <div style={{ fontSize: 10, color: '#bbb', fontWeight: 600, marginBottom: 2 }}>نسخه سایت</div>
-          <div style={{ fontSize: 13, fontWeight: 800, color: '#555', fontFamily: 'monospace' }}>v1.1.0</div>
-          <div style={{ fontSize: 10, color: '#bbb', marginTop: 1 }}>2026-06-11</div>
+        <div style={{ background: 'var(--ad-chip)', border: '1px solid var(--ad-card-b)', borderRadius: 10, padding: '7px 14px', textAlign: 'left' }}>
+          <div style={{ fontSize: 10, color: 'var(--ad-text3)', fontWeight: 600, marginBottom: 2 }}>نسخه سایت</div>
+          <div style={{ fontSize: 13, fontWeight: 800, color: 'var(--ad-text2)', fontFamily: 'monospace' }}>v1.1.0</div>
+          <div style={{ fontSize: 10, color: 'var(--ad-text3)', marginTop: 1 }}>2026-06-11</div>
         </div>
       </div>
 
@@ -78,11 +78,11 @@ export default function AdminDashboard() {
       </div>
 
       {/* Trainers table */}
-      <div style={{ background: '#fff', borderRadius: 16, border: '1px solid #ede8e0', overflow: 'hidden', marginBottom: 20 }}>
-        <div style={{ padding: '18px 24px', borderBottom: '1px solid #f0ebe3', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div style={{ background: 'var(--ad-card)', borderRadius: 16, border: '1px solid var(--ad-card-b)', overflow: 'hidden', marginBottom: 20, transition: 'background .3s' }}>
+        <div style={{ padding: '18px 24px', borderBottom: '1px solid var(--ad-side-b)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div>
-            <h2 style={{ fontSize: 15, fontWeight: 800, color: '#111', marginBottom: 1 }}>مربیان</h2>
-            <p style={{ fontSize: 12, color: '#aaa' }}>{trainers.length} مربی فعال</p>
+            <h2 style={{ fontSize: 15, fontWeight: 800, color: 'var(--text)', marginBottom: 1 }}>مربیان</h2>
+            <p style={{ fontSize: 12, color: 'var(--ad-text3)' }}>{trainers.length} مربی فعال</p>
           </div>
           <Link to="/admin/trainers" className="admin-link">
             مشاهده همه
@@ -92,9 +92,9 @@ export default function AdminDashboard() {
         <div style={{ overflowX: 'auto' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
-              <tr style={{ background: '#fafaf9' }}>
+              <tr style={{ background: 'var(--ad-rowh)' }}>
                 {['نام', 'تخصص', 'تجربه', 'جلسات', 'وضعیت'].map(h => (
-                  <th key={h} style={{ padding: '10px 20px', textAlign: 'right', fontSize: 11, fontWeight: 800, color: '#aaa', fontFamily: 'Vazirmatn, sans-serif', letterSpacing: .5 }}>{h}</th>
+                  <th key={h} style={{ padding: '10px 20px', textAlign: 'right', fontSize: 11, fontWeight: 800, color: 'var(--ad-th)', fontFamily: 'Vazirmatn, sans-serif', letterSpacing: .5 }}>{h}</th>
                 ))}
               </tr>
             </thead>
@@ -104,12 +104,12 @@ export default function AdminDashboard() {
                   <td style={{ padding: '13px 20px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                       <div style={{ width: 34, height: 34, borderRadius: '50%', background: `linear-gradient(135deg, ${t.gradFrom}, ${t.gradTo})`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, fontWeight: 900, color: 'rgba(255,255,255,.7)', flexShrink: 0 }}>{t.initial}</div>
-                      <span style={{ fontSize: 14, fontWeight: 700, color: '#111' }}>{t.name}</span>
+                      <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--text)' }}>{t.name}</span>
                     </div>
                   </td>
-                  <td style={{ padding: '13px 20px', fontSize: 13, color: '#666' }}>{t.role}</td>
-                  <td style={{ padding: '13px 20px', fontSize: 13, color: '#666' }}>{t.exp}</td>
-                  <td style={{ padding: '13px 20px', fontSize: 13, color: '#666' }}>{t.sessions}</td>
+                  <td style={{ padding: '13px 20px', fontSize: 13, color: 'var(--ad-text2)' }}>{t.role}</td>
+                  <td style={{ padding: '13px 20px', fontSize: 13, color: 'var(--ad-text2)' }}>{t.exp}</td>
+                  <td style={{ padding: '13px 20px', fontSize: 13, color: 'var(--ad-text2)' }}>{t.sessions}</td>
                   <td style={{ padding: '13px 20px' }}>
                     <span style={{ background: '#dcfce7', color: '#15803d', fontSize: 11, fontWeight: 700, padding: '3px 10px', borderRadius: 999 }}>فعال</span>
                   </td>
@@ -121,11 +121,11 @@ export default function AdminDashboard() {
       </div>
 
       {/* Pricing preview */}
-      <div style={{ background: '#fff', borderRadius: 16, border: '1px solid #ede8e0', overflow: 'hidden' }}>
-        <div style={{ padding: '18px 24px', borderBottom: '1px solid #f0ebe3', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div style={{ background: 'var(--ad-card)', borderRadius: 16, border: '1px solid var(--ad-card-b)', overflow: 'hidden', transition: 'background .3s' }}>
+        <div style={{ padding: '18px 24px', borderBottom: '1px solid var(--ad-side-b)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div>
-            <h2 style={{ fontSize: 15, fontWeight: 800, color: '#111', marginBottom: 1 }}>پلن‌های عضویت</h2>
-            <p style={{ fontSize: 12, color: '#aaa' }}>{pricing.length} پلن</p>
+            <h2 style={{ fontSize: 15, fontWeight: 800, color: 'var(--text)', marginBottom: 1 }}>پلن‌های عضویت</h2>
+            <p style={{ fontSize: 12, color: 'var(--ad-text3)' }}>{pricing.length} پلن</p>
           </div>
           <Link to="/admin/pricing" className="admin-link">
             ویرایش
@@ -135,17 +135,17 @@ export default function AdminDashboard() {
         <div style={{ display: 'flex', gap: 14, padding: 20, flexWrap: 'wrap' }}>
           {pricing.map(p => (
             <div key={p.id} style={{
-              flex: 1, minWidth: 150, background: '#fafaf9', borderRadius: 14,
-              padding: '16px 20px', border: p.popular ? `2px solid ${p.color}30` : '1px solid #ede8e0',
+              flex: 1, minWidth: 150, background: 'var(--ad-rowh)', borderRadius: 14,
+              padding: '16px 20px', border: p.popular ? `2px solid ${p.color}30` : '1px solid var(--ad-card-b)',
               position: 'relative',
             }}>
               {p.popular && (
                 <span style={{ position: 'absolute', top: -1, right: 16, background: p.color, color: '#fff', fontSize: 10, fontWeight: 800, padding: '2px 8px', borderRadius: '0 0 8px 8px' }}>ویژه</span>
               )}
-              <div style={{ fontSize: 13, fontWeight: 700, color: '#333', marginBottom: 6 }}>{p.name}</div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)', marginBottom: 6 }}>{p.name}</div>
               <div style={{ fontSize: 20, fontWeight: 900, color: p.color, lineHeight: 1 }}>
                 {p.price}
-                <span style={{ fontSize: 11, fontWeight: 500, color: '#aaa', marginRight: 4 }}>تومان/{p.period}</span>
+                <span style={{ fontSize: 11, fontWeight: 500, color: 'var(--ad-text3)', marginRight: 4 }}>تومان/{p.period}</span>
               </div>
             </div>
           ))}

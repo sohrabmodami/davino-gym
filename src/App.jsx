@@ -13,6 +13,7 @@ import TrainerProfile from './pages/TrainerProfile'
 import Classes from './pages/Classes'
 import AdminApp from './pages/admin/AdminApp'
 import { AdminProvider } from './data/adminStore.jsx'
+import { ThemeProvider } from './data/themeStore.jsx'
 
 function HomePage() {
   return (
@@ -35,6 +36,7 @@ function HomePage() {
 
 export default function App() {
   return (
+    <ThemeProvider>
     <AdminProvider>
       <BrowserRouter>
         <Routes>
@@ -45,5 +47,6 @@ export default function App() {
         </Routes>
       </BrowserRouter>
     </AdminProvider>
+    </ThemeProvider>
   )
 }

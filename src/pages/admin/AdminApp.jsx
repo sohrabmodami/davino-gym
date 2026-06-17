@@ -8,14 +8,25 @@ import AdminPricing from './AdminPricing'
 import AdminGallery from './AdminGallery'
 import AdminSettings from './AdminSettings'
 import AdminClasses from './AdminClasses'
+import AdminMessages from './AdminMessages'
 
 const SESSION_KEY = 'davino_admin_auth'
+const TOKEN_KEY = 'davino_admin_token'
 
 export default function AdminApp() {
   const [authed, setAuthed] = useState(() => sessionStorage.getItem(SESSION_KEY) === '1')
 
-  const login = () => { sessionStorage.setItem(SESSION_KEY, '1'); setAuthed(true) }
-  const logout = () => { sessionStorage.removeItem(SESSION_KEY); setAuthed(false) }
+  // توکن (رمز ادمین) را نگه می‌داریم تا store بتواند تغییرات را روی سرور ذخیره کند
+  const login = (token) => {
+    sessionStorage.setItem(SESSION_KEY, '1')
+    if (token) sessionStorage.setItem(TOKEN_KEY, token)
+    setAuthed(true)
+  }
+  const logout = () => {
+    sessionStorage.removeItem(SESSION_KEY)
+    sessionStorage.removeItem(TOKEN_KEY)
+    setAuthed(false)
+  }
 
   if (!authed) return <AdminLogin onLogin={login} />
 
@@ -27,6 +38,7 @@ export default function AdminApp() {
         <Route path="/pricing" element={<AdminPricing />} />
         <Route path="/gallery" element={<AdminGallery />} />
         <Route path="/classes" element={<AdminClasses />} />
+        <Route path="/messages" element={<AdminMessages />} />
         <Route path="/settings" element={<AdminSettings />} />
         <Route path="*" element={<Navigate to="/admin" replace />} />
       </Routes>

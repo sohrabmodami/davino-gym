@@ -5,3 +5,10 @@ dist
 .env
 .env.*
 .claude
+
+# داده‌ی محتوای ادمین روی سرور — نباید در گیت باشد تا با هر دیپلوی پاک نشود
+server/data/
+server/backups/
+
+# بسته‌ی دیپلوی (با npm run build دوباره ساخته می‌شود)
+*.tar.gz

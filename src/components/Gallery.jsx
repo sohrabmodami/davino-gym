@@ -1,55 +1,45 @@
 import { useState } from 'react'
 import { useAdmin } from '../data/adminStore.jsx'
 
+/* سایه‌ی کمی تیره‌تر از رنگ پایه‌ی کارت برای راه‌راهِ دوسایه (مطابق دیزاین) */
+function darken(hex, amt = 9) {
+  if (!hex || hex[0] !== '#' || hex.length < 7) return '#15152a'
+  const clamp = v => Math.max(0, Math.min(255, v))
+  const r = clamp(parseInt(hex.slice(1, 3), 16) - amt)
+  const g = clamp(parseInt(hex.slice(3, 5), 16) - amt)
+  const b = clamp(parseInt(hex.slice(5, 7), 16) - amt)
+  return `#${[r, g, b].map(v => v.toString(16).padStart(2, '0')).join('')}`
+}
+
 function GalleryCard({ item, onClick }) {
   const hasPhoto = !!item.photo
   const accent = item.accent || '#EA443C'
+  const base = item.color || '#1a1a2e'
+  const shade = darken(base)
 
   return (
     <div
       onClick={() => onClick(item)}
+      className={item.span === 'wide' ? 'gallery-wide' : undefined}
       style={{
-        gridColumn: item.span === 'wide' ? 'span 2' : 'span 1',
         borderRadius: '18px', overflow: 'hidden',
-        background: hasPhoto ? '#111' : (item.color || '#1a1a2e'),
-        aspectRatio: item.span === 'wide' ? '16/7' : '4/3',
+        background: hasPhoto
+          ? '#111'
+          : `repeating-linear-gradient(135deg, ${base}, ${base} 14px, ${shade} 14px, ${shade} 28px)`,
         position: 'relative', cursor: 'pointer',
-        border: '1px solid rgba(255,255,255,0.06)',
+        border: '1px solid rgba(255,255,255,0.08)',
         transition: 'transform 0.3s ease, box-shadow 0.3s ease',
       }}
-      onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.02)'; e.currentTarget.style.boxShadow = `0 16px 48px rgba(0,0,0,0.25), 0 0 0 2px ${accent}50`; }}
+      onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.02)'; e.currentTarget.style.boxShadow = '0 16px 48px rgba(0,0,0,0.35)'; }}
       onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.boxShadow = 'none'; }}
     >
-      {hasPhoto ? (
+      {hasPhoto && (
         <img src={item.photo} alt={item.title || item.label} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
-      ) : (
-        <>
-          <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0.08 }} viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
-            {[...Array(5)].map((_, r) =>
-              [...Array(7)].map((_, c) => (
-                <circle key={`${r}-${c}`} cx={30 + c * 55} cy={30 + r * 55} r="10" fill={accent}/>
-              ))
-            )}
-          </svg>
-          <div style={{
-            position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center',
-          }}>
-            <div style={{
-              width: '60px', height: '60px', borderRadius: '50%',
-              background: `${accent}20`, border: `2px solid ${accent}40`,
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-            }}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={accent} strokeWidth="1.8">
-                <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
-              </svg>
-            </div>
-          </div>
-        </>
       )}
 
       <div style={{
         position: 'absolute', inset: 0,
-        background: `linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.7) 100%)`,
+        background: 'linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.7) 100%)',
       }} />
 
       <div style={{
@@ -58,7 +48,7 @@ function GalleryCard({ item, onClick }) {
       }}>
         <div style={{ fontSize: '14px', fontWeight: 700, color: '#fff' }}>{item.title || item.label}</div>
         <div style={{
-          background: `rgba(255,255,255,0.18)`, border: `1px solid rgba(255,255,255,0.3)`,
+          background: 'rgba(255,255,255,0.18)', border: '1px solid rgba(255,255,255,0.3)',
           borderRadius: '6px', padding: '3px 10px',
           fontSize: '11px', fontWeight: 700, color: '#fff',
           backdropFilter: 'blur(4px)',
@@ -77,16 +67,20 @@ export default function Gallery() {
   const filtered = activeTag === 'همه' ? gallery : gallery.filter(g => (g.category || g.tag) === activeTag)
 
   return (
-    <section id="gallery" style={{ padding: '100px 2.5rem', background: 'var(--color-bg-white)' }}>
+    <section id="gallery" style={{
+      padding: 'clamp(70px, 8vw, 100px) clamp(24px, 4vw, 40px)',
+      background: 'var(--bg2)',
+      borderTop: '1px solid var(--line)',
+      transition: 'background .3s',
+    }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '44px' }}>
           <div style={{
-            display: 'inline-block',
-            background: 'rgba(234,68,60,0.08)', border: '1px solid rgba(234,68,60,0.2)',
-            borderRadius: '50px', padding: '5px 16px', marginBottom: '16px',
-          }}>
-            <span style={{ fontSize: '12px', color: 'var(--color-primary)', fontWeight: 700 }}>گالری</span>
-          </div>
+            display: 'inline-block', fontSize: 11, fontWeight: 800, color: 'var(--accent)',
+            letterSpacing: '.14em', background: 'rgba(234,68,60,.1)',
+            border: '1px solid rgba(234,68,60,.22)', borderRadius: 999,
+            padding: '6px 15px', marginBottom: 16,
+          }}>گالری</div>
           <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)', fontWeight: 900, marginBottom: '14px', letterSpacing: '-0.5px' }}>
             داوینو در یک نگاه
           </h2>
@@ -97,10 +91,11 @@ export default function Gallery() {
           <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap' }}>
             {allTags.map(tag => (
               <button key={tag} onClick={() => setActiveTag(tag)} style={{
-                padding: '7px 18px', borderRadius: '50px', fontSize: '13px', fontWeight: 600,
-                background: activeTag === tag ? 'var(--color-primary)' : 'rgba(234,68,60,0.06)',
-                color: activeTag === tag ? '#fff' : 'var(--color-primary)',
-                border: activeTag === tag ? 'none' : '1.5px solid rgba(234,68,60,0.2)',
+                padding: '7px 18px', borderRadius: 999, fontSize: '13px',
+                fontWeight: activeTag === tag ? 700 : 600,
+                background: activeTag === tag ? 'var(--accent)' : 'var(--surface)',
+                color: activeTag === tag ? '#fff' : 'var(--t60)',
+                border: activeTag === tag ? '1px solid var(--accent)' : '1px solid var(--surface-b)',
                 transition: 'all 0.2s ease', cursor: 'pointer',
               }}>
                 {tag}
@@ -116,7 +111,7 @@ export default function Gallery() {
         </div>
 
         {gallery.length === 0 && (
-          <div style={{ textAlign: 'center', padding: '60px 20px', color: '#bbb' }}>
+          <div style={{ textAlign: 'center', padding: '60px 20px', color: 'var(--t45)' }}>
             <p style={{ fontSize: 15, fontWeight: 600 }}>گالری هنوز تصویری ندارد</p>
           </div>
         )}

@@ -1,96 +1,94 @@
 const services = [
   {
-    icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22V12m0 0L8 8m4 4l4-4M3 15c0 3.314 4.03 6 9 6s9-2.686 9-6"/><path d="M3 9c0 3.314 4.03 6 9 6s9-2.686 9-6M3 9c0-3.314 4.03-6 9-6s9 2.686 9 6"/></svg>,
-    title: 'سنگنوردی مبتدی',
-    desc: 'برای اولین‌بارها — آموزش اصول پایه، تکنیک‌های صحیح و ایمنی از صفر',
-    color: '#22C55E',
-  },
-  {
-    icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>,
-    title: 'کلاس‌های پیشرفته',
-    desc: 'تکنیک‌های بولدرینگ و لید برای سنگنوردان متوسط و حرفه‌ای',
+    icon: <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>,
+    title: 'کلاس‌های مبتدی و پیشرفته',
+    desc: 'دوره‌های آموزشی داوینو برای افراد ۱۴ سال به بالا، از سطح مبتدی تا پیشرفته طراحی شده‌اند. هنرجویان در محیطی ایمن و تخصصی، اصول پایه سنگنوردی، تکنیک‌های صعود، مهارت‌های حرکتی و مباحث پیشرفته را زیر نظر مربیان مجرب فرا می‌گیرند. کلاس‌ها به‌صورت نیمه‌خصوصی و با ظرفیت ۴ تا ۶ نفر برای هر مربی برگزار می‌شوند تا کیفیت آموزش در بالاترین سطح حفظ شود.',
     color: '#EA443C',
   },
   {
-    icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>,
-    title: 'تمرین گروهی',
-    desc: 'جلسات گروهی با انگیزه بیشتر، رقابت دوستانه و پیشرفت سریع‌تر',
-    color: '#8B5CF6',
-  },
-  {
-    icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>,
-    title: 'آمادگی جسمانی',
-    desc: 'تقویت قدرت انگشتان، تعادل، انعطاف و استقامت ویژه سنگنوردی',
+    icon: <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>,
+    title: 'آمادگی جسمانی و تخصصی سنگنوردی',
+    desc: 'این دوره‌ها با هدف افزایش توان جسمانی، استقامت، قدرت، انعطاف‌پذیری و آمادگی تخصصی مورد نیاز سنگنوردان طراحی شده‌اند. برنامه‌های تمرینی متناسب با سطح آمادگی هر ورزشکار تدوین می‌شوند تا مسیر پیشرفت سریع‌تر و اصولی‌تر طی شود.',
     color: '#EC4899',
   },
   {
-    icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>,
-    title: 'تیم مسابقاتی',
-    desc: 'آماده‌سازی برای مسابقات استانی، کشوری و بین‌المللی سنگنوردی',
-    color: '#EA443C',
+    icon: <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>,
+    title: 'تمرینات گروهی',
+    desc: 'تمرینات گروهی فرصتی برای ارتقای مهارت‌ها در کنار سایر سنگنوردان است. این جلسات با برنامه‌ریزی مربیان مجموعه برگزار می‌شوند و علاوه بر افزایش توانایی‌های فنی، به تقویت روحیه تیمی، انگیزه و تجربه عملی هنرجویان کمک می‌کنند.',
+    color: '#8B5CF6',
   },
   {
-    icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>,
-    title: 'برنامه کودکان',
-    desc: 'کلاس‌های ویژه کودکان ۶ تا ۱۴ سال با مربیان متخصص آموزش کودک',
+    icon: <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9H4.5a2.5 2.5 0 010-5C6 4 6 9 6 9zm0 0h12m-12 0v9a2 2 0 002 2h8a2 2 0 002-2V9m0 0h1.5a2.5 2.5 0 000-5C18 4 18 9 18 9z"/><path d="M8 22V9M16 22V9"/></svg>,
+    title: 'برگزاری مسابقات',
+    desc: 'آکادمی داوینو با سابقه برگزاری سه دوره مسابقات کشوری سنگنوردی نونهالان و نوجوانان، نقش فعالی در توسعه و ترویج این رشته در سطح پایه داشته است. این مسابقات با هدف ایجاد فضای رقابتی سالم، ارزیابی توانایی ورزشکاران و پرورش نسل آینده سنگنوردان برگزار می‌شوند و فرصتی ارزشمند برای محک‌زدن مهارت‌ها در فضایی استاندارد و حرفه‌ای فراهم می‌کنند.',
     color: '#F59E0B',
+  },
+  {
+    icon: <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>,
+    title: 'کلاس‌های ویژه کودکان',
+    desc: 'دوره‌های تخصصی کودکان برای گروه سنی ۶ تا ۱۴ سال طراحی شده‌اند و توسط مربیان متخصص کودک با ظرفیت محدود ۴ تا ۶ نفر برگزار می‌شوند. آموزش با رویکردی متناسب با سن و توانایی کودکان ارائه می‌شود و علاوه بر مهارت‌های سنگنوردی، به افزایش اعتمادبه‌نفس، تمرکز، هماهنگی حرکتی و رشد فردی کودکان کمک می‌کند.',
+    color: '#22C55E',
+  },
+  {
+    icon: <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M8 3l4 8 5-5 5 14H2L8 3z"/></svg>,
+    title: 'کلاس‌های سنگنوردی طبیعت',
+    desc: 'این دوره‌ها برای علاقه‌مندانی طراحی شده‌اند که قصد دارند مهارت‌های خود را از دیواره‌های آموزشی به محیط‌های طبیعی منتقل کنند. آموزش تکنیک‌های صعود در طبیعت، کار با تجهیزات، اصول ایمنی و تجربه عملی در فضای باز از بخش‌های مهم این برنامه‌هاست. تجهیزات تخصصی توسط آکادمی در اختیار هنرجویان قرار می‌گیرد و همه‌ی برنامه‌ها زیر نظر مربیان باتجربه برگزار می‌شوند.',
+    color: '#06B6D4',
   },
 ]
 
+/* rgba کمرنگ از رنگ هگز هر کارت */
+const tint = (hex, a) => {
+  const r = parseInt(hex.slice(1, 3), 16)
+  const g = parseInt(hex.slice(3, 5), 16)
+  const b = parseInt(hex.slice(5, 7), 16)
+  return `rgba(${r},${g},${b},${a})`
+}
+
 export default function Services() {
   return (
-    <section id="services" style={{ padding: '100px 2.5rem', background: 'var(--color-bg-section)' }}>
-      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+    <section id="services" style={{
+      padding: 'clamp(70px, 8vw, 100px) clamp(24px, 4vw, 40px)',
+      background: 'var(--bg)',
+      transition: 'background .3s',
+    }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+        <div style={{ textAlign: 'center', marginBottom: 56 }}>
           <div style={{
-            display: 'inline-block',
-            background: 'rgba(234,68,60,0.08)', border: '1px solid rgba(234,68,60,0.2)',
-            borderRadius: '50px', padding: '5px 16px', marginBottom: '16px',
-          }}>
-            <span style={{ fontSize: '12px', color: 'var(--color-primary)', fontWeight: 700 }}>خدمات ما</span>
-          </div>
-          <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)', fontWeight: 900, marginBottom: '14px', letterSpacing: '-0.5px' }}>
+            display: 'inline-block', fontSize: 11, fontWeight: 800, color: 'var(--accent)',
+            letterSpacing: '.14em', background: 'rgba(234,68,60,.1)',
+            border: '1px solid rgba(234,68,60,.22)', borderRadius: 999,
+            padding: '6px 15px', marginBottom: 16,
+          }}>خدمات ما</div>
+          <h2 style={{ fontSize: 'clamp(1.9rem, 4vw, 2.8rem)', fontWeight: 900, letterSpacing: '-.01em', margin: '0 0 12px', color: 'var(--text)' }}>
             برای هر سطح، یک مسیر
           </h2>
-          <p style={{ fontSize: '16px', color: 'var(--color-foreground-muted)', maxWidth: '460px', margin: '0 auto', lineHeight: 1.75 }}>
+          <p style={{ fontSize: 16, color: 'var(--t50)', maxWidth: 460, margin: '0 auto', lineHeight: 1.75 }}>
             از اولین قدم تا قهرمانی — داوینو همه‌چیز داره
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(310px, 1fr))', gap: '20px' }}>
-          {services.map((s, i) => (
-            <div key={i}
+        <div className="services-grid">
+          {services.map(s => (
+            <div
+              key={s.title}
               style={{
-                background: 'var(--color-bg-white)',
-                border: '1.5px solid var(--color-border)',
-                borderRadius: '20px', padding: '28px',
-                transition: 'all 0.28s ease',
-                cursor: 'default',
+                background: 'var(--surface)', border: '1px solid var(--surface-b)',
+                borderRadius: 20, padding: 28, transition: 'all .28s',
+                display: 'flex', flexDirection: 'column',
+                borderTop: `3px solid ${s.color}`,
               }}
-              onMouseEnter={e => {
-                e.currentTarget.style.transform = 'translateY(-4px)'
-                e.currentTarget.style.borderColor = `${s.color}50`
-                e.currentTarget.style.boxShadow = `0 16px 48px rgba(0,0,0,0.08)`
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.transform = 'translateY(0)'
-                e.currentTarget.style.borderColor = 'var(--color-border)'
-                e.currentTarget.style.boxShadow = 'none'
-              }}
+              onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.borderColor = tint(s.color, .4); e.currentTarget.style.borderTopColor = s.color }}
+              onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.borderColor = 'var(--surface-b)'; e.currentTarget.style.borderTopColor = s.color }}
             >
               <div style={{
-                width: 56, height: 56, borderRadius: '14px',
-                background: `${s.color}12`,
-                border: `1.5px solid ${s.color}25`,
+                width: 56, height: 56, borderRadius: 14,
+                background: tint(s.color, .12), border: `1px solid ${tint(s.color, .25)}`,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                color: s.color, marginBottom: '18px',
+                color: s.color, marginBottom: 18,
               }}>{s.icon}</div>
-              <h3 style={{ fontSize: '17px', fontWeight: 800, marginBottom: '8px' }}>{s.title}</h3>
-              <p style={{ fontSize: '14px', color: 'var(--color-foreground-muted)', lineHeight: 1.7 }}>{s.desc}</p>
-              <div style={{ marginTop: '20px', display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', fontWeight: 700, color: s.color }}>
-                <span>اطلاعات بیشتر</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </div>
+              <h3 style={{ fontSize: 17, fontWeight: 800, margin: '0 0 10px', color: 'var(--text)' }}>{s.title}</h3>
+              <p style={{ fontSize: 13.5, color: 'var(--t50)', lineHeight: 2, margin: 0, textAlign: 'justify' }}>{s.desc}</p>
             </div>
           ))}
         </div>

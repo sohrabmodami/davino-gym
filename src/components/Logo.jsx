@@ -1,7 +1,8 @@
-export default function Logo({ size = 1, dark = false }) {
+export default function Logo({ size = 1, dark = null }) {
   const w = 108 * size
   const h = 68 * size
-  const fill = dark ? '#FFFFFF' : '#1A1410'
+  // بدون prop صریح، رنگ از توکن تم می‌آید تا در دارک/لایت درست باشد
+  const fill = dark === null ? 'var(--text)' : (dark ? '#FFFFFF' : '#1A1410')
   return (
     <svg width={w} height={h} viewBox="0 0 27.0932 16.9332" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path fill={fill} fillRule="evenodd" d="M26.8843 13.9589l-4.1704 0c0.6957,-1.1987 1.3912,-2.404 2.0813,-3.611 0.6965,1.207 1.3936,2.4123 2.0891,3.611z"/>

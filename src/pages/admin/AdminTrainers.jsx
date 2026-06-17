@@ -1,25 +1,26 @@
 import { useState, useRef, useEffect } from 'react'
 import { useAdmin } from '../../data/adminStore.jsx'
+import ClassModal from './ClassModal.jsx'
 
 const days = ['شنبه', 'یکشنبه', 'دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنجشنبه', 'جمعه']
 
 const CSS = `
   @keyframes fadeIn { from{opacity:0} to{opacity:1} }
   @keyframes slideUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
-  .trainer-card { background: #fff; border-radius: 16px; border: 1px solid #ede8e0; padding: 20px; display: flex; gap: 14px; align-items: flex-start; transition: box-shadow .2s, transform .2s; }
+  .trainer-card { background: var(--ad-card); border-radius: 16px; border: 1px solid var(--ad-card-b); padding: 20px; display: flex; gap: 14px; align-items: flex-start; transition: box-shadow .2s, transform .2s; }
   .trainer-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,.07); transform: translateY(-1px); }
   .admin-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.45); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; padding: 20px; animation: fadeIn .2s; }
-  .admin-modal { background: #fff; border-radius: 20px; width: 100%; max-width: 600px; max-height: 90vh; overflow: auto; box-shadow: 0 32px 80px rgba(0,0,0,.2); animation: slideUp .25s ease; }
+  .admin-modal { background: var(--ad-card); border-radius: 20px; width: 100%; max-width: 600px; max-height: 90vh; overflow: auto; box-shadow: 0 32px 80px rgba(0,0,0,.2); animation: slideUp .25s ease; }
   .admin-field label { display: flex; flex-direction: column; gap: 5px; }
   .admin-field span { font-size: 11px; color: #999; font-weight: 700; }
-  .admin-input { border: 1.5px solid #e8e3dc; border-radius: 10px; padding: 9px 13px; font-size: 13px; outline: none; font-family: 'Vazirmatn', sans-serif; transition: border-color .18s; width: 100%; box-sizing: border-box; }
+  .admin-input { border: 1.5px solid var(--ad-card-b); border-radius: 10px; padding: 9px 13px; font-size: 13px; outline: none; font-family: 'Vazirmatn', sans-serif; transition: border-color .18s; width: 100%; box-sizing: border-box; }
   .admin-input:focus { border-color: #EA443C; }
   .admin-btn-primary { background: #EA443C; color: #fff; border: none; border-radius: 10px; padding: 10px 24px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: 'Vazirmatn', sans-serif; transition: all .15s; }
   .admin-btn-primary:hover { background: #d63830; }
-  .admin-btn-ghost { background: #fff; color: #555; border: 1.5px solid #e8e3dc; border-radius: 10px; padding: 10px 20px; font-size: 14px; cursor: pointer; font-family: 'Vazirmatn', sans-serif; transition: all .15s; }
+  .admin-btn-ghost { background: var(--ad-card); color: var(--ad-text2); border: 1.5px solid var(--ad-card-b); border-radius: 10px; padding: 10px 20px; font-size: 14px; cursor: pointer; font-family: 'Vazirmatn', sans-serif; transition: all .15s; }
   .admin-btn-ghost:hover { border-color: #ccc; }
   .icon-btn { width: 34px; height: 34px; border-radius: 9px; border: 1.5px solid; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all .15s; flex-shrink: 0; }
-  .icon-btn.edit { border-color: #e8e3dc; background: #fff; color: #666; }
+  .icon-btn.edit { border-color: var(--ad-card-b); background: var(--ad-card); color: #666; }
   .icon-btn.edit:hover { border-color: #EA443C; color: #EA443C; background: rgba(234,68,60,.05); }
   .icon-btn.del { border-color: #fecaca; background: #fff5f5; color: #ef4444; }
   .icon-btn.del:hover { background: #ef4444; color: #fff; }
@@ -102,11 +103,11 @@ function ImageCropModal({ src, onCrop, onClose }) {
     <div style={{ position: 'fixed', inset: 0, zIndex: 2000, background: 'rgba(0,0,0,.65)', backdropFilter: 'blur(6px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}
       onClick={onClose}
     >
-      <div style={{ background: '#fff', borderRadius: 22, padding: '24px 24px 22px', maxWidth: 420, width: '100%', animation: 'slideUp .25s ease', boxShadow: '0 32px 80px rgba(0,0,0,.35)' }}
+      <div style={{ background: 'var(--ad-card)', borderRadius: 22, padding: '24px 24px 22px', maxWidth: 420, width: '100%', animation: 'slideUp .25s ease', boxShadow: '0 32px 80px rgba(0,0,0,.35)' }}
         onClick={e => e.stopPropagation()}
       >
-        <h3 style={{ fontSize: 16, fontWeight: 900, color: '#111', marginBottom: 3 }}>برش عکس مربی</h3>
-        <p style={{ fontSize: 12, color: '#aaa', marginBottom: 16 }}>قاب قرمز را بکش تا ناحیه دلخواه را انتخاب کنی</p>
+        <h3 style={{ fontSize: 16, fontWeight: 900, color: 'var(--text)', marginBottom: 3 }}>برش عکس مربی</h3>
+        <p style={{ fontSize: 12, color: 'var(--ad-text3)', marginBottom: 16 }}>قاب قرمز را بکش تا ناحیه دلخواه را انتخاب کنی</p>
 
         {/* Image + crop overlay */}
         <div style={{ position: 'relative', width: CW, height: CH, background: '#111', borderRadius: 14, overflow: 'hidden', margin: '0 auto 18px', userSelect: 'none' }}>
@@ -143,7 +144,7 @@ function ImageCropModal({ src, onCrop, onClose }) {
         {/* Size slider */}
         <div style={{ marginBottom: 20 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
-            <span style={{ fontSize: 11, fontWeight: 700, color: '#999' }}>اندازه قاب کراپ</span>
+            <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--ad-text2)' }}>اندازه قاب کراپ</span>
             <span style={{ fontSize: 11, fontWeight: 700, color: '#EA443C' }}>{box ? Math.round(box.size / maxSize * 100) : 88}٪</span>
           </div>
           <input type="range" min={Math.max(60, maxSize * 0.25)} max={maxSize} step={1}
@@ -162,7 +163,7 @@ function ImageCropModal({ src, onCrop, onClose }) {
 }
 
 /* ─── Trainer Modal ─── */
-function TrainerModal({ trainer, cropSrc, onRequestCrop, onSave, onClose }) {
+function TrainerModal({ trainer, cropSrc, onRequestCrop, onSave, onClose, trainerClasses = [], onAddClass, onEditClass, onDeleteClass }) {
   const [form, setForm] = useState(trainer ? {
     ...trainer,
     specialties: Array.isArray(trainer.specialties) ? trainer.specialties.join('، ') : trainer.specialties || '',
@@ -212,9 +213,9 @@ function TrainerModal({ trainer, cropSrc, onRequestCrop, onSave, onClose }) {
   return (
     <div className="admin-modal-overlay" style={{ zIndex: 1000 }} onClick={onClose}>
       <div className="admin-modal" onClick={e => e.stopPropagation()}>
-        <div style={{ padding: '24px 28px', borderBottom: '1px solid #f0ebe3', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <h2 style={{ fontSize: 17, fontWeight: 900, color: '#111' }}>{trainer ? 'ویرایش مربی' : 'مربی جدید'}</h2>
-          <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#bbb', padding: 4, display: 'flex' }}>
+        <div style={{ padding: '24px 28px', borderBottom: '1px solid var(--ad-card-b)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <h2 style={{ fontSize: 17, fontWeight: 900, color: 'var(--text)' }}>{trainer ? 'ویرایش مربی' : 'مربی جدید'}</h2>
+          <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--ad-text3)', padding: 4, display: 'flex' }}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
           </button>
         </div>
@@ -225,7 +226,7 @@ function TrainerModal({ trainer, cropSrc, onRequestCrop, onSave, onClose }) {
             <div style={{
               width: 72, height: 72, borderRadius: 14, overflow: 'hidden', flexShrink: 0,
               background: form.photo ? 'transparent' : `linear-gradient(135deg, ${form.gradFrom || '#1C2B3A'}, ${form.gradTo || '#0D1820'})`,
-              border: '2px solid #e8e3dc',
+              border: '2px solid var(--ad-card-b)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}>
               {form.photo
@@ -234,7 +235,7 @@ function TrainerModal({ trainer, cropSrc, onRequestCrop, onSave, onClose }) {
               }
             </div>
             <div>
-              <div style={{ fontSize: 13, fontWeight: 700, color: '#333', marginBottom: 6 }}>عکس مربی</div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)', marginBottom: 6 }}>عکس مربی</div>
               <div style={{ display: 'flex', gap: 8 }}>
                 <button type="button" onClick={handleFileClick} className="admin-btn-primary" style={{ padding: '7px 14px', fontSize: 12, display: 'flex', alignItems: 'center', gap: 5 }}>
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
@@ -282,20 +283,74 @@ function TrainerModal({ trainer, cropSrc, onRequestCrop, onSave, onClose }) {
             </label>
           </div>
 
+          {/* روزهای حضور — fallback؛ اگر مربی کلاس داشته باشد، روزها خودکار از کلاس‌ها خوانده می‌شود */}
           <div style={{ marginBottom: 24 }}>
-            <span style={{ fontSize: 11, color: '#999', fontWeight: 700 }}>روزهای حضور</span>
-            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 8 }}>
+            <span style={{ fontSize: 11, color: 'var(--ad-text2)', fontWeight: 700 }}>روزهای حضور (پیش‌فرض)</span>
+            <div style={{ fontSize: 11, color: 'var(--ad-text3)', marginTop: 3, marginBottom: 8 }}>
+              اگر برای این مربی کلاس تعریف شده باشد، روزهای واقعی از روی کلاس‌ها محاسبه و نمایش داده می‌شود.
+            </div>
+            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
               {days.map(d => (
                 <button key={d} onClick={() => toggleDay(d)} style={{
                   padding: '6px 13px', borderRadius: 999, fontSize: 12, fontWeight: 700, cursor: 'pointer',
                   fontFamily: 'Vazirmatn', border: '1.5px solid',
-                  borderColor: form.days.includes(d) ? '#EA443C' : '#e8e3dc',
-                  background: form.days.includes(d) ? 'rgba(234,68,60,.08)' : '#fafaf9',
+                  borderColor: form.days.includes(d) ? '#EA443C' : 'var(--ad-card-b)',
+                  background: form.days.includes(d) ? 'rgba(234,68,60,.08)' : 'var(--ad-rowh)',
                   color: form.days.includes(d) ? '#EA443C' : '#aaa',
                   transition: 'all .15s',
                 }}>{d}</button>
               ))}
             </div>
+          </div>
+
+          {/* پنل کلاس‌های این مربی — فقط برای مربی ذخیره‌شده */}
+          <div style={{ marginBottom: 24, borderTop: '1px solid var(--ad-card-b)', paddingTop: 20 }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
+              <div>
+                <span style={{ fontSize: 13, fontWeight: 800, color: 'var(--text)' }}>کلاس‌های این مربی</span>
+                <span style={{ fontSize: 11, color: 'var(--ad-text3)', marginRight: 8 }}>
+                  {trainer ? `${trainerClasses.length} کلاس` : 'بعد از ذخیره مربی فعال می‌شود'}
+                </span>
+              </div>
+              {trainer && (
+                <button type="button" onClick={onAddClass} style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(234,68,60,.08)',
+                  border: '1.5px solid rgba(234,68,60,.3)', borderRadius: 9, padding: '7px 13px',
+                  fontSize: 12.5, fontWeight: 700, color: '#EA443C', cursor: 'pointer', fontFamily: 'Vazirmatn',
+                }}>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  افزودن کلاس
+                </button>
+              )}
+            </div>
+
+            {trainer && trainerClasses.length === 0 && (
+              <div style={{ fontSize: 12, color: 'var(--ad-text3)', background: 'var(--ad-rowh)', borderRadius: 10, padding: '14px 16px', textAlign: 'center' }}>
+                هنوز کلاسی برای این مربی تعریف نشده — با «افزودن کلاس» شروع کن
+              </div>
+            )}
+
+            {trainer && trainerClasses.length > 0 && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                {trainerClasses.map(c => (
+                  <div key={c.id} style={{ display: 'flex', alignItems: 'center', gap: 10, background: 'var(--ad-rowh)', border: '1px solid var(--ad-card-b)', borderRadius: 10, padding: '10px 12px' }}>
+                    <span style={{ width: 8, height: 8, borderRadius: '50%', background: c.color, flexShrink: 0 }} />
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)' }}>{c.title}</div>
+                      <div style={{ fontSize: 11, color: 'var(--ad-text3)', marginTop: 2 }}>
+                        {c.days.join('، ')} · {c.startTime} · {c.sessions || 8} جلسه/ماه · {c.enrolled}/{c.capacity} نفر
+                      </div>
+                    </div>
+                    <button type="button" onClick={() => onEditClass(c)} title="ویرایش" style={{ width: 28, height: 28, borderRadius: 7, border: '1.5px solid var(--ad-card-b)', background: 'var(--ad-card)', cursor: 'pointer', color: 'var(--ad-text2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                    </button>
+                    <button type="button" onClick={() => onDeleteClass(c.id)} title="حذف" style={{ width: 28, height: 28, borderRadius: 7, border: '1.5px solid #fecaca', background: '#fff5f5', cursor: 'pointer', color: '#ef4444', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg>
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end' }}>
@@ -311,13 +366,13 @@ function TrainerModal({ trainer, cropSrc, onRequestCrop, onSave, onClose }) {
 function DeleteModal({ name, onConfirm, onClose }) {
   return (
     <div className="admin-modal-overlay" style={{ zIndex: 1000 }} onClick={onClose}>
-      <div style={{ background: '#fff', borderRadius: 20, padding: 32, maxWidth: 360, width: '100%', textAlign: 'center', boxShadow: '0 32px 80px rgba(0,0,0,.2)', animation: 'slideUp .25s ease' }} onClick={e => e.stopPropagation()}>
+      <div style={{ background: 'var(--ad-card)', borderRadius: 20, padding: 32, maxWidth: 360, width: '100%', textAlign: 'center', boxShadow: '0 32px 80px rgba(0,0,0,.2)', animation: 'slideUp .25s ease' }} onClick={e => e.stopPropagation()}>
         <div style={{ width: 52, height: 52, borderRadius: '50%', background: '#fff5f5', border: '1px solid #fecaca', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px', color: '#ef4444' }}>
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6M9 6V4h6v2"/></svg>
         </div>
-        <h3 style={{ fontSize: 16, fontWeight: 900, color: '#111', marginBottom: 8 }}>حذف مربی؟</h3>
-        <p style={{ fontSize: 13, color: '#888', marginBottom: 24, lineHeight: 1.7 }}>
-          آیا از حذف <strong style={{ color: '#111' }}>{name}</strong> مطمئنی؟<br/>این عمل قابل بازگشت نیست.
+        <h3 style={{ fontSize: 16, fontWeight: 900, color: 'var(--text)', marginBottom: 8 }}>حذف مربی؟</h3>
+        <p style={{ fontSize: 13, color: 'var(--ad-text2)', marginBottom: 24, lineHeight: 1.7 }}>
+          آیا از حذف <strong style={{ color: 'var(--text)' }}>{name}</strong> مطمئنی؟<br/>این عمل قابل بازگشت نیست.
         </p>
         <div style={{ display: 'flex', gap: 10, justifyContent: 'center' }}>
           <button className="admin-btn-ghost" onClick={onClose}>انصراف</button>
@@ -329,16 +384,28 @@ function DeleteModal({ name, onConfirm, onClose }) {
 }
 
 export default function AdminTrainers() {
-  const { trainers, updateTrainer, deleteTrainer, addTrainer } = useAdmin()
+  const { trainers, classes = [], updateTrainer, deleteTrainer, addTrainer, addClass, updateClass, deleteClass } = useAdmin()
   const [modal, setModal] = useState(null)
   const [deleteTarget, setDeleteTarget] = useState(null)
   // Crop state lives at top level so it renders outside any other modal
   const [cropState, setCropState] = useState(null) // { src, onDone }
+  // مودال کلاس (افزودن/ویرایش از داخل پروفایل مربی) — { cls, trainerId }
+  const [classModal, setClassModal] = useState(null)
 
   const handleSave = (data) => {
     if (modal === 'add') addTrainer(data)
     else updateTrainer(data.id, data)
     setModal(null)
+  }
+
+  // کلاس‌های مربیِ در حال ویرایش
+  const editingTrainerId = modal && modal !== 'add' ? modal.id : null
+  const trainerClasses = editingTrainerId ? classes.filter(c => c.trainerId === editingTrainerId) : []
+
+  const handleClassSave = (data) => {
+    if (classModal?.cls) updateClass(data.id, data)
+    else addClass(data)
+    setClassModal(null)
   }
 
   const handleRequestCrop = (src, onDone) => {
@@ -370,6 +437,21 @@ export default function AdminTrainers() {
           onRequestCrop={handleRequestCrop}
           onSave={handleSave}
           onClose={() => setModal(null)}
+          trainerClasses={trainerClasses}
+          onAddClass={() => setClassModal({ cls: null, trainerId: editingTrainerId })}
+          onEditClass={(c) => setClassModal({ cls: c, trainerId: editingTrainerId })}
+          onDeleteClass={(id) => deleteClass(id)}
+        />
+      )}
+
+      {/* مودال کلاس از داخل پروفایل مربی — مربی روی همین مربی قفل است */}
+      {classModal && (
+        <ClassModal
+          cls={classModal.cls}
+          trainers={trainers}
+          lockedTrainerId={classModal.trainerId}
+          onSave={handleClassSave}
+          onClose={() => setClassModal(null)}
         />
       )}
 
@@ -383,8 +465,8 @@ export default function AdminTrainers() {
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 28 }}>
         <div>
-          <h1 style={{ fontSize: 22, fontWeight: 900, color: '#111', marginBottom: 4 }}>مربیان</h1>
-          <p style={{ fontSize: 13, color: '#999' }}>{trainers.length} مربی فعال در باشگاه</p>
+          <h1 style={{ fontSize: 22, fontWeight: 900, color: 'var(--text)', marginBottom: 4 }}>مربیان</h1>
+          <p style={{ fontSize: 13, color: 'var(--ad-text2)' }}>{trainers.length} مربی فعال در باشگاه</p>
         </div>
         <button onClick={() => setModal('add')} className="admin-btn-primary" style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '11px 22px' }}>
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -400,16 +482,16 @@ export default function AdminTrainers() {
               background: t.photo ? 'transparent' : `linear-gradient(135deg, ${t.gradFrom}, ${t.gradTo})`,
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               fontSize: 18, fontWeight: 900, color: 'rgba(255,255,255,.65)',
-              border: '2px solid #f0ebe3',
+              border: '2px solid var(--ad-card-b)',
             }}>
               {t.photo ? <img src={t.photo} alt={t.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : t.initial}
             </div>
             <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontSize: 15, fontWeight: 800, color: '#111', marginBottom: 2 }}>{t.name}</div>
+              <div style={{ fontSize: 15, fontWeight: 800, color: 'var(--text)', marginBottom: 2 }}>{t.name}</div>
               <div style={{ fontSize: 12, color: '#EA443C', fontWeight: 700, marginBottom: 10 }}>{t.role}</div>
               <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-                <span style={{ fontSize: 11, background: '#f5f0ea', color: '#777', padding: '3px 9px', borderRadius: 999, fontWeight: 600 }}>{t.exp}</span>
-                <span style={{ fontSize: 11, background: '#f5f0ea', color: '#777', padding: '3px 9px', borderRadius: 999, fontWeight: 600 }}>{t.sessions}</span>
+                <span style={{ fontSize: 11, background: 'var(--ad-rowh)', color: 'var(--ad-text2)', padding: '3px 9px', borderRadius: 999, fontWeight: 600 }}>{t.exp}</span>
+                <span style={{ fontSize: 11, background: 'var(--ad-rowh)', color: 'var(--ad-text2)', padding: '3px 9px', borderRadius: 999, fontWeight: 600 }}>{t.sessions}</span>
               </div>
             </div>
             <div style={{ display: 'flex', gap: 6, flexShrink: 0 }}>
@@ -425,7 +507,7 @@ export default function AdminTrainers() {
       </div>
 
       {trainers.length === 0 && (
-        <div style={{ textAlign: 'center', padding: '80px 20px', color: '#bbb' }}>
+        <div style={{ textAlign: 'center', padding: '80px 20px', color: 'var(--ad-text3)' }}>
           <p style={{ fontSize: 14, fontWeight: 600 }}>هیچ مربی‌ای ثبت نشده</p>
         </div>
       )}

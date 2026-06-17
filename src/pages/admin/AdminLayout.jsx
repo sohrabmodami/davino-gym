@@ -1,6 +1,16 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import Logo from '../../components/Logo'
+import { ThemeToggle } from '../../data/themeStore.jsx'
+
+const PAGE_TITLES = {
+  '/admin': 'داشبورد',
+  '/admin/trainers': 'مربیان',
+  '/admin/pricing': 'قیمت‌ها',
+  '/admin/classes': 'کلاس‌ها',
+  '/admin/gallery': 'گالری',
+  '/admin/messages': 'پیام‌ها',
+  '/admin/settings': 'تنظیمات',
+}
 
 const navItems = [
   {
@@ -24,6 +34,10 @@ const navItems = [
     icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>,
   },
   {
+    path: '/admin/messages', label: 'پیام‌ها',
+    icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>,
+  },
+  {
     path: '/admin/settings', label: 'تنظیمات',
     icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M12 2v2M12 20v2M2 12h2M20 12h2M19.07 19.07l-1.41-1.41M4.93 19.07l1.41-1.41"/></svg>,
   },
@@ -33,12 +47,12 @@ const CSS = `
   .admin-nav-item {
     display: flex; align-items: center; gap: 12px;
     padding: 10px 12px; border-radius: 10px; margin-bottom: 2px;
-    color: rgba(255,255,255,.45); text-decoration: none; font-size: 14px;
+    color: var(--ad-side-item); text-decoration: none; font-size: 14px;
     font-weight: 500; transition: all .18s; cursor: pointer;
     font-family: 'Vazirmatn', sans-serif; background: none; border: none; width: 100%;
     white-space: nowrap; position: relative;
   }
-  .admin-nav-item:hover { color: rgba(255,255,255,.8); background: rgba(255,255,255,.06); }
+  .admin-nav-item:hover { color: var(--text); background: var(--ad-side-hover); }
   .admin-nav-item.active { color: #EA443C; background: rgba(234,68,60,.12); font-weight: 700; }
   .admin-nav-item.active::before {
     content: ''; position: absolute; right: 0; top: 50%; transform: translateY(-50%);
@@ -49,10 +63,10 @@ const CSS = `
 
   .sidebar-tooltip {
     position: absolute; right: 100%; top: 50%; transform: translateY(-50%);
-    background: #18181b; color: #fff; font-size: 12px; font-weight: 600;
+    background: var(--ad-card); color: var(--text); font-size: 12px; font-weight: 600;
     padding: 5px 10px; border-radius: 7px; white-space: nowrap;
     margin-right: 8px; pointer-events: none; opacity: 0;
-    font-family: 'Vazirmatn', sans-serif; border: 1px solid rgba(255,255,255,.1);
+    font-family: 'Vazirmatn', sans-serif; border: 1px solid var(--ad-card-b);
     transition: opacity .15s;
   }
   .admin-nav-item.collapsed:hover .sidebar-tooltip { opacity: 1; }
@@ -63,39 +77,41 @@ export default function AdminLayout({ children, onLogout }) {
   const [collapsed, setCollapsed] = useState(false)
 
   const isActive = (item) => item.exact ? pathname === item.path : pathname.startsWith(item.path)
+  const pageTitle = PAGE_TITLES[pathname] || (pathname.startsWith('/admin/') ? PAGE_TITLES[`/admin/${pathname.split('/')[2]}`] : '') || 'داشبورد'
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', background: '#F5F3F0', fontFamily: 'Vazirmatn, sans-serif', direction: 'rtl' }}>
+    <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--ad-page)', color: 'var(--text)', fontFamily: 'Vazirmatn, sans-serif', direction: 'rtl', transition: 'background .3s, color .3s' }}>
       <style>{CSS}</style>
 
       {/* Sidebar */}
       <aside style={{
         width: collapsed ? 64 : 232, flexShrink: 0,
-        background: '#18181b',
+        background: 'var(--ad-side)',
         display: 'flex', flexDirection: 'column',
-        transition: 'width .25s cubic-bezier(.4,0,.2,1)',
+        transition: 'width .25s cubic-bezier(.4,0,.2,1), background .3s',
         position: 'sticky', top: 0, height: '100vh',
         zIndex: 10, overflow: 'hidden',
-        borderLeft: '1px solid rgba(255,255,255,.05)',
+        borderLeft: '1px solid var(--ad-side-b)',
       }}>
         {/* Brand */}
         <div style={{
           padding: collapsed ? '18px 0' : '20px 16px',
-          borderBottom: '1px solid rgba(255,255,255,.07)',
+          borderBottom: '1px solid var(--ad-side-b)',
           display: 'flex', alignItems: 'center',
           justifyContent: collapsed ? 'center' : 'space-between',
           minHeight: 68,
         }}>
           {!collapsed && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <Logo size={0.85} dark />
+            <div style={{ display: 'flex', alignItems: 'center', gap: 9 }}>
+              <span style={{ fontFamily: 'var(--font-latin)', fontSize: 19, fontWeight: 700, letterSpacing: '.04em', color: 'var(--text)' }}>DAVINO</span>
+              <span style={{ fontSize: 10, fontWeight: 800, color: '#EA443C', background: 'rgba(234,68,60,.12)', border: '1px solid rgba(234,68,60,.25)', borderRadius: 6, padding: '2px 7px' }}>ادمین</span>
             </div>
           )}
           <button
             onClick={() => setCollapsed(c => !c)}
-            style={{ background: 'rgba(255,255,255,.06)', border: '1px solid rgba(255,255,255,.1)', color: 'rgba(255,255,255,.4)', cursor: 'pointer', padding: 7, display: 'flex', borderRadius: 8, transition: 'all .15s', flexShrink: 0 }}
-            onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,.1)'; e.currentTarget.style.color = '#fff' }}
-            onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,.06)'; e.currentTarget.style.color = 'rgba(255,255,255,.4)' }}
+            style={{ background: 'var(--ad-side-hover)', border: '1px solid var(--ad-card-b)', color: 'var(--ad-text3)', cursor: 'pointer', padding: 7, display: 'flex', borderRadius: 8, transition: 'all .15s', flexShrink: 0 }}
+            onMouseEnter={e => { e.currentTarget.style.color = 'var(--text)' }}
+            onMouseLeave={e => { e.currentTarget.style.color = 'var(--ad-text3)' }}
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
               <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
@@ -105,7 +121,7 @@ export default function AdminLayout({ children, onLogout }) {
 
         {/* Nav label */}
         {!collapsed && (
-          <div style={{ padding: '16px 16px 6px', fontSize: 10, fontWeight: 800, color: 'rgba(255,255,255,.2)', letterSpacing: 1.5 }}>
+          <div style={{ padding: '16px 16px 6px', fontSize: 10, fontWeight: 800, color: 'var(--ad-text3)', letterSpacing: 1.5 }}>
             منو
           </div>
         )}
@@ -130,15 +146,15 @@ export default function AdminLayout({ children, onLogout }) {
 
         {/* Bottom */}
         {!collapsed && (
-          <div style={{ padding: '6px 8px', borderTop: '1px solid rgba(255,255,255,.07)' }}>
+          <div style={{ padding: '6px 8px', borderTop: '1px solid var(--ad-side-b)' }}>
             <Link to="/" style={{
               display: 'flex', alignItems: 'center', gap: 10,
               padding: '9px 12px', borderRadius: 10, marginBottom: 2,
-              color: 'rgba(255,255,255,.35)', textDecoration: 'none', fontSize: 13,
+              color: 'var(--ad-text3)', textDecoration: 'none', fontSize: 13,
               transition: 'all .15s',
             }}
-              onMouseEnter={e => { e.currentTarget.style.color = 'rgba(255,255,255,.6)'; e.currentTarget.style.background = 'rgba(255,255,255,.05)' }}
-              onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,.35)'; e.currentTarget.style.background = 'transparent' }}
+              onMouseEnter={e => { e.currentTarget.style.color = 'var(--text)'; e.currentTarget.style.background = 'var(--ad-side-hover)' }}
+              onMouseLeave={e => { e.currentTarget.style.color = 'var(--ad-text3)'; e.currentTarget.style.background = 'transparent' }}
             >
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
               مشاهده سایت
@@ -147,11 +163,11 @@ export default function AdminLayout({ children, onLogout }) {
               display: 'flex', alignItems: 'center', gap: 10,
               padding: '9px 12px', borderRadius: 10, width: '100%',
               background: 'none', border: 'none', cursor: 'pointer',
-              color: 'rgba(255,255,255,.35)', fontSize: 13,
+              color: 'var(--ad-text3)', fontSize: 13,
               fontFamily: 'Vazirmatn, sans-serif', transition: 'all .15s',
             }}
               onMouseEnter={e => { e.currentTarget.style.color = '#f87171'; e.currentTarget.style.background = 'rgba(248,113,113,.08)' }}
-              onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,.35)'; e.currentTarget.style.background = 'transparent' }}
+              onMouseLeave={e => { e.currentTarget.style.color = 'var(--ad-text3)'; e.currentTarget.style.background = 'transparent' }}
             >
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
               خروج
@@ -160,16 +176,16 @@ export default function AdminLayout({ children, onLogout }) {
         )}
 
         {collapsed && (
-          <div style={{ padding: '8px', borderTop: '1px solid rgba(255,255,255,.07)' }}>
+          <div style={{ padding: '8px', borderTop: '1px solid var(--ad-side-b)' }}>
             <button onClick={onLogout} title="خروج" style={{
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               width: '100%', padding: '9px', borderRadius: 10,
               background: 'none', border: 'none', cursor: 'pointer',
-              color: 'rgba(255,255,255,.3)', transition: 'all .15s',
+              color: 'var(--ad-text3)', transition: 'all .15s',
               fontFamily: 'Vazirmatn, sans-serif',
             }}
               onMouseEnter={e => { e.currentTarget.style.color = '#f87171'; e.currentTarget.style.background = 'rgba(248,113,113,.08)' }}
-              onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,.3)'; e.currentTarget.style.background = 'transparent' }}
+              onMouseLeave={e => { e.currentTarget.style.color = 'var(--ad-text3)'; e.currentTarget.style.background = 'transparent' }}
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
             </button>
@@ -179,6 +195,34 @@ export default function AdminLayout({ children, onLogout }) {
 
       {/* Main content */}
       <main style={{ flex: 1, overflow: 'auto', minWidth: 0 }}>
+        {/* Topbar */}
+        <div style={{
+          position: 'sticky', top: 0, zIndex: 9,
+          height: 64, display: 'flex', alignItems: 'center', gap: 14,
+          padding: '0 clamp(20px, 3vw, 40px)',
+          background: 'var(--ad-topbar)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)',
+          borderBottom: '1px solid var(--ad-side-b)',
+        }}>
+          <div style={{
+            display: 'flex', alignItems: 'center', gap: 9, flex: 1, maxWidth: 360,
+            background: 'var(--ad-chip)', border: '1px solid var(--ad-card-b)',
+            borderRadius: 10, padding: '8px 14px',
+          }}>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--ad-text3)" strokeWidth="2" strokeLinecap="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            <input placeholder="جستجو…" style={{ flex: 1, background: 'none', border: 'none', outline: 'none', color: 'var(--text)', fontSize: 13, fontFamily: 'Vazirmatn, sans-serif' }} />
+          </div>
+          <div style={{ marginRight: 'auto', display: 'flex', alignItems: 'center', gap: 12 }}>
+            <ThemeToggle />
+            <div style={{ display: 'flex', alignItems: 'center', gap: 9 }}>
+              <div style={{ width: 34, height: 34, borderRadius: '50%', background: 'linear-gradient(135deg, #EA443C, #c5342c)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: 13, fontWeight: 800, flexShrink: 0 }}>ا</div>
+              <div style={{ lineHeight: 1.2 }}>
+                <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)' }}>ادمین</div>
+                <div style={{ fontSize: 11, color: 'var(--ad-text3)' }}>{pageTitle}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {children}
       </main>
     </div>
