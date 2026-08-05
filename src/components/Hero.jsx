@@ -16,7 +16,7 @@ export default function Hero() {
       {/* درخشش قرمز متحرک */}
       <div style={{
         position: 'absolute', top: -160, left: '8%', width: 560, height: 560,
-        background: 'radial-gradient(circle, rgba(234,68,60,.16), transparent 64%)',
+        background: 'radial-gradient(circle, rgba(39,94,170,.16), transparent 64%)',
         filter: 'blur(20px)', pointerEvents: 'none',
         animation: 'dvGlow 8s ease-in-out infinite',
       }} />
@@ -48,7 +48,7 @@ export default function Hero() {
         <div style={{ flex: '1 1 420px', minWidth: 300 }}>
           <div style={{
             display: 'inline-flex', alignItems: 'center', gap: 9,
-            background: 'rgba(234,68,60,.12)', border: '1px solid rgba(234,68,60,.28)',
+            background: 'rgba(39,94,170,.12)', border: '1px solid rgba(39,94,170,.28)',
             borderRadius: 999, padding: '7px 16px', marginBottom: 26,
             animation: 'dvUp .6s .05s both',
           }}>
@@ -83,11 +83,11 @@ export default function Hero() {
             <Link to="/register" style={{
               background: 'var(--accent)', color: '#fff', fontWeight: 800, fontSize: 16,
               padding: '15px 38px', borderRadius: 12,
-              boxShadow: '0 10px 28px rgba(234,68,60,.34)',
+              boxShadow: '0 10px 28px rgba(39,94,170,.34)',
               transition: 'all .25s', display: 'inline-block',
             }}
-              onMouseEnter={e => { e.target.style.transform = 'translateY(-2px)'; e.target.style.boxShadow = '0 16px 36px rgba(234,68,60,.48)' }}
-              onMouseLeave={e => { e.target.style.transform = 'translateY(0)'; e.target.style.boxShadow = '0 10px 28px rgba(234,68,60,.34)' }}
+              onMouseEnter={e => { e.target.style.transform = 'translateY(-2px)'; e.target.style.boxShadow = '0 16px 36px rgba(39,94,170,.48)' }}
+              onMouseLeave={e => { e.target.style.transform = 'translateY(0)'; e.target.style.boxShadow = '0 10px 28px rgba(39,94,170,.34)' }}
             >ثبت‌نام</Link>
             <a href="#about" style={{
               color: 'var(--text)', background: 'var(--surface)', fontWeight: 700, fontSize: 15,
@@ -107,7 +107,7 @@ export default function Hero() {
           <div style={{
             position: 'relative', height: 'clamp(440px, 54vw, 620px)',
             borderRadius: 26, overflow: 'hidden',
-            border: '1px solid rgba(234,68,60,.18)',
+            border: '1px solid rgba(39,94,170,.18)',
             boxShadow: '0 40px 90px rgba(0,0,0,.5)',
           }}>
             {settings.heroImage
@@ -124,7 +124,7 @@ export default function Hero() {
             }
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, transparent 35%, rgba(8,6,10,.9) 100%)' }} />
             <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: 30, textAlign: 'center' }}>
-              <div style={{ fontFamily: 'var(--font-latin)', fontSize: 11, color: 'rgba(234,68,60,.85)', fontWeight: 600, letterSpacing: '.22em', marginBottom: 8 }}>
+              <div style={{ fontFamily: 'var(--font-latin)', fontSize: 11, color: 'rgba(39,94,170,.85)', fontWeight: 600, letterSpacing: '.22em', marginBottom: 8 }}>
                 DAVINO CLIMBING GYM
               </div>
               <div style={{ fontSize: 22, fontWeight: 900, color: '#fff', marginBottom: 16 }}>
@@ -133,7 +133,7 @@ export default function Hero() {
               <div style={{ display: 'flex', gap: 8, justifyContent: 'center', flexWrap: 'wrap' }}>
                 {['مبتدی', 'متوسط', 'حرفه‌ای', 'مسابقاتی'].map(lvl => (
                   <span key={lvl} style={{
-                    background: 'rgba(234,68,60,.16)', border: '1px solid rgba(234,68,60,.32)',
+                    background: 'rgba(39,94,170,.16)', border: '1px solid rgba(39,94,170,.32)',
                     borderRadius: 7, padding: '4px 13px',
                     fontSize: 12, color: '#f3a39d', fontWeight: 700,
                   }}>{lvl}</span>
@@ -146,7 +146,7 @@ export default function Hero() {
           <div style={{
             position: 'absolute', bottom: -16, right: -16,
             background: 'var(--accent)', borderRadius: 16, padding: '13px 19px',
-            boxShadow: '0 12px 30px rgba(234,68,60,.4)',
+            boxShadow: '0 12px 30px rgba(39,94,170,.4)',
             animation: 'dvFloat 4.6s 1s ease-in-out infinite',
           }}>
             <div style={{ fontSize: 11, color: 'rgba(255,255,255,.85)', fontWeight: 500 }}>امتیاز کاربران</div>

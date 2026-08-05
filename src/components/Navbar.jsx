@@ -53,12 +53,12 @@ const CSS = `
     border: none;
     cursor: pointer;
     font-family: var(--font-body);
-    box-shadow: 0 6px 20px rgba(234,68,60,.3);
+    box-shadow: 0 6px 20px rgba(39,94,170,.3);
     transition: all .2s;
   }
   .nav-cta-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 26px rgba(234,68,60,.45);
+    box-shadow: 0 10px 26px rgba(39,94,170,.45);
   }
 
   .nav-burger {
@@ -117,7 +117,7 @@ const CSS = `
     margin-top: 14px;
     font-family: var(--font-body);
     cursor: pointer;
-    box-shadow: 0 6px 20px rgba(234,68,60,.3);
+    box-shadow: 0 6px 20px rgba(39,94,170,.3);
   }
 
   @media (max-width: 920px) {

@@ -17,7 +17,7 @@ const SINGLE_ICONS = {
 }
 
 const tint = (hex, a) => {
-  if (!hex || hex[0] !== '#' || hex.length < 7) return `rgba(234,68,60,${a})`
+  if (!hex || hex[0] !== '#' || hex.length < 7) return `rgba(39,94,170,${a})`
   const r = parseInt(hex.slice(1, 3), 16), g = parseInt(hex.slice(3, 5), 16), b = parseInt(hex.slice(5, 7), 16)
   return `rgba(${r},${g},${b},${a})`
 }
@@ -28,7 +28,7 @@ function GroupCardPopular({ plan }) {
     <div style={{
       position: 'relative', background: 'linear-gradient(160deg, #1a1013, #120d0c)',
       border: '2px solid var(--accent)', borderRadius: 24, padding: '40px 28px',
-      boxShadow: '0 24px 70px rgba(234,68,60,.18)',
+      boxShadow: '0 24px 70px rgba(39,94,170,.18)',
     }}>
       <div style={{ position: 'absolute', top: 16, left: '50%', transform: 'translateX(-50%)', background: 'var(--accent)', color: '#fff', fontWeight: 800, fontSize: 11, padding: '5px 16px', borderRadius: 999, whiteSpace: 'nowrap' }}>⭐ پرطرفدارترین</div>
       <div style={{ paddingTop: 20 }}>
@@ -42,12 +42,12 @@ function GroupCardPopular({ plan }) {
         <div style={{ display: 'flex', flexDirection: 'column', gap: 11, marginBottom: 28 }}>
           {plan.features.map(f => (
             <div key={f} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <span style={{ width: 18, height: 18, borderRadius: '50%', flexShrink: 0, background: 'rgba(234,68,60,.2)', border: '1px solid rgba(234,68,60,.45)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><CheckIcon color="#EA443C" /></span>
+              <span style={{ width: 18, height: 18, borderRadius: '50%', flexShrink: 0, background: 'rgba(39,94,170,.2)', border: '1px solid rgba(39,94,170,.45)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><CheckIcon color="#275EAA" /></span>
               <span style={{ fontSize: 13, color: 'rgba(255,255,255,.78)' }}>{f}</span>
             </div>
           ))}
         </div>
-        <Link to={`/register?plan=${encodeURIComponent(plan.id)}`} style={{ display: 'block', textAlign: 'center', width: '100%', padding: 14, borderRadius: 12, fontWeight: 800, fontSize: 14, background: 'var(--accent)', color: '#fff', boxShadow: '0 8px 24px rgba(234,68,60,.4)', transition: 'all .2s' }}
+        <Link to={`/register?plan=${encodeURIComponent(plan.id)}`} style={{ display: 'block', textAlign: 'center', width: '100%', padding: 14, borderRadius: 12, fontWeight: 800, fontSize: 14, background: 'var(--accent)', color: '#fff', boxShadow: '0 8px 24px rgba(39,94,170,.4)', transition: 'all .2s' }}
           onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.02)'}
           onMouseLeave={e => e.currentTarget.style.transform = 'none'}
         >{plan.cta}</Link>
@@ -61,7 +61,7 @@ function GroupCardRegular({ plan }) {
   return (
     <div
       style={{ background: 'linear-gradient(160deg, #211a1c 0%, #131011 100%)', border: '1px solid rgba(255,255,255,.1)', borderRadius: 24, padding: '32px 28px', transition: 'all .3s' }}
-      onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.borderColor = 'rgba(234,68,60,.5)' }}
+      onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.borderColor = 'rgba(39,94,170,.5)' }}
       onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.borderColor = 'rgba(255,255,255,.1)' }}
     >
       <h3 style={{ fontSize: 20, fontWeight: 900, color: '#fff', margin: '0 0 6px' }}>{plan.name}</h3>
@@ -74,13 +74,13 @@ function GroupCardRegular({ plan }) {
       <div style={{ display: 'flex', flexDirection: 'column', gap: 11, marginBottom: 28 }}>
         {plan.features.map(f => (
           <div key={f} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <span style={{ width: 18, height: 18, borderRadius: '50%', flexShrink: 0, background: 'rgba(234,68,60,.2)', border: '1px solid rgba(234,68,60,.4)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><CheckIcon color="#EA443C" /></span>
+            <span style={{ width: 18, height: 18, borderRadius: '50%', flexShrink: 0, background: 'rgba(39,94,170,.2)', border: '1px solid rgba(39,94,170,.4)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><CheckIcon color="#275EAA" /></span>
             <span style={{ fontSize: 13, color: 'rgba(255,255,255,.78)' }}>{f}</span>
           </div>
         ))}
       </div>
       <Link to={`/register?plan=${encodeURIComponent(plan.id)}`} style={{ display: 'block', textAlign: 'center', width: '100%', padding: 13, borderRadius: 12, fontWeight: 700, fontSize: 14, background: 'rgba(255,255,255,.06)', color: '#fff', border: '1.5px solid rgba(255,255,255,.2)', transition: 'all .2s' }}
-        onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.background = 'rgba(234,68,60,.15)' }}
+        onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.background = 'rgba(39,94,170,.15)' }}
         onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,.2)'; e.currentTarget.style.background = 'rgba(255,255,255,.06)' }}
       >{plan.cta}</Link>
     </div>
@@ -136,7 +136,7 @@ export default function Pricing() {
     <section id="pricing" style={{ padding: 'clamp(70px, 8vw, 100px) clamp(24px, 4vw, 40px)', background: 'var(--bg)', transition: 'background .3s' }}>
       <div style={{ maxWidth: 1080, margin: '0 auto' }}>
         <div style={{ textAlign: 'center', marginBottom: 48 }}>
-          <div style={{ display: 'inline-block', fontSize: 11, fontWeight: 800, color: 'var(--accent)', letterSpacing: '.14em', background: 'rgba(234,68,60,.1)', border: '1px solid rgba(234,68,60,.22)', borderRadius: 999, padding: '6px 15px', marginBottom: 16 }}>تعرفه‌ها</div>
+          <div style={{ display: 'inline-block', fontSize: 11, fontWeight: 800, color: 'var(--accent)', letterSpacing: '.14em', background: 'rgba(39,94,170,.1)', border: '1px solid rgba(39,94,170,.22)', borderRadius: 999, padding: '6px 15px', marginBottom: 16 }}>تعرفه‌ها</div>
           <h2 style={{ fontSize: 'clamp(1.9rem, 4vw, 2.8rem)', fontWeight: 900, letterSpacing: '-.01em', margin: '0 0 12px', color: 'var(--text)' }}>پکیج مناسبت رو انتخاب کن</h2>
           <p style={{ fontSize: 16, color: 'var(--t50)', maxWidth: 420, margin: '0 auto', lineHeight: 1.75 }}>بدون قرارداد اجباری — هر وقت خواستی لغو کن</p>
         </div>

@@ -7,7 +7,7 @@ const CheckIcon = ({ size = 15 }) => (
 const featureGroups = [
   {
     title: 'خدمات ما شامل',
-    color: '#EA443C',
+    color: '#275EAA',
     items: [
       'طراحی و اجرای دیواره سنگنوردی کودک',
       'دیواره‌های آموزشی مدارس و مراکز فرهنگی',
@@ -77,8 +77,8 @@ export default function ClimbingWallService() {
         <div style={{ textAlign: 'center', marginBottom: 'clamp(36px, 5vw, 52px)' }}>
           <div style={{
             display: 'inline-block', fontSize: 11, fontWeight: 800, color: 'var(--accent)',
-            letterSpacing: '.14em', background: 'rgba(234,68,60,.1)',
-            border: '1px solid rgba(234,68,60,.22)', borderRadius: 999,
+            letterSpacing: '.14em', background: 'rgba(39,94,170,.1)',
+            border: '1px solid rgba(39,94,170,.22)', borderRadius: 999,
             padding: '6px 15px', marginBottom: 18,
           }}>احداث دیواره سنگنوردی</div>
           <h2 style={{ fontSize: 'clamp(1.6rem, 3.4vw, 2.4rem)', fontWeight: 900, lineHeight: 1.35, letterSpacing: '-.01em', margin: '0 0 14px', color: 'var(--text)', maxWidth: 780, marginInline: 'auto' }}>
@@ -152,7 +152,7 @@ export default function ClimbingWallService() {
                 display: 'inline-flex', alignItems: 'center', gap: 10,
                 background: 'var(--accent)', color: '#fff', textDecoration: 'none',
                 fontSize: 16, fontWeight: 800, padding: '14px 30px', borderRadius: 14,
-                boxShadow: '0 8px 26px rgba(234,68,60,0.35)',
+                boxShadow: '0 8px 26px rgba(39,94,170,0.35)',
               }}
             >
               مشاهده اطلاعات کامل و خدمات

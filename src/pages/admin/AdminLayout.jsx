@@ -68,10 +68,10 @@ const CSS = `
     white-space: nowrap; position: relative;
   }
   .admin-nav-item:hover { color: var(--text); background: var(--ad-side-hover); }
-  .admin-nav-item.active { color: #EA443C; background: rgba(234,68,60,.12); font-weight: 700; }
+  .admin-nav-item.active { color: #275EAA; background: rgba(39,94,170,.12); font-weight: 700; }
   .admin-nav-item.active::before {
     content: ''; position: absolute; right: 0; top: 50%; transform: translateY(-50%);
-    width: 3px; height: 20px; background: #EA443C; border-radius: 3px 0 0 3px;
+    width: 3px; height: 20px; background: #275EAA; border-radius: 3px 0 0 3px;
   }
   .admin-nav-item.collapsed { justify-content: center; padding: 10px; }
   .admin-nav-item.collapsed::before { display: none; }
@@ -120,7 +120,7 @@ export default function AdminLayout({ children, onLogout }) {
           {!collapsed && (
             <div style={{ display: 'flex', alignItems: 'center', gap: 9 }}>
               <span style={{ fontFamily: 'var(--font-latin)', fontSize: 19, fontWeight: 700, letterSpacing: '.04em', color: 'var(--text)' }}>DAVINO</span>
-              <span style={{ fontSize: 10, fontWeight: 800, color: '#EA443C', background: 'rgba(234,68,60,.12)', border: '1px solid rgba(234,68,60,.25)', borderRadius: 6, padding: '2px 7px' }}>ادمین</span>
+              <span style={{ fontSize: 10, fontWeight: 800, color: '#275EAA', background: 'rgba(39,94,170,.12)', border: '1px solid rgba(39,94,170,.25)', borderRadius: 6, padding: '2px 7px' }}>ادمین</span>
             </div>
           )}
           <button
@@ -229,7 +229,7 @@ export default function AdminLayout({ children, onLogout }) {
           </div>
           <div style={{ marginRight: 'auto', display: 'flex', alignItems: 'center', gap: 12 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 9 }}>
-              <div style={{ width: 34, height: 34, borderRadius: '50%', background: 'linear-gradient(135deg, #EA443C, #c5342c)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: 13, fontWeight: 800, flexShrink: 0 }}>ا</div>
+              <div style={{ width: 34, height: 34, borderRadius: '50%', background: 'linear-gradient(135deg, #275EAA, #1E4A8A)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: 13, fontWeight: 800, flexShrink: 0 }}>ا</div>
               <div style={{ lineHeight: 1.2 }}>
                 <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)' }}>ادمین</div>
                 <div style={{ fontSize: 11, color: 'var(--ad-text3)' }}>{pageTitle}</div>

@@ -14,9 +14,9 @@ const CSS = `
   .reg-card { background: var(--ad-card); border: 1px solid var(--ad-card-b); border-radius: 16px; padding: 20px; animation: regUp .22s ease; }
   .reg-detail-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px 22px; }
   .reg-filter { border: none; padding: 7px 14px; border-radius: 999px; background: transparent; color: var(--ad-text2); font: 700 12px 'Vazirmatn'; white-space: nowrap; }
-  .reg-filter.active { background: #EA443C; color: #fff; }
+  .reg-filter.active { background: #275EAA; color: #fff; }
   .reg-select { min-width: 175px; background: var(--ad-rowh); color: var(--text); border: 1.5px solid var(--ad-card-b); border-radius: 10px; padding: 9px 12px; outline: none; font: 700 12px 'Vazirmatn'; }
-  .reg-select:focus { border-color: #EA443C; }
+  .reg-select:focus { border-color: #275EAA; }
   @media (max-width: 760px) { .reg-detail-grid { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 520px) { .reg-detail-grid { grid-template-columns: 1fr; } .reg-card { padding: 16px; } }
 `
@@ -142,7 +142,7 @@ export default function AdminRegistrations() {
                 </div>
 
                 <div style={{ marginTop: 16, display: 'flex', gap: 8 }}>
-                  <a href={`tel:${item.phone}`} style={{ display: 'inline-flex', alignItems: 'center', padding: '8px 14px', borderRadius: 9, background: 'rgba(234,68,60,.1)', border: '1px solid rgba(234,68,60,.25)', color: '#EA443C', fontSize: 12, fontWeight: 800 }}>تماس با متقاضی</a>
+                  <a href={`tel:${item.phone}`} style={{ display: 'inline-flex', alignItems: 'center', padding: '8px 14px', borderRadius: 9, background: 'rgba(39,94,170,.1)', border: '1px solid rgba(39,94,170,.25)', color: '#275EAA', fontSize: 12, fontWeight: 800 }}>تماس با متقاضی</a>
                 </div>
               </article>
             )

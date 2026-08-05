@@ -55,10 +55,10 @@ const CSS = `
   .register-field.full { grid-column: 1 / -1; }
   .register-label { font-size: 13px; font-weight: 700; color: var(--t60); }
   .register-input { width: 100%; min-height: 48px; padding: 12px 14px; color: var(--text); background: var(--bg2); border: 1.5px solid var(--surface-b); border-radius: 11px; outline: none; font: 14px var(--font-body); transition: border-color .2s, box-shadow .2s; }
-  .register-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(234,68,60,.1); }
+  .register-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(39,94,170,.1); }
   .register-date-container { width: 100%; }
   .register-date-trigger { width: 100%; min-height: 48px; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px; color: var(--t45); background: var(--bg2); border: 1.5px solid var(--surface-b); border-radius: 11px; font: 14px var(--font-body); text-align: right; transition: border-color .2s, box-shadow .2s; }
-  .register-date-trigger:hover, .register-date-trigger:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(234,68,60,.1); }
+  .register-date-trigger:hover, .register-date-trigger:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(39,94,170,.1); }
   .register-date-trigger.has-value { color: var(--text); }
   .register-date-trigger svg { color: var(--accent); flex-shrink: 0; }
   .register-jalali-calendar { font-family: var(--font-body); background: var(--bg2) !important; color: var(--text); border: 1px solid var(--surface-b); border-radius: 16px; box-shadow: var(--shadow-card); padding: 8px; }

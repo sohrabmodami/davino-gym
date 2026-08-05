@@ -56,22 +56,22 @@ export default function AdminLogin({ onLogin }) {
           font-family: 'Vazirmatn', sans-serif; outline: none; transition: border-color .2s, background .2s;
           box-sizing: border-box;
         }
-        .admin-login-input:focus { border-color: #EA443C; background: rgba(234,68,60,.05); }
+        .admin-login-input:focus { border-color: #275EAA; background: rgba(39,94,170,.05); }
         .admin-login-input.error { border-color: #f87171 !important; }
         .admin-login-btn {
-          width: 100%; background: #EA443C; color: #fff; border: none; border-radius: 12px;
+          width: 100%; background: #275EAA; color: #fff; border: none; border-radius: 12px;
           padding: 13px; font-size: 15px; font-weight: 800; cursor: pointer;
           font-family: 'Vazirmatn', sans-serif; transition: all .2s;
-          box-shadow: 0 4px 20px rgba(234,68,60,.4); letter-spacing: .3px;
+          box-shadow: 0 4px 20px rgba(39,94,170,.4); letter-spacing: .3px;
         }
-        .admin-login-btn:hover { background: #d63830; transform: translateY(-1px); box-shadow: 0 6px 28px rgba(234,68,60,.5); }
+        .admin-login-btn:hover { background: #1E4A8A; transform: translateY(-1px); box-shadow: 0 6px 28px rgba(39,94,170,.5); }
         .admin-login-btn:active { transform: translateY(0); }
         .eye-btn { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: rgba(255,255,255,.35); padding: 4px; display: flex; transition: color .15s; }
         .eye-btn:hover { color: rgba(255,255,255,.6); }
       `}</style>
 
       {/* Background grid */}
-      <div style={{ position: 'fixed', inset: 0, backgroundImage: 'radial-gradient(circle at 30% 20%, rgba(234,68,60,.08) 0%, transparent 50%), radial-gradient(circle at 70% 80%, rgba(234,68,60,.05) 0%, transparent 40%)', pointerEvents: 'none' }} />
+      <div style={{ position: 'fixed', inset: 0, backgroundImage: 'radial-gradient(circle at 30% 20%, rgba(39,94,170,.08) 0%, transparent 50%), radial-gradient(circle at 70% 80%, rgba(39,94,170,.05) 0%, transparent 40%)', pointerEvents: 'none' }} />
 
       <div style={{
         background: 'rgba(255,255,255,.04)',
@@ -88,9 +88,9 @@ export default function AdminLogin({ onLogin }) {
           <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 16 }}>
             <Logo size={1.0} dark />
           </div>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(234,68,60,.1)', border: '1px solid rgba(234,68,60,.2)', borderRadius: 999, padding: '4px 14px' }}>
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#EA443C" strokeWidth="2.5" strokeLinecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-            <span style={{ fontSize: 12, color: '#EA443C', fontWeight: 700 }}>پنل مدیریت</span>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(39,94,170,.1)', border: '1px solid rgba(39,94,170,.2)', borderRadius: 999, padding: '4px 14px' }}>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#275EAA" strokeWidth="2.5" strokeLinecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+            <span style={{ fontSize: 12, color: '#275EAA', fontWeight: 700 }}>پنل مدیریت</span>
           </div>
         </div>
 

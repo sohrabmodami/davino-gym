@@ -54,8 +54,8 @@ export default function Blog() {
           <div style={{ position: 'relative', maxWidth: 820, margin: '0 auto', textAlign: 'center' }}>
             <div style={{
               display: 'inline-block', fontSize: 11, fontWeight: 800, color: 'var(--accent)',
-              letterSpacing: '.14em', background: 'rgba(234,68,60,.1)',
-              border: '1px solid rgba(234,68,60,.22)', borderRadius: 999,
+              letterSpacing: '.14em', background: 'rgba(39,94,170,.1)',
+              border: '1px solid rgba(39,94,170,.22)', borderRadius: 999,
               padding: '6px 15px', marginBottom: 18,
             }}>بلاگ داوینو</div>
             <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3.2rem)', fontWeight: 900, letterSpacing: '-.02em', margin: '0 0 16px', color: 'var(--text)', lineHeight: 1.25 }}>
@@ -169,7 +169,7 @@ export default function Blog() {
         .blog-hero-glow {
           position: absolute; top: -140px; left: 50%; transform: translateX(-50%);
           width: 620px; height: 420px; pointer-events: none;
-          background: radial-gradient(circle, rgba(234,68,60,.14), transparent 65%);
+          background: radial-gradient(circle, rgba(39,94,170,.14), transparent 65%);
           filter: blur(20px);
         }
         .blog-search {
@@ -179,7 +179,7 @@ export default function Blog() {
           border-radius: 14px; padding: 4px 14px;
           color: var(--t45); transition: border-color .2s, box-shadow .2s;
         }
-        .blog-search:focus-within { border-color: rgba(234,68,60,.55); box-shadow: 0 0 0 3px rgba(234,68,60,.08); }
+        .blog-search:focus-within { border-color: rgba(39,94,170,.55); box-shadow: 0 0 0 3px rgba(39,94,170,.08); }
         .blog-search input {
           flex: 1; background: none; border: none; outline: none;
           padding: 13px 0; font-size: 15px; color: var(--text);
@@ -203,7 +203,7 @@ export default function Blog() {
           background: var(--surface); border: 1px solid var(--surface-b);
           border-radius: 22px; transition: transform .2s, border-color .2s, box-shadow .2s;
         }
-        .blog-featured:hover { transform: translateY(-4px); border-color: rgba(234,68,60,.4); box-shadow: 0 22px 50px rgba(0,0,0,.16); }
+        .blog-featured:hover { transform: translateY(-4px); border-color: rgba(39,94,170,.4); box-shadow: 0 22px 50px rgba(0,0,0,.16); }
         .blog-featured-cover { position: relative; flex: 1 1 48%; min-height: 300px; overflow: hidden; background: var(--bg2); }
         .blog-featured-body { flex: 1 1 52%; display: flex; flex-direction: column; padding: clamp(24px, 3.5vw, 40px); }
         @media (max-width: 760px) {
@@ -217,16 +217,16 @@ export default function Blog() {
           background: var(--surface); border: 1px solid var(--surface-b);
           border-radius: 18px; overflow: hidden; transition: transform .2s, border-color .2s, box-shadow .2s;
         }
-        .blog-card:hover { transform: translateY(-4px); border-color: rgba(234,68,60,.4); box-shadow: 0 18px 40px rgba(0,0,0,.14); }
+        .blog-card:hover { transform: translateY(-4px); border-color: rgba(39,94,170,.4); box-shadow: 0 18px 40px rgba(0,0,0,.14); }
         .blog-card-cover { position: relative; aspect-ratio: 16/9; overflow: hidden; background: var(--bg2); }
         .blog-card-ph {
           position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
           background: repeating-linear-gradient(135deg, #1b1620, #1b1620 14px, #16121b 14px, #16121b 28px);
         }
-        .blog-card-ph span { font-family: var(--font-latin); font-size: 13px; letter-spacing: .24em; color: rgba(234,68,60,.7); font-weight: 700; }
+        .blog-card-ph span { font-family: var(--font-latin); font-size: 13px; letter-spacing: .24em; color: rgba(39,94,170,.7); font-weight: 700; }
         .blog-card-cat {
           position: absolute; top: 12px; right: 12px;
-          background: rgba(234,68,60,.92); color: #fff; font-size: 11px; font-weight: 800;
+          background: rgba(39,94,170,.92); color: #fff; font-size: 11px; font-weight: 800;
           padding: 5px 12px; border-radius: 999px;
         }
       `}</style>

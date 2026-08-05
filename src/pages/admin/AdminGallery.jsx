@@ -9,7 +9,7 @@ const CSS = `
   .gallery-item:hover .gallery-del-btn { opacity: 1; }
   .gallery-order-badge { position: absolute; top: 10px; right: 10px; min-width: 22px; height: 22px; padding: 0 5px; border-radius: 6px; background: rgba(0,0,0,.55); color: #fff; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
   .upload-zone { border: 2px dashed var(--ad-card-b); border-radius: 14px; padding: 32px 20px; text-align: center; cursor: pointer; transition: border-color .18s, background .18s; }
-  .upload-zone:hover { border-color: #EA443C; background: rgba(234,68,60,.03); }
+  .upload-zone:hover { border-color: #275EAA; background: rgba(39,94,170,.03); }
 `
 
 function readAsDataURL(file) {
@@ -97,12 +97,12 @@ export default function AdminGallery() {
         style={{ marginBottom: 24 }}
       >
         {uploading ? (
-          <div style={{ color: '#EA443C', fontSize: 13, fontWeight: 700 }}>
+          <div style={{ color: '#275EAA', fontSize: 13, fontWeight: 700 }}>
             در حال آپلود… {progress.done} از {progress.total}
           </div>
         ) : (
           <>
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#EA443C" strokeWidth="1.5" strokeLinecap="round" style={{ marginBottom: 8, opacity: .5 }}>
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#275EAA" strokeWidth="1.5" strokeLinecap="round" style={{ marginBottom: 8, opacity: .5 }}>
               <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
             </svg>
             <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--ad-text2)', marginBottom: 3 }}>کلیک کن یا تصاویر رو اینجا بکش</div>

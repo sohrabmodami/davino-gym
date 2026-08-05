@@ -139,8 +139,8 @@ export default function Gallery() {
         <div style={{ textAlign: 'center', marginBottom: '44px' }}>
           <div style={{
             display: 'inline-block', fontSize: 11, fontWeight: 800, color: 'var(--accent)',
-            letterSpacing: '.14em', background: 'rgba(234,68,60,.1)',
-            border: '1px solid rgba(234,68,60,.22)', borderRadius: 999,
+            letterSpacing: '.14em', background: 'rgba(39,94,170,.1)',
+            border: '1px solid rgba(39,94,170,.22)', borderRadius: 999,
             padding: '6px 15px', marginBottom: 16,
           }}>گالری</div>
           <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)', fontWeight: 900, marginBottom: '14px', letterSpacing: '-0.5px' }}>

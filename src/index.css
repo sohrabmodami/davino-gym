@@ -22,15 +22,15 @@
   --btnfg: #ffffff;
   --dot: #d8d1c6;
   --hdot: rgba(30,22,16,.08);
-  --hring: rgba(234,68,60,.09);
+  --hring: rgba(39,94,170,.09);
   --hgrid: rgba(30,22,16,.09);
   --cubeTop: rgba(255,255,255,.9);
   --cubeL: rgba(30,22,16,.05);
   --cubeR: rgba(30,22,16,.10);
-  --accentText: #c5342c;
+  --accentText: #1E4A8A;
   --obtnbd: #d0c7ba;
-  --accent-soft: rgba(234,68,60,.12);
-  --accent-soft-b: rgba(234,68,60,.28);
+  --accent-soft: rgba(39,94,170,.12);
+  --accent-soft-b: rgba(39,94,170,.28);
   --shadow-card: 0 20px 50px rgba(24,19,16,.12);
   /* توکن‌های پنل ادمین */
   --ad-page: #f5f3f0;
@@ -49,8 +49,8 @@
   --ad-chip: #f4f1ec;
 
   /* پالت برند */
-  --accent: #EA443C;
-  --accent-deep: #c5342c;
+  --accent: #275EAA;
+  --accent-deep: #1E4A8A;
   --success: #22C55E;
   --info: #3B82F6;
   --warning: #F59E0B;
@@ -65,7 +65,7 @@
   /* ── نگاشت متغیرهای قدیمی به توکن‌های جدید (برای صفحات مهاجرت‌نکرده) ── */
   --color-primary: var(--accent);
   --color-primary-light: var(--accent-soft);
-  --color-primary-glow: rgba(234, 68, 60, 0.2);
+  --color-primary-glow: rgba(39, 94, 170, 0.2);
   --color-bg: var(--bg);
   --color-bg-white: var(--bg2);
   --color-bg-card: var(--surface);
@@ -281,13 +281,13 @@ img { max-width: 100%; display: block; }
   text-decoration: none; color: inherit;
   transition: transform .32s cubic-bezier(.22,.61,.36,1), box-shadow .32s cubic-bezier(.22,.61,.36,1), border-color .28s ease, background .3s;
 }
-.tcard:hover { transform: translateY(-7px); box-shadow: var(--shadow-card); border-color: rgba(234,68,60,.4); }
+.tcard:hover { transform: translateY(-7px); box-shadow: var(--shadow-card); border-color: rgba(39,94,170,.4); }
 .tring {
   position: absolute; inset: -8px; border-radius: 50%;
-  border: 2px dashed rgba(234,68,60,.35);
+  border: 2px dashed rgba(39,94,170,.35);
   transition: border-color .3s ease;
 }
-.tcard:hover .tring { border-color: rgba(234,68,60,.7); animation: trainer-spin 8s linear infinite; }
+.tcard:hover .tring { border-color: rgba(39,94,170,.7); animation: trainer-spin 8s linear infinite; }
 .tarc {
   position: absolute; inset: -8px; border-radius: 50%;
   border: 2.5px solid transparent;
@@ -302,32 +302,32 @@ img { max-width: 100%; display: block; }
   display: flex; align-items: center; justify-content: center;
   transition: box-shadow .3s ease;
 }
-.tcard:hover .tavatar { box-shadow: 0 6px 24px rgba(234,68,60,.3); }
+.tcard:hover .tavatar { box-shadow: 0 6px 24px rgba(39,94,170,.3); }
 .tbadge {
   position: absolute; bottom: 2px; left: 2px; z-index: 2;
   width: 32px; height: 32px; border-radius: 50%;
   background: var(--accent); border: 3px solid var(--avb);
   display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 2px 8px rgba(234,68,60,.45);
+  box-shadow: 0 2px 8px rgba(39,94,170,.45);
   transition: transform .25s ease;
 }
 .tcard:hover .tbadge { transform: scale(1.15); }
 .tdiv {
   width: 36px; height: 2px;
-  background: linear-gradient(90deg, rgba(234,68,60,.15), var(--accent), rgba(234,68,60,.15));
+  background: linear-gradient(90deg, rgba(39,94,170,.15), var(--accent), rgba(39,94,170,.15));
   border-radius: 999px; margin-bottom: 18px;
   transition: width .3s ease;
 }
 .tcard:hover .tdiv { width: 60px; }
 .tpill {
-  background: rgba(234,68,60,.1);
-  border: 1px solid rgba(234,68,60,.22);
+  background: rgba(39,94,170,.1);
+  border: 1px solid rgba(39,94,170,.22);
   color: var(--accentText);
   font-size: 11px; font-weight: 800;
   padding: 4px 12px; border-radius: 999px;
   transition: background .2s ease;
 }
-.tcard:hover .tpill { background: rgba(234,68,60,.18); }
+.tcard:hover .tpill { background: rgba(39,94,170,.18); }
 .tbtn {
   display: inline-flex; align-items: center; gap: 6px;
   background: var(--btnbg); color: var(--btnfg);

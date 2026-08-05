@@ -4,7 +4,7 @@ import { useAdmin } from '../../data/adminStore.jsx'
 const CSS = `
   @keyframes slideUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
   .settings-input { border: 1.5px solid var(--ad-card-b); border-radius: 10px; padding: 10px 14px; font-size: 14px; outline: none; font-family: 'Vazirmatn', sans-serif; transition: border-color .18s, box-shadow .18s; width: 100%; box-sizing: border-box; color: var(--text); background: var(--ad-card); }
-  .settings-input:focus { border-color: #EA443C; box-shadow: 0 0 0 3px rgba(234,68,60,.08); }
+  .settings-input:focus { border-color: #275EAA; box-shadow: 0 0 0 3px rgba(39,94,170,.08); }
   .settings-section { background: var(--ad-card); border-radius: 16px; border: 1px solid var(--ad-card-b); padding: 28px; margin-bottom: 20px; }
   .settings-input:disabled { background: var(--ad-rowh); color: var(--ad-text3); border-color: var(--ad-card-b); }
 
@@ -13,7 +13,7 @@ const CSS = `
   .toggle-wrap input { opacity: 0; width: 0; height: 0; position: absolute; }
   .toggle-slider { position: absolute; inset: 0; border-radius: 999px; cursor: pointer; background: var(--track); transition: background .2s; }
   .toggle-slider:before { content: ''; position: absolute; width: 16px; height: 16px; border-radius: 50%; left: 3px; top: 3px; background: var(--ad-card); transition: transform .2s; box-shadow: 0 1px 4px rgba(0,0,0,.18); }
-  .toggle-wrap input:checked + .toggle-slider { background: #EA443C; }
+  .toggle-wrap input:checked + .toggle-slider { background: #275EAA; }
   .toggle-wrap input:checked + .toggle-slider:before { transform: translateX(16px); }
 `
 
@@ -121,7 +121,7 @@ function HeroCropModal({ src, onCrop, onClose }) {
               style={{
                 position: 'absolute', left: box.x, top: box.y, width: box.w, height: boxH,
                 boxShadow: '0 0 0 9999px rgba(0,0,0,0.55)',
-                border: '2px solid #EA443C',
+                border: '2px solid #275EAA',
                 borderRadius: 4,
                 cursor: 'move',
                 zIndex: 2,
@@ -135,7 +135,7 @@ function HeroCropModal({ src, onCrop, onClose }) {
               {[33, 66].map(p => <div key={`v${p}`} style={{ position: 'absolute', left: `${p}%`, top: 0, bottom: 0, width: 1, background: 'rgba(255,255,255,0.2)', pointerEvents: 'none' }} />)}
               {[33, 66].map(p => <div key={`h${p}`} style={{ position: 'absolute', top: `${p}%`, left: 0, right: 0, height: 1, background: 'rgba(255,255,255,0.2)', pointerEvents: 'none' }} />)}
               {[['top', 'left'], ['top', 'right'], ['bottom', 'left'], ['bottom', 'right']].map(([v, h]) => (
-                <div key={`${v}${h}`} style={{ position: 'absolute', [v]: -2, [h]: -2, width: 14, height: 14, borderStyle: 'solid', borderColor: '#EA443C', borderWidth: `${v === 'top' ? 3 : 0}px ${h === 'right' ? 3 : 0}px ${v === 'bottom' ? 3 : 0}px ${h === 'left' ? 3 : 0}px`, pointerEvents: 'none' }} />
+                <div key={`${v}${h}`} style={{ position: 'absolute', [v]: -2, [h]: -2, width: 14, height: 14, borderStyle: 'solid', borderColor: '#275EAA', borderWidth: `${v === 'top' ? 3 : 0}px ${h === 'right' ? 3 : 0}px ${v === 'bottom' ? 3 : 0}px ${h === 'left' ? 3 : 0}px`, pointerEvents: 'none' }} />
               ))}
             </div>
           )}
@@ -144,17 +144,17 @@ function HeroCropModal({ src, onCrop, onClose }) {
         <div style={{ marginBottom: 20 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
             <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--ad-text2)' }}>اندازه قاب کراپ</span>
-            <span style={{ fontSize: 11, fontWeight: 700, color: '#EA443C' }}>{box ? Math.round(box.w / maxW * 100) : 90}٪</span>
+            <span style={{ fontSize: 11, fontWeight: 700, color: '#275EAA' }}>{box ? Math.round(box.w / maxW * 100) : 90}٪</span>
           </div>
           <input type="range" min={Math.max(80, maxW * 0.3)} max={maxW} step={1}
             value={box?.w ?? maxW * 0.9}
             onChange={e => handleSize(+e.target.value)}
-            style={{ width: '100%', accentColor: '#EA443C', cursor: 'pointer' }} />
+            style={{ width: '100%', accentColor: '#275EAA', cursor: 'pointer' }} />
         </div>
 
         <div style={{ display: 'flex', gap: 10 }}>
           <button onClick={onClose} style={{ flex: 1, background: 'var(--ad-card)', color: 'var(--ad-text2)', border: '1.5px solid var(--ad-card-b)', borderRadius: 10, padding: '10px', fontFamily: 'Vazirmatn', fontSize: 14, cursor: 'pointer' }}>انصراف</button>
-          <button onClick={handleCrop} style={{ flex: 1, background: '#EA443C', color: '#fff', border: 'none', borderRadius: 10, padding: '10px', fontFamily: 'Vazirmatn', fontSize: 14, fontWeight: 700, cursor: 'pointer' }}>برش و ذخیره</button>
+          <button onClick={handleCrop} style={{ flex: 1, background: '#275EAA', color: '#fff', border: 'none', borderRadius: 10, padding: '10px', fontFamily: 'Vazirmatn', fontSize: 14, fontWeight: 700, cursor: 'pointer' }}>برش و ذخیره</button>
         </div>
       </div>
     </div>
@@ -256,7 +256,7 @@ export default function AdminSettings() {
         {/* Gym info */}
         <div className="settings-section">
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 22, paddingBottom: 16, borderBottom: '1px solid var(--ad-card-b)' }}>
-            <div style={{ width: 32, height: 32, borderRadius: 9, background: 'rgba(234,68,60,.08)', border: '1px solid rgba(234,68,60,.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#EA443C' }}>{gymIcon}</div>
+            <div style={{ width: 32, height: 32, borderRadius: 9, background: 'rgba(39,94,170,.08)', border: '1px solid rgba(39,94,170,.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#275EAA' }}>{gymIcon}</div>
             <h2 style={{ fontSize: 14, fontWeight: 800, color: 'var(--text)' }}>اطلاعات باشگاه</h2>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
@@ -283,7 +283,7 @@ export default function AdminSettings() {
         {/* Social */}
         <div className="settings-section">
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 22, paddingBottom: 16, borderBottom: '1px solid var(--ad-card-b)' }}>
-            <div style={{ width: 32, height: 32, borderRadius: 9, background: 'rgba(234,68,60,.08)', border: '1px solid rgba(234,68,60,.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#EA443C' }}>{socialIcon}</div>
+            <div style={{ width: 32, height: 32, borderRadius: 9, background: 'rgba(39,94,170,.08)', border: '1px solid rgba(39,94,170,.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#275EAA' }}>{socialIcon}</div>
             <h2 style={{ fontSize: 14, fontWeight: 800, color: 'var(--text)' }}>شبکه‌های اجتماعی</h2>
           </div>
           <p style={{ fontSize: 12, color: 'var(--ad-text3)', marginBottom: 18, marginTop: -10, lineHeight: 1.7 }}>
@@ -313,7 +313,7 @@ export default function AdminSettings() {
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
                     <Toggle checked={isOn} onChange={v => setField(visKey, v)} />
-                    <span style={{ fontSize: 10, color: isOn ? '#EA443C' : 'var(--ad-text3)', fontWeight: 700 }}>{isOn ? 'نمایش' : 'مخفی'}</span>
+                    <span style={{ fontSize: 10, color: isOn ? '#275EAA' : 'var(--ad-text3)', fontWeight: 700 }}>{isOn ? 'نمایش' : 'مخفی'}</span>
                   </div>
                 </div>
               )
@@ -324,7 +324,7 @@ export default function AdminSettings() {
         {/* Hero content */}
         <div className="settings-section">
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 22, paddingBottom: 16, borderBottom: '1px solid var(--ad-card-b)' }}>
-            <div style={{ width: 32, height: 32, borderRadius: 9, background: 'rgba(234,68,60,.08)', border: '1px solid rgba(234,68,60,.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#EA443C' }}>{imageIcon}</div>
+            <div style={{ width: 32, height: 32, borderRadius: 9, background: 'rgba(39,94,170,.08)', border: '1px solid rgba(39,94,170,.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#275EAA' }}>{imageIcon}</div>
             <h2 style={{ fontSize: 14, fontWeight: 800, color: 'var(--text)' }}>محتوای هیرو</h2>
           </div>
 
@@ -378,7 +378,7 @@ export default function AdminSettings() {
                 </div>
                 <div style={{ display: 'flex', gap: 8 }}>
                   <button type="button" onClick={() => heroFileRef.current?.click()} style={{
-                    background: '#EA443C', color: '#fff', border: 'none', borderRadius: 10,
+                    background: '#275EAA', color: '#fff', border: 'none', borderRadius: 10,
                     padding: '9px 16px', fontSize: 13, fontWeight: 700, cursor: 'pointer',
                     fontFamily: 'Vazirmatn', display: 'flex', alignItems: 'center', gap: 6,
                   }}>
@@ -415,12 +415,12 @@ export default function AdminSettings() {
           <button
             type="submit"
             style={{
-              background: dirty ? '#EA443C' : 'var(--ad-card-b)',
+              background: dirty ? '#275EAA' : 'var(--ad-card-b)',
               color: dirty ? '#fff' : 'var(--ad-text3)',
               border: 'none', borderRadius: 12, padding: '11px 32px',
               fontFamily: 'Vazirmatn', fontSize: 14, fontWeight: 700,
               cursor: dirty ? 'pointer' : 'default',
-              boxShadow: dirty ? '0 4px 16px rgba(234,68,60,.3)' : 'none',
+              boxShadow: dirty ? '0 4px 16px rgba(39,94,170,.3)' : 'none',
               transition: 'all .2s',
             }}
           >

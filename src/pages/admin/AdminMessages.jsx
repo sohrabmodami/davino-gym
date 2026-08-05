@@ -5,11 +5,11 @@ const TOKEN_KEY = 'davino_admin_token'
 const CSS = `
   @keyframes slideUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
   .msg-card { background: var(--ad-card); border: 1px solid var(--ad-card-b); border-radius: 14px; padding: 18px 20px; transition: border-color .18s; }
-  .msg-card:hover { border-color: rgba(234,68,60,.35); }
+  .msg-card:hover { border-color: rgba(39,94,170,.35); }
   .msg-btn { font-family: 'Vazirmatn', sans-serif; font-size: 12.5px; font-weight: 700; border-radius: 9px; padding: 7px 13px; cursor: pointer; border: 1.5px solid var(--ad-card-b); background: var(--ad-card); color: var(--ad-text2); transition: all .15s; }
   .msg-btn:hover { border-color: #bbb; }
   .filter-tab { font-family: 'Vazirmatn', sans-serif; font-size: 13px; font-weight: 700; border: none; cursor: pointer; padding: 7px 16px; border-radius: 999px; background: transparent; color: var(--ad-text2); transition: all .2s; }
-  .filter-tab.active { background: #EA443C; color: #fff; }
+  .filter-tab.active { background: #275EAA; color: #fff; }
 `
 
 const faDate = (iso) => {
@@ -104,13 +104,13 @@ export default function AdminMessages() {
               <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10, flexWrap: 'wrap' }}>
                 <span style={{ fontSize: 15, fontWeight: 800, color: 'var(--text)' }}>{m.name}</span>
                 {m.status === 'new'
-                  ? <span style={{ fontSize: 10, fontWeight: 800, color: '#EA443C', background: 'rgba(234,68,60,.12)', border: '1px solid rgba(234,68,60,.25)', borderRadius: 999, padding: '2px 9px' }}>جدید</span>
+                  ? <span style={{ fontSize: 10, fontWeight: 800, color: '#275EAA', background: 'rgba(39,94,170,.12)', border: '1px solid rgba(39,94,170,.25)', borderRadius: 999, padding: '2px 9px' }}>جدید</span>
                   : <span style={{ fontSize: 10, fontWeight: 800, color: '#22C55E', background: 'rgba(34,197,94,.12)', border: '1px solid rgba(34,197,94,.25)', borderRadius: 999, padding: '2px 9px' }}>پیگیری‌شده</span>
                 }
                 <span style={{ marginRight: 'auto', fontSize: 11.5, color: 'var(--ad-text3)' }}>{faDate(m.date)}</span>
               </div>
 
-              <a href={`tel:${m.phone}`} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13.5, fontWeight: 700, color: '#EA443C', textDecoration: 'none', marginBottom: m.message ? 10 : 14, direction: 'ltr' }}>
+              <a href={`tel:${m.phone}`} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13.5, fontWeight: 700, color: '#275EAA', textDecoration: 'none', marginBottom: m.message ? 10 : 14, direction: 'ltr' }}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .82h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7a2 2 0 011.72 2z"/></svg>
                 {m.phone}
               </a>

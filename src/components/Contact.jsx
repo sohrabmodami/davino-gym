@@ -51,8 +51,8 @@ export default function Contact() {
         <div style={{ textAlign: 'center', marginBottom: '64px' }}>
           <div style={{
             display: 'inline-block', fontSize: 11, fontWeight: 800, color: 'var(--accent)',
-            letterSpacing: '.14em', background: 'rgba(234,68,60,.1)',
-            border: '1px solid rgba(234,68,60,.22)', borderRadius: 999,
+            letterSpacing: '.14em', background: 'rgba(39,94,170,.1)',
+            border: '1px solid rgba(39,94,170,.22)', borderRadius: 999,
             padding: '6px 15px', marginBottom: 16,
           }}>تماس با ما</div>
           <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 900, marginBottom: '16px', letterSpacing: '-0.5px' }}>
@@ -87,7 +87,7 @@ export default function Contact() {
                 <div key={info.label} style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
                   <div style={{
                     width: 44, height: 44, borderRadius: '12px', flexShrink: 0,
-                    background: 'rgba(234,68,60,0.1)', border: '1px solid rgba(234,68,60,0.2)',
+                    background: 'rgba(39,94,170,0.1)', border: '1px solid rgba(39,94,170,0.2)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     color: 'var(--color-primary)',
                   }}>
@@ -164,7 +164,7 @@ export default function Contact() {
                     value={form.name}
                     onChange={e => setForm(p => ({ ...p, name: e.target.value }))}
                     style={inputStyle}
-                    onFocus={e => e.target.style.borderColor = 'rgba(234,68,60,0.55)'}
+                    onFocus={e => e.target.style.borderColor = 'rgba(39,94,170,0.55)'}
                     onBlur={e => e.target.style.borderColor = 'var(--surface-b)'}
                   />
                 </div>
@@ -177,7 +177,7 @@ export default function Contact() {
                     value={form.phone}
                     onChange={e => setForm(p => ({ ...p, phone: e.target.value }))}
                     style={{ ...inputStyle, direction: 'ltr', textAlign: 'right' }}
-                    onFocus={e => e.target.style.borderColor = 'rgba(234,68,60,0.55)'}
+                    onFocus={e => e.target.style.borderColor = 'rgba(39,94,170,0.55)'}
                     onBlur={e => e.target.style.borderColor = 'var(--surface-b)'}
                   />
                 </div>
@@ -190,7 +190,7 @@ export default function Contact() {
                     value={form.message}
                     onChange={e => setForm(p => ({ ...p, message: e.target.value }))}
                     style={{ ...inputStyle, resize: 'vertical', minHeight: '100px' }}
-                    onFocus={e => e.target.style.borderColor = 'rgba(234,68,60,0.55)'}
+                    onFocus={e => e.target.style.borderColor = 'rgba(39,94,170,0.55)'}
                     onBlur={e => e.target.style.borderColor = 'var(--surface-b)'}
                   />
                 </div>
@@ -203,12 +203,12 @@ export default function Contact() {
                   background: 'var(--accent)',
                   color: '#fff', fontWeight: 800, fontSize: '16px',
                   padding: '15px', borderRadius: '12px',
-                  boxShadow: '0 8px 26px rgba(234,68,60,0.35)',
+                  boxShadow: '0 8px 26px rgba(39,94,170,0.35)',
                   transition: 'all 0.2s ease',
                   opacity: sending ? 0.7 : 1, cursor: sending ? 'default' : 'pointer',
                 }}
-                  onMouseEnter={e => { if (sending) return; e.target.style.transform = 'scale(1.02)'; e.target.style.boxShadow = '0 12px 34px rgba(234,68,60,0.5)'; }}
-                  onMouseLeave={e => { e.target.style.transform = 'scale(1)'; e.target.style.boxShadow = '0 8px 26px rgba(234,68,60,0.35)'; }}
+                  onMouseEnter={e => { if (sending) return; e.target.style.transform = 'scale(1.02)'; e.target.style.boxShadow = '0 12px 34px rgba(39,94,170,0.5)'; }}
+                  onMouseLeave={e => { e.target.style.transform = 'scale(1)'; e.target.style.boxShadow = '0 8px 26px rgba(39,94,170,0.35)'; }}
                 >
                   {sending ? 'در حال ارسال…' : 'ارسال پیام'}
                 </button>

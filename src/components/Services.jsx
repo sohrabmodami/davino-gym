@@ -3,7 +3,7 @@ const services = [
     icon: <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>,
     title: 'کلاس‌های مبتدی و پیشرفته',
     desc: 'دوره‌های آموزشی داوینو برای افراد ۱۴ سال به بالا، از سطح مبتدی تا پیشرفته طراحی شده‌اند. هنرجویان در محیطی ایمن و تخصصی، اصول پایه سنگنوردی، تکنیک‌های صعود، مهارت‌های حرکتی و مباحث پیشرفته را زیر نظر مربیان مجرب فرا می‌گیرند. کلاس‌ها به‌صورت نیمه‌خصوصی و با ظرفیت ۴ تا ۶ نفر برای هر مربی برگزار می‌شوند تا کیفیت آموزش در بالاترین سطح حفظ شود.',
-    color: '#EA443C',
+    color: '#275EAA',
   },
   {
     icon: <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>,
@@ -56,8 +56,8 @@ export default function Services() {
         <div style={{ textAlign: 'center', marginBottom: 56 }}>
           <div style={{
             display: 'inline-block', fontSize: 11, fontWeight: 800, color: 'var(--accent)',
-            letterSpacing: '.14em', background: 'rgba(234,68,60,.1)',
-            border: '1px solid rgba(234,68,60,.22)', borderRadius: 999,
+            letterSpacing: '.14em', background: 'rgba(39,94,170,.1)',
+            border: '1px solid rgba(39,94,170,.22)', borderRadius: 999,
             padding: '6px 15px', marginBottom: 16,
           }}>خدمات ما</div>
           <h2 style={{ fontSize: 'clamp(1.9rem, 4vw, 2.8rem)', fontWeight: 900, letterSpacing: '-.01em', margin: '0 0 12px', color: 'var(--text)' }}>

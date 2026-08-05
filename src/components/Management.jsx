@@ -30,8 +30,8 @@ export default function Management() {
         <div style={{ marginBottom: 'clamp(32px, 5vw, 48px)' }}>
           <div style={{
             display: 'inline-block', fontSize: 11, fontWeight: 800, color: 'var(--accent)',
-            letterSpacing: '.14em', background: 'rgba(234,68,60,.1)',
-            border: '1px solid rgba(234,68,60,.22)', borderRadius: 999,
+            letterSpacing: '.14em', background: 'rgba(39,94,170,.1)',
+            border: '1px solid rgba(39,94,170,.22)', borderRadius: 999,
             padding: '6px 15px', marginBottom: 20,
           }}>درباره مدیریت مجموعه</div>
           <h2 style={{ fontSize: 'clamp(1.9rem, 4vw, 2.8rem)', fontWeight: 900, lineHeight: 1.18, letterSpacing: '-.01em', margin: '0 0 10px', color: 'var(--text)' }}>
@@ -56,7 +56,7 @@ export default function Management() {
 
             <blockquote style={{
               margin: '28px 0 0', padding: '22px 24px',
-              background: 'var(--accent-soft)', border: '1px solid rgba(234,68,60,.2)',
+              background: 'var(--accent-soft)', border: '1px solid rgba(39,94,170,.2)',
               borderRight: '3px solid var(--accent)', borderRadius: '0 16px 16px 0',
             }}>
               <p style={{

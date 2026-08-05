@@ -7,7 +7,7 @@ const CSS = `
   .stat-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,.12); transform: translateY(-2px); }
   .admin-table-row { border-top: 1px solid var(--ad-side-b); transition: background .15s; }
   .admin-table-row:hover { background: var(--ad-rowh); }
-  .admin-link { color: #EA443C; text-decoration: none; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 4px; transition: gap .15s; }
+  .admin-link { color: #275EAA; text-decoration: none; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 4px; transition: gap .15s; }
   .admin-link:hover { gap: 8px; }
 `
 
@@ -37,7 +37,7 @@ export default function AdminDashboard() {
 
   const stats = [
     {
-      label: 'مربیان فعال', value: trainers.length, color: '#EA443C', sub: 'فعال',
+      label: 'مربیان فعال', value: trainers.length, color: '#275EAA', sub: 'فعال',
       icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>,
     },
     {
@@ -67,7 +67,7 @@ export default function AdminDashboard() {
         </div>
         <div style={{ background: 'var(--ad-chip)', border: '1px solid var(--ad-card-b)', borderRadius: 10, padding: '7px 14px', textAlign: 'left' }}>
           <div style={{ fontSize: 10, color: 'var(--ad-text3)', fontWeight: 600, marginBottom: 2 }}>نسخه سایت</div>
-          <div style={{ fontSize: 13, fontWeight: 800, color: 'var(--ad-text2)', fontFamily: 'monospace' }}>v1.1.0</div>
+          <div style={{ fontSize: 13, fontWeight: 800, color: 'var(--ad-text2)', fontFamily: 'monospace' }}>v1.2.0</div>
           <div style={{ fontSize: 10, color: 'var(--ad-text3)', marginTop: 1 }}>2026-06-11</div>
         </div>
       </div>

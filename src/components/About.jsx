@@ -28,8 +28,8 @@ export default function About() {
         <div style={{ marginBottom: 'clamp(32px, 5vw, 48px)' }}>
           <div style={{
             display: 'inline-block', fontSize: 11, fontWeight: 800, color: 'var(--accent)',
-            letterSpacing: '.14em', background: 'rgba(234,68,60,.1)',
-            border: '1px solid rgba(234,68,60,.22)', borderRadius: 999,
+            letterSpacing: '.14em', background: 'rgba(39,94,170,.1)',
+            border: '1px solid rgba(39,94,170,.22)', borderRadius: 999,
             padding: '6px 15px', marginBottom: 20,
           }}>درباره ما</div>
           <h2 style={{ fontSize: 'clamp(1.9rem, 4vw, 2.8rem)', fontWeight: 900, lineHeight: 1.18, letterSpacing: '-.01em', margin: 0, color: 'var(--text)' }}>
@@ -65,7 +65,7 @@ export default function About() {
                       position: 'absolute', right: 0, top: 3, width: 16, height: 16, borderRadius: '50%',
                       background: m.active ? 'var(--accent)' : 'var(--bg2)',
                       border: '2px solid var(--accent)',
-                      boxShadow: m.active ? '0 0 0 4px rgba(234,68,60,.18)' : 'none',
+                      boxShadow: m.active ? '0 0 0 4px rgba(39,94,170,.18)' : 'none',
                     }} />
                     <div style={{ fontSize: 12, fontWeight: 800, color: 'var(--accent)', marginBottom: 4, letterSpacing: '.04em' }}>{m.year} · {m.title}</div>
                     <div style={{ fontSize: 13, color: 'var(--t50)', lineHeight: 1.75 }}>{m.desc}</div>

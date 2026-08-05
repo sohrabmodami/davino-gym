@@ -3,14 +3,14 @@ import { useAdmin } from '../../data/adminStore.jsx'
 
 const CSS = `
   .blog-inp { border: 1.5px solid var(--ad-card-b); border-radius: 10px; padding: 10px 14px; font-size: 14px; outline: none; font-family: 'Vazirmatn', sans-serif; transition: border-color .18s, box-shadow .18s; width: 100%; box-sizing: border-box; color: var(--text); background: var(--ad-card); }
-  .blog-inp:focus { border-color: #EA443C; box-shadow: 0 0 0 3px rgba(234,68,60,.08); }
+  .blog-inp:focus { border-color: #275EAA; box-shadow: 0 0 0 3px rgba(39,94,170,.08); }
   .blog-sec { background: var(--ad-card); border-radius: 16px; border: 1px solid var(--ad-card-b); padding: 24px; margin-bottom: 18px; }
   .blog-lbl { display: block; font-size: 12.5px; font-weight: 700; color: var(--ad-text2); margin-bottom: 7px; }
   .blog-btn { font-family: 'Vazirmatn', sans-serif; font-size: 13.5px; font-weight: 800; border-radius: 10px; padding: 11px 22px; cursor: pointer; border: none; transition: all .15s; }
-  .blog-btn-primary { background: #EA443C; color: #fff; }
+  .blog-btn-primary { background: #275EAA; color: #fff; }
   .blog-btn-ghost { background: var(--ad-card); color: var(--ad-text2); border: 1.5px solid var(--ad-card-b); }
   .blog-row { display: flex; align-items: center; gap: 14px; background: var(--ad-card); border: 1px solid var(--ad-card-b); border-radius: 13px; padding: 14px 18px; transition: border-color .18s; }
-  .blog-row:hover { border-color: rgba(234,68,60,.35); }
+  .blog-row:hover { border-color: rgba(39,94,170,.35); }
   .blog-hint { font-size: 11.5px; color: var(--ad-text3); margin-top: 5px; }
 `
 
@@ -130,7 +130,7 @@ function Editor({ initial, existingSlugs, onSave, onCancel }) {
         </div>
 
         <label style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 18, cursor: 'pointer', userSelect: 'none' }}>
-          <input type="checkbox" checked={form.published} onChange={e => set('published', e.target.checked)} style={{ width: 18, height: 18, accentColor: '#EA443C' }} />
+          <input type="checkbox" checked={form.published} onChange={e => set('published', e.target.checked)} style={{ width: 18, height: 18, accentColor: '#275EAA' }} />
           <span style={{ fontSize: 13.5, fontWeight: 700, color: 'var(--text)' }}>منتشر شود (در سایت نمایش داده شود)</span>
         </label>
       </div>
@@ -204,7 +204,7 @@ export default function AdminBlog() {
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 5, flexWrap: 'wrap' }}>
                       <span style={{ fontSize: 14.5, fontWeight: 800, color: 'var(--text)' }}>{a.title}</span>
-                      <span style={{ fontSize: 10.5, fontWeight: 800, padding: '2px 9px', borderRadius: 999, background: 'rgba(234,68,60,.12)', color: '#EA443C' }}>{a.category}</span>
+                      <span style={{ fontSize: 10.5, fontWeight: 800, padding: '2px 9px', borderRadius: 999, background: 'rgba(39,94,170,.12)', color: '#275EAA' }}>{a.category}</span>
                       <span style={{ fontSize: 10.5, fontWeight: 800, padding: '2px 9px', borderRadius: 999, background: a.published ? 'rgba(34,197,94,.14)' : 'var(--ad-rowh)', color: a.published ? '#16a34a' : 'var(--ad-text3)' }}>
                         {a.published ? 'منتشر شده' : 'پیش‌نویس'}
                       </span>

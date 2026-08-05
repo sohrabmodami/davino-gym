@@ -14,10 +14,10 @@ const CSS = `
   .ws-admin-card { background: var(--ad-card); border: 1px solid var(--ad-card-b); border-radius: 16px; padding: 20px; animation: wsUp .22s ease; }
   .ws-admin-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px 22px; }
   .ws-admin-filter { border: none; padding: 7px 14px; border-radius: 999px; background: transparent; color: var(--ad-text2); font: 700 12px 'Vazirmatn'; white-space: nowrap; }
-  .ws-admin-filter.active { background: #EA443C; color: #fff; }
+  .ws-admin-filter.active { background: #275EAA; color: #fff; }
   .ws-admin-select { min-width: 175px; background: var(--ad-rowh); color: var(--text); border: 1.5px solid var(--ad-card-b); border-radius: 10px; padding: 9px 12px; outline: none; font: 700 12px 'Vazirmatn'; }
   .ws-admin-btn { padding: 8px 14px; border-radius: 9px; border: 1px solid var(--ad-card-b); background: var(--ad-card); color: var(--ad-text2); font: 700 12px 'Vazirmatn'; cursor: pointer; }
-  .ws-admin-btn.primary { background: #EA443C; color: #fff; border-color: #EA443C; }
+  .ws-admin-btn.primary { background: #275EAA; color: #fff; border-color: #275EAA; }
   @media (max-width: 760px) { .ws-admin-grid { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 520px) { .ws-admin-grid { grid-template-columns: 1fr; } .ws-admin-card { padding: 16px; } }
 `
@@ -222,7 +222,7 @@ export default function AdminWorkshop() {
                 {item.attendees?.[0]?.phone && (
                   <div style={{ marginTop: 16, display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                     {(item.attendees || []).map((person, index) => person.phone ? (
-                      <a key={index} href={`tel:${person.phone}`} style={{ display: 'inline-flex', alignItems: 'center', padding: '8px 14px', borderRadius: 9, background: 'rgba(234,68,60,.1)', border: '1px solid rgba(234,68,60,.25)', color: '#EA443C', fontSize: 12, fontWeight: 800 }}>
+                      <a key={index} href={`tel:${person.phone}`} style={{ display: 'inline-flex', alignItems: 'center', padding: '8px 14px', borderRadius: 9, background: 'rgba(39,94,170,.1)', border: '1px solid rgba(39,94,170,.25)', color: '#275EAA', fontSize: 12, fontWeight: 800 }}>
                         تماس {item.attendeeCount === 2 ? `(${index + 1})` : ''}
                       </a>
                     ) : null)}

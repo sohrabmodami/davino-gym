@@ -8,9 +8,9 @@ const CSS = `
   .cls-row { display: grid; grid-template-columns: 28px 1fr 1fr 1fr 1fr auto; align-items: center; gap: 14px; padding: 14px 18px; border-radius: 12px; border: 1px solid var(--ad-card-b); background: var(--ad-card); transition: box-shadow .15s; }
   .cls-row:hover { box-shadow: 0 4px 16px rgba(0,0,0,.07); }
   .admin-input { border: 1.5px solid var(--ad-card-b); border-radius: 10px; padding: 9px 13px; font-size: 13px; outline: none; font-family: 'Vazirmatn', sans-serif; transition: border-color .18s; width: 100%; box-sizing: border-box; }
-  .admin-input:focus { border-color: #EA443C; }
-  .admin-btn-primary { background: #EA443C; color: #fff; border: none; border-radius: 10px; padding: 10px 22px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: 'Vazirmatn', sans-serif; transition: all .15s; }
-  .admin-btn-primary:hover { background: #d63830; }
+  .admin-input:focus { border-color: #275EAA; }
+  .admin-btn-primary { background: #275EAA; color: #fff; border: none; border-radius: 10px; padding: 10px 22px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: 'Vazirmatn', sans-serif; transition: all .15s; }
+  .admin-btn-primary:hover { background: #1E4A8A; }
   .admin-btn-ghost { background: var(--ad-card); color: var(--ad-text2); border: 1.5px solid var(--ad-card-b); border-radius: 10px; padding: 10px 18px; font-size: 14px; cursor: pointer; font-family: 'Vazirmatn', sans-serif; }
   .admin-modal-overlay { position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,.45); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; padding: 20px; animation: fadeIn .2s; }
   .day-tag { padding: 3px 9px; border-radius: 999px; font-size: 11px; font-weight: 700; background: rgba(0,0,0,.06); color: var(--ad-text2); display: inline-block; font-family: 'Vazirmatn'; margin: 2px; }
@@ -20,7 +20,7 @@ const CSS = `
   .toggle-wrap input { opacity: 0; width: 0; height: 0; position: absolute; }
   .toggle-slider { position: absolute; inset: 0; border-radius: 999px; cursor: pointer; background: var(--track); transition: background .2s; }
   .toggle-slider:before { content: ''; position: absolute; width: 16px; height: 16px; border-radius: 50%; left: 3px; top: 3px; background: var(--ad-card); transition: transform .2s; box-shadow: 0 1px 4px rgba(0,0,0,.18); }
-  .toggle-wrap input:checked + .toggle-slider { background: #EA443C; }
+  .toggle-wrap input:checked + .toggle-slider { background: #275EAA; }
   .toggle-wrap input:checked + .toggle-slider:before { transform: translateX(16px); }
 `
 
@@ -70,9 +70,9 @@ export default function AdminClasses() {
         </div>
         <button
           onClick={() => setModal('add')}
-          style={{ display: 'flex', alignItems: 'center', gap: 8, background: '#EA443C', color: '#fff', border: 'none', borderRadius: 12, padding: '11px 22px', fontSize: 14, fontWeight: 700, cursor: 'pointer', fontFamily: 'Vazirmatn', boxShadow: '0 4px 16px rgba(234,68,60,.3)', transition: 'all .15s' }}
-          onMouseEnter={e => e.currentTarget.style.background = '#d63830'}
-          onMouseLeave={e => e.currentTarget.style.background = '#EA443C'}
+          style={{ display: 'flex', alignItems: 'center', gap: 8, background: '#275EAA', color: '#fff', border: 'none', borderRadius: 12, padding: '11px 22px', fontSize: 14, fontWeight: 700, cursor: 'pointer', fontFamily: 'Vazirmatn', boxShadow: '0 4px 16px rgba(39,94,170,.3)', transition: 'all .15s' }}
+          onMouseEnter={e => e.currentTarget.style.background = '#1E4A8A'}
+          onMouseLeave={e => e.currentTarget.style.background = '#275EAA'}
         >
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           کلاس جدید
@@ -115,7 +115,7 @@ export default function AdminClasses() {
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
               <Toggle checked={cls.active} onChange={v => updateClass(cls.id, { active: v })} />
               <button onClick={() => setModal(cls)} style={{ width: 32, height: 32, borderRadius: 8, border: '1.5px solid var(--ad-card-b)', background: 'var(--ad-card)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--ad-text2)', transition: 'all .15s' }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = '#EA443C'; e.currentTarget.style.color = '#EA443C' }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = '#275EAA'; e.currentTarget.style.color = '#275EAA' }}
                 onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--ad-card-b)'; e.currentTarget.style.color = '#888' }}>
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
               </button>

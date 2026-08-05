@@ -52,7 +52,7 @@ const CSS = `
     cursor: pointer; transition: all .15s; white-space: nowrap;
   }
   .filter-tab:hover { border-color: var(--accent); color: var(--accent); }
-  .filter-tab.on { background: #EA443C; color: #fff; border-color: #EA443C; box-shadow: 0 4px 12px rgba(234,68,60,.25); }
+  .filter-tab.on { background: #275EAA; color: #fff; border-color: #275EAA; box-shadow: 0 4px 12px rgba(39,94,170,.25); }
 
   .chip-select {
     padding: 7px 14px 7px 34px;
@@ -83,7 +83,7 @@ const CSS = `
   }
   .week-card {
     border-radius: 12px; padding: 10px 12px;
-    border-right: 3px solid var(--c, #EA443C);
+    border-right: 3px solid var(--c, #275EAA);
     background: var(--surface); border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line); border-left: 1px solid var(--line);
     margin-bottom: 8px; cursor: default;
@@ -260,7 +260,7 @@ export default function Classes() {
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 20 }}>
             <div>
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 7, background: 'rgba(234,68,60,.12)', border: '1px solid rgba(234,68,60,.28)', borderRadius: 999, padding: '5px 14px', marginBottom: 16 }}>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 7, background: 'rgba(39,94,170,.12)', border: '1px solid rgba(39,94,170,.28)', borderRadius: 999, padding: '5px 14px', marginBottom: 16 }}>
                 <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#22C55E', display: 'inline-block' }} />
                 <span style={{ fontSize: 12, color: 'var(--accentText)', fontWeight: 800, fontFamily: 'Vazirmatn' }}>ثبت‌نام باز است</span>
               </div>
@@ -375,10 +375,10 @@ export default function Classes() {
             تیم ما آماده‌ست کمک کنه کلاس مناسبت رو انتخاب کنی
           </div>
           <a href="/#contact" style={{
-            display: 'inline-block', background: '#EA443C', color: '#fff',
+            display: 'inline-block', background: '#275EAA', color: '#fff',
             fontWeight: 800, fontSize: 15, padding: '13px 36px', borderRadius: 12,
             fontFamily: 'Vazirmatn', textDecoration: 'none',
-            boxShadow: '0 8px 24px rgba(234,68,60,.35)',
+            boxShadow: '0 8px 24px rgba(39,94,170,.35)',
           }}>
             تماس با ما
           </a>

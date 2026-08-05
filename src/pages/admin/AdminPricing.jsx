@@ -7,15 +7,15 @@ const CSS = `
   .plan-card { background: var(--ad-card); border-radius: 18px; border: 1.5px solid var(--ad-card-b); padding: 24px; transition: box-shadow .2s, transform .2s; position: relative; }
   .plan-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,.08); transform: translateY(-2px); }
   .admin-input { border: 1.5px solid var(--ad-card-b); border-radius: 10px; padding: 9px 13px; font-size: 13px; outline: none; font-family: 'Vazirmatn', sans-serif; transition: border-color .18s; width: 100%; box-sizing: border-box; }
-  .admin-input:focus { border-color: #EA443C; }
-  .admin-btn-primary { background: #EA443C; color: #fff; border: none; border-radius: 10px; padding: 10px 22px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: 'Vazirmatn', sans-serif; transition: all .15s; }
-  .admin-btn-primary:hover { background: #d63830; }
+  .admin-input:focus { border-color: #275EAA; }
+  .admin-btn-primary { background: #275EAA; color: #fff; border: none; border-radius: 10px; padding: 10px 22px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: 'Vazirmatn', sans-serif; transition: all .15s; }
+  .admin-btn-primary:hover { background: #1E4A8A; }
   .admin-btn-ghost { background: var(--ad-card); color: var(--ad-text2); border: 1.5px solid var(--ad-card-b); border-radius: 10px; padding: 10px 18px; font-size: 14px; cursor: pointer; font-family: 'Vazirmatn', sans-serif; transition: all .15s; }
   .admin-btn-ghost:hover { border-color: #ccc; }
   .edit-toggle { width: 32px; height: 32px; border-radius: 8px; border: 1.5px solid var(--ad-card-b); background: var(--ad-card); cursor: pointer; display: flex; align-items: center; justify-content: center; color: #888; transition: all .15s; }
-  .edit-toggle:hover { border-color: #EA443C; color: #EA443C; background: rgba(234,68,60,.05); }
+  .edit-toggle:hover { border-color: #275EAA; color: #275EAA; background: rgba(39,94,170,.05); }
   .custom-checkbox { width: 18px; height: 18px; border-radius: 5px; border: 1.5px solid var(--ad-card-b); background: var(--ad-card); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .15s; flex-shrink: 0; }
-  .custom-checkbox.checked { border-color: #EA443C; background: #EA443C; }
+  .custom-checkbox.checked { border-color: #275EAA; background: #275EAA; }
 `
 
 function PlanCard({ plan, isEditing, onEdit, onSave, onCancel }) {

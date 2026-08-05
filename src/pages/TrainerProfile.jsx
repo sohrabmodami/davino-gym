@@ -7,7 +7,7 @@ const WEEK_DAYS = ['شنبه', 'یکشنبه', 'دوشنبه', 'سه‌شنبه'
 
 /* rgba کمرنگ از رنگ هگز کلاس */
 const tint = (hex, a) => {
-  if (!hex || !hex.startsWith('#') || hex.length < 7) return `rgba(234,68,60,${a})`
+  if (!hex || !hex.startsWith('#') || hex.length < 7) return `rgba(39,94,170,${a})`
   const r = parseInt(hex.slice(1, 3), 16)
   const g = parseInt(hex.slice(3, 5), 16)
   const b = parseInt(hex.slice(5, 7), 16)
@@ -114,7 +114,7 @@ export default function TrainerProfile() {
 
           {/* کارت پرتره ۳:۴ */}
           <div style={{ flex: '0 1 340px', minWidth: 240, position: 'relative', animation: 'tpFadeUp .7s .15s both' }}>
-            <div style={{ position: 'absolute', inset: -26, background: 'radial-gradient(circle at 60% 40%, rgba(234,68,60,.18), transparent 60%)', pointerEvents: 'none' }} />
+            <div style={{ position: 'absolute', inset: -26, background: 'radial-gradient(circle at 60% 40%, rgba(39,94,170,.18), transparent 60%)', pointerEvents: 'none' }} />
             <div style={{
               position: 'relative', aspectRatio: '3/4', borderRadius: 20, overflow: 'hidden',
               border: '1px solid var(--surface-b)', boxShadow: '0 30px 70px rgba(0,0,0,.25)',
@@ -135,7 +135,7 @@ export default function TrainerProfile() {
               }
               <div style={{
                 position: 'absolute', top: 14, right: 14,
-                background: 'rgba(234,68,60,.92)', backdropFilter: 'blur(8px)',
+                background: 'rgba(39,94,170,.92)', backdropFilter: 'blur(8px)',
                 border: '1px solid rgba(255,255,255,.2)', color: '#fff',
                 fontSize: 10, fontWeight: 800, padding: '5px 11px', borderRadius: 999,
               }}>★ {trainer.tag}</div>
@@ -219,7 +219,7 @@ export default function TrainerProfile() {
             fontSize: 14, fontWeight: 900, padding: '13px 26px', borderRadius: 11,
             transition: 'all .2s',
           }}
-            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 14px 32px rgba(234,68,60,.4)' }}
+            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 14px 32px rgba(39,94,170,.4)' }}
             onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = 'none' }}
           >
             رزرو جلسه

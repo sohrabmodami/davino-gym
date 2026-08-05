@@ -14,20 +14,20 @@ const CSS = `
   .admin-field label { display: flex; flex-direction: column; gap: 5px; }
   .admin-field span { font-size: 11px; color: #999; font-weight: 700; }
   .admin-input { border: 1.5px solid var(--ad-card-b); border-radius: 10px; padding: 9px 13px; font-size: 13px; outline: none; font-family: 'Vazirmatn', sans-serif; transition: border-color .18s; width: 100%; box-sizing: border-box; }
-  .admin-input:focus { border-color: #EA443C; }
-  .admin-btn-primary { background: #EA443C; color: #fff; border: none; border-radius: 10px; padding: 10px 24px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: 'Vazirmatn', sans-serif; transition: all .15s; }
-  .admin-btn-primary:hover { background: #d63830; }
+  .admin-input:focus { border-color: #275EAA; }
+  .admin-btn-primary { background: #275EAA; color: #fff; border: none; border-radius: 10px; padding: 10px 24px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: 'Vazirmatn', sans-serif; transition: all .15s; }
+  .admin-btn-primary:hover { background: #1E4A8A; }
   .admin-btn-ghost { background: var(--ad-card); color: var(--ad-text2); border: 1.5px solid var(--ad-card-b); border-radius: 10px; padding: 10px 20px; font-size: 14px; cursor: pointer; font-family: 'Vazirmatn', sans-serif; transition: all .15s; }
   .admin-btn-ghost:hover { border-color: #ccc; }
   .icon-btn { width: 34px; height: 34px; border-radius: 9px; border: 1.5px solid; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all .15s; flex-shrink: 0; }
   .icon-btn.edit { border-color: var(--ad-card-b); background: var(--ad-card); color: #666; }
-  .icon-btn.edit:hover { border-color: #EA443C; color: #EA443C; background: rgba(234,68,60,.05); }
+  .icon-btn.edit:hover { border-color: #275EAA; color: #275EAA; background: rgba(39,94,170,.05); }
   .icon-btn.del { border-color: #fecaca; background: #fff5f5; color: #ef4444; }
   .icon-btn.del:hover { background: #ef4444; color: #fff; }
-  .crop-frame { border-radius: 12px; border: 2.5px solid #EA443C; overflow: hidden; cursor: grab; user-select: none; position: relative; }
+  .crop-frame { border-radius: 12px; border: 2.5px solid #275EAA; overflow: hidden; cursor: grab; user-select: none; position: relative; }
   .crop-frame:active { cursor: grabbing; }
-  .upload-btn { background: rgba(234,68,60,.08); border: 1.5px dashed rgba(234,68,60,.3); border-radius: 12px; padding: 14px; width: 100%; cursor: pointer; font-family: Vazirmatn; font-size: 13px; font-weight: 700; color: #EA443C; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all .15s; }
-  .upload-btn:hover { background: rgba(234,68,60,.12); border-color: #EA443C; }
+  .upload-btn { background: rgba(39,94,170,.08); border: 1.5px dashed rgba(39,94,170,.3); border-radius: 12px; padding: 14px; width: 100%; cursor: pointer; font-family: Vazirmatn; font-size: 13px; font-weight: 700; color: #275EAA; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all .15s; }
+  .upload-btn:hover { background: rgba(39,94,170,.12); border-color: #275EAA; }
 `
 
 /* ─── Crop Modal — crop-box-on-image style ─── */
@@ -119,7 +119,7 @@ function ImageCropModal({ src, onCrop, onClose }) {
               style={{
                 position: 'absolute', left: box.x, top: box.y, width: box.size, height: boxH,
                 boxShadow: '0 0 0 9999px rgba(0,0,0,0.55)',
-                border: '2px solid #EA443C',
+                border: '2px solid #275EAA',
                 borderRadius: 4,
                 cursor: 'move',
                 zIndex: 2,
@@ -135,7 +135,7 @@ function ImageCropModal({ src, onCrop, onClose }) {
               {[33, 66].map(p => <div key={`h${p}`} style={{ position: 'absolute', top: `${p}%`, left: 0, right: 0, height: 1, background: 'rgba(255,255,255,0.2)', pointerEvents: 'none' }} />)}
               {/* Corner marks */}
               {[['top:0;left:0', 'top', 'left'], ['top:0;right:0', 'top', 'right'], ['bottom:0;left:0', 'bottom', 'left'], ['bottom:0;right:0', 'bottom', 'right']].map(([, v, h]) => (
-                <div key={`${v}${h}`} style={{ position: 'absolute', [v]: -2, [h]: -2, width: 12, height: 12, borderStyle: 'solid', borderColor: '#EA443C', borderWidth: `${v === 'top' ? 3 : 0}px ${h === 'right' ? 3 : 0}px ${v === 'bottom' ? 3 : 0}px ${h === 'left' ? 3 : 0}px`, pointerEvents: 'none' }} />
+                <div key={`${v}${h}`} style={{ position: 'absolute', [v]: -2, [h]: -2, width: 12, height: 12, borderStyle: 'solid', borderColor: '#275EAA', borderWidth: `${v === 'top' ? 3 : 0}px ${h === 'right' ? 3 : 0}px ${v === 'bottom' ? 3 : 0}px ${h === 'left' ? 3 : 0}px`, pointerEvents: 'none' }} />
               ))}
             </div>
           )}
@@ -145,12 +145,12 @@ function ImageCropModal({ src, onCrop, onClose }) {
         <div style={{ marginBottom: 20 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
             <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--ad-text2)' }}>اندازه قاب کراپ</span>
-            <span style={{ fontSize: 11, fontWeight: 700, color: '#EA443C' }}>{box ? Math.round(box.size / maxSize * 100) : 88}٪</span>
+            <span style={{ fontSize: 11, fontWeight: 700, color: '#275EAA' }}>{box ? Math.round(box.size / maxSize * 100) : 88}٪</span>
           </div>
           <input type="range" min={Math.max(60, maxSize * 0.25)} max={maxSize} step={1}
             value={box?.size ?? maxSize * 0.88}
             onChange={e => handleSize(+e.target.value)}
-            style={{ width: '100%', accentColor: '#EA443C', cursor: 'pointer' }} />
+            style={{ width: '100%', accentColor: '#275EAA', cursor: 'pointer' }} />
         </div>
 
         <div style={{ display: 'flex', gap: 10 }}>
@@ -285,9 +285,9 @@ function TrainerModal({ trainer, cropSrc, onRequestCrop, onSave, onClose, traine
                 <button key={d} onClick={() => toggleDay(d)} style={{
                   padding: '6px 13px', borderRadius: 999, fontSize: 12, fontWeight: 700, cursor: 'pointer',
                   fontFamily: 'Vazirmatn', border: '1.5px solid',
-                  borderColor: form.days.includes(d) ? '#EA443C' : 'var(--ad-card-b)',
-                  background: form.days.includes(d) ? 'rgba(234,68,60,.08)' : 'var(--ad-rowh)',
-                  color: form.days.includes(d) ? '#EA443C' : '#aaa',
+                  borderColor: form.days.includes(d) ? '#275EAA' : 'var(--ad-card-b)',
+                  background: form.days.includes(d) ? 'rgba(39,94,170,.08)' : 'var(--ad-rowh)',
+                  color: form.days.includes(d) ? '#275EAA' : '#aaa',
                   transition: 'all .15s',
                 }}>{d}</button>
               ))}
@@ -305,9 +305,9 @@ function TrainerModal({ trainer, cropSrc, onRequestCrop, onSave, onClose, traine
               </div>
               {trainer && (
                 <button type="button" onClick={onAddClass} style={{
-                  display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(234,68,60,.08)',
-                  border: '1.5px solid rgba(234,68,60,.3)', borderRadius: 9, padding: '7px 13px',
-                  fontSize: 12.5, fontWeight: 700, color: '#EA443C', cursor: 'pointer', fontFamily: 'Vazirmatn',
+                  display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(39,94,170,.08)',
+                  border: '1.5px solid rgba(39,94,170,.3)', borderRadius: 9, padding: '7px 13px',
+                  fontSize: 12.5, fontWeight: 700, color: '#275EAA', cursor: 'pointer', fontFamily: 'Vazirmatn',
                 }}>
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                   افزودن کلاس
@@ -494,7 +494,7 @@ export default function AdminTrainers() {
             </div>
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontSize: 15, fontWeight: 800, color: 'var(--text)', marginBottom: 2 }}>{t.name}</div>
-              <div style={{ fontSize: 12, color: '#EA443C', fontWeight: 700, marginBottom: 10 }}>{t.role}</div>
+              <div style={{ fontSize: 12, color: '#275EAA', fontWeight: 700, marginBottom: 10 }}>{t.role}</div>
               <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                 <span style={{ fontSize: 11, background: 'var(--ad-rowh)', color: 'var(--ad-text2)', padding: '3px 9px', borderRadius: 999, fontWeight: 600 }}>{t.exp}</span>
                 <span style={{ fontSize: 11, background: 'var(--ad-rowh)', color: 'var(--ad-text2)', padding: '3px 9px', borderRadius: 999, fontWeight: 600 }}>{t.sessions}</span>

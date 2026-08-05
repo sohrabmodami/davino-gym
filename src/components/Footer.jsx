@@ -98,14 +98,14 @@ export default function Footer() {
               {settings.phone && (
                 <a href={`tel:${settings.phone}`} style={{
                   display: 'inline-flex', alignItems: 'center', gap: 8,
-                  background: 'rgba(234,68,60,.1)', border: '1px solid rgba(234,68,60,.2)',
+                  background: 'rgba(39,94,170,.1)', border: '1px solid rgba(39,94,170,.2)',
                   borderRadius: 12, padding: '9px 14px', textDecoration: 'none',
                   color: '#fff', transition: 'background .2s',
                 }}
-                  onMouseEnter={e => e.currentTarget.style.background = 'rgba(234,68,60,.18)'}
-                  onMouseLeave={e => e.currentTarget.style.background = 'rgba(234,68,60,.1)'}
+                  onMouseEnter={e => e.currentTarget.style.background = 'rgba(39,94,170,.18)'}
+                  onMouseLeave={e => e.currentTarget.style.background = 'rgba(39,94,170,.1)'}
                 >
-                  <span style={{ color: '#EA443C', display: 'flex' }}><PhoneIcon /></span>
+                  <span style={{ color: '#275EAA', display: 'flex' }}><PhoneIcon /></span>
                   <div>
                     <div style={{ fontSize: 10, color: 'rgba(255,255,255,.4)', fontWeight: 600, marginBottom: 1 }}>تلفن ثابت</div>
                     <div style={{ fontSize: 14, fontWeight: 700 }}>{settings.phone}</div>
@@ -137,7 +137,7 @@ export default function Footer() {
                 {visibleSocials.map(s => (
                   <a key={s.key} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}
                     style={{ width: 40, height: 40, borderRadius: 10, background: 'rgba(255,255,255,.07)', border: '1px solid rgba(255,255,255,.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(255,255,255,.5)', transition: 'all .2s', textDecoration: 'none' }}
-                    onMouseEnter={e => { e.currentTarget.style.background = '#EA443C'; e.currentTarget.style.borderColor = '#EA443C'; e.currentTarget.style.color = '#fff'; e.currentTarget.style.transform = 'translateY(-2px)' }}
+                    onMouseEnter={e => { e.currentTarget.style.background = '#275EAA'; e.currentTarget.style.borderColor = '#275EAA'; e.currentTarget.style.color = '#fff'; e.currentTarget.style.transform = 'translateY(-2px)' }}
                     onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,.07)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,.1)'; e.currentTarget.style.color = 'rgba(255,255,255,.5)'; e.currentTarget.style.transform = 'none' }}
                   >{s.icon}</a>
                 ))}
@@ -155,7 +155,7 @@ export default function Footer() {
                   padding: '16px 0',
                   borderBottom: i < contactItems.length - 1 ? '1px solid rgba(255,255,255,.06)' : 'none',
                 }}>
-                  <div style={{ width: 36, height: 36, borderRadius: 10, background: 'rgba(234,68,60,.1)', border: '1px solid rgba(234,68,60,.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#EA443C', flexShrink: 0 }}>
+                  <div style={{ width: 36, height: 36, borderRadius: 10, background: 'rgba(39,94,170,.1)', border: '1px solid rgba(39,94,170,.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#275EAA', flexShrink: 0 }}>
                     {item.icon}
                   </div>
                   <div>
@@ -176,7 +176,7 @@ export default function Footer() {
           </p>
           <a href="https://sohrabmodami.com" target="_blank" rel="noopener noreferrer"
             style={{ fontSize: 12, color: 'rgba(255,255,255,.3)', fontFamily: 'var(--font-latin)', letterSpacing: '.02em', direction: 'ltr', textDecoration: 'none', transition: 'color .2s' }}
-            onMouseEnter={e => e.currentTarget.style.color = '#EA443C'}
+            onMouseEnter={e => e.currentTarget.style.color = '#275EAA'}
             onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,.3)'}
           >
             Design &amp; Developed by Sohrab Modami

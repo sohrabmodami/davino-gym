@@ -1,22 +1,22 @@
 import { useState } from 'react'
 
 const DAYS_LIST = ['شنبه', 'یکشنبه', 'دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنجشنبه', 'جمعه']
-const COLORS =['#EA443C', '#22C55E', '#3B82F6', '#F59E0B', '#A855F7', '#06B6D4', '#10B981', '#F97316']
+const COLORS =['#275EAA', '#22C55E', '#3B82F6', '#F59E0B', '#A855F7', '#06B6D4', '#10B981', '#F97316']
 
 const CSS = `
   @keyframes cmFadeIn { from{opacity:0} to{opacity:1} }
   @keyframes cmSlideUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
   .cm-input { border: 1.5px solid var(--ad-card-b); border-radius: 10px; padding: 9px 13px; font-size: 13px; outline: none; font-family: 'Vazirmatn', sans-serif; transition: border-color .18s; width: 100%; box-sizing: border-box; background: var(--ad-card); color: var(--text); }
-  .cm-input:focus { border-color: #EA443C; }
+  .cm-input:focus { border-color: #275EAA; }
   .cm-input:disabled { opacity: .7; cursor: not-allowed; }
-  .cm-btn-primary { background: #EA443C; color: #fff; border: none; border-radius: 10px; padding: 10px 22px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: 'Vazirmatn', sans-serif; transition: all .15s; }
-  .cm-btn-primary:hover { background: #d63830; }
+  .cm-btn-primary { background: #275EAA; color: #fff; border: none; border-radius: 10px; padding: 10px 22px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: 'Vazirmatn', sans-serif; transition: all .15s; }
+  .cm-btn-primary:hover { background: #1E4A8A; }
   .cm-btn-ghost { background: var(--ad-card); color: var(--ad-text2); border: 1.5px solid var(--ad-card-b); border-radius: 10px; padding: 10px 18px; font-size: 14px; cursor: pointer; font-family: 'Vazirmatn', sans-serif; }
   .cm-toggle { position: relative; display: inline-block; width: 38px; height: 22px; flex-shrink: 0; }
   .cm-toggle input { opacity: 0; width: 0; height: 0; position: absolute; }
   .cm-slider { position: absolute; inset: 0; border-radius: 999px; cursor: pointer; background: var(--track); transition: background .2s; }
   .cm-slider:before { content: ''; position: absolute; width: 16px; height: 16px; border-radius: 50%; left: 3px; top: 3px; background: var(--ad-card); transition: transform .2s; box-shadow: 0 1px 4px rgba(0,0,0,.18); }
-  .cm-toggle input:checked + .cm-slider { background: #EA443C; }
+  .cm-toggle input:checked + .cm-slider { background: #275EAA; }
   .cm-toggle input:checked + .cm-slider:before { transform: translateX(16px); }
 `
 
@@ -34,7 +34,7 @@ export function Toggle({ checked, onChange }) {
 export default function ClassModal({ cls, trainers = [], lockedTrainerId = null, onSave, onClose }) {
   const [form, setForm] = useState(cls || {
     title: '', trainerId: lockedTrainerId || '', trainerName: '', days: [], startTime: '09:00', endTime: '10:00',
-    sessions: 8, capacity: 10, enrolled: 0, price: '', color: '#EA443C', active: true,
+    sessions: 8, capacity: 10, enrolled: 0, price: '', color: '#275EAA', active: true,
   })
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }))
   const toggleDay = d => set('days', form.days.includes(d) ? form.days.filter(x => x !== d) : [...form.days, d])
@@ -118,9 +118,9 @@ export default function ClassModal({ cls, trainers = [], lockedTrainerId = null,
                 <button key={d} type="button" onClick={() => toggleDay(d)} style={{
                   padding: '6px 13px', borderRadius: 999, fontSize: 12, fontWeight: 700, cursor: 'pointer',
                   fontFamily: 'Vazirmatn', border: '1.5px solid',
-                  borderColor: form.days.includes(d) ? '#EA443C' : 'var(--ad-card-b)',
-                  background: form.days.includes(d) ? 'rgba(234,68,60,.08)' : 'var(--ad-rowh)',
-                  color: form.days.includes(d) ? '#EA443C' : 'var(--ad-text3)',
+                  borderColor: form.days.includes(d) ? '#275EAA' : 'var(--ad-card-b)',
+                  background: form.days.includes(d) ? 'rgba(39,94,170,.08)' : 'var(--ad-rowh)',
+                  color: form.days.includes(d) ? '#275EAA' : 'var(--ad-text3)',
                   transition: 'all .15s',
                 }}>{d}</button>
               ))}

@@ -22,7 +22,7 @@ const defaultPricing = [
   {
     id: 2, kind: 'group', audience: 'بزرگسالان', sessions: 8,
     name: '۸ جلسه در ماه', sub: 'برای پیشرفت جدی',
-    price: '۸۵۰,۰۰۰', unit: 'ماهانه', popular: true, color: '#EA443C',
+    price: '۸۵۰,۰۰۰', unit: 'ماهانه', popular: true, color: '#275EAA',
     features: ['۸ جلسه کلاس گروهی', 'دسترسی نامحدود به دیواره‌ها', 'برنامه تمرینی اختصاصی', 'تخفیف ۱۵٪ روی سانس آزاد', 'باشگاه جامعه داوینو'],
     cta: 'انتخاب پکیج',
   },
@@ -36,7 +36,7 @@ const defaultPricing = [
   {
     id: 4, kind: 'group', audience: 'کودکان', sessions: 8,
     name: '۸ جلسه در ماه', sub: 'ویژه ۶ تا ۱۴ سال',
-    price: '۷۵۰,۰۰۰', unit: 'ماهانه', popular: true, color: '#EA443C',
+    price: '۷۵۰,۰۰۰', unit: 'ماهانه', popular: true, color: '#275EAA',
     features: ['۸ جلسه کلاس کودکان', 'مربی متخصص آموزش کودک', 'برنامه رشد مهارتی', 'تخفیف خواهر/برادر', 'گزارش پیشرفت ماهانه'],
     cta: 'انتخاب پکیج',
   },
@@ -51,7 +51,7 @@ const defaultPricing = [
   {
     id: 6, kind: 'single', icon: 'private',
     name: 'تمرین خصوصی', sub: 'تک‌جلسه با مربی',
-    price: '۳۵۰,۰۰۰', unit: 'هر جلسه', popular: false, color: '#EA443C',
+    price: '۳۵۰,۰۰۰', unit: 'هر جلسه', popular: false, color: '#275EAA',
     features: ['یک جلسه اختصاصی با مربی', 'برنامه‌ریزی شخصی', 'تحلیل تکنیک'],
     cta: 'رزرو جلسه',
   },
@@ -71,7 +71,7 @@ const defaultClasses = [
   { id: 1, title: 'سنگنوردی مقدماتی', trainerId: 'saba-karbasian', trainerName: 'صبا کرباسیان', days: ['شنبه', 'سه‌شنبه'], startTime: '16:00', endTime: '17:30', level: 'مبتدی', sessions: 8, capacity: 12, enrolled: 8, price: '۲۵۰,۰۰۰', color: '#22C55E', active: true },
   { id: 2, title: 'بولدرینگ پیشرفته', trainerId: 'arash-kamali', trainerName: 'آرش کمالی', days: ['یکشنبه', 'چهارشنبه'], startTime: '18:00', endTime: '19:30', level: 'پیشرفته', sessions: 8, capacity: 8, enrolled: 7, price: '۳۵۰,۰۰۰', color: '#3B82F6', active: true },
   { id: 3, title: 'لید تکنیک', trainerId: 'kiarash-najafi', trainerName: 'کیارش نجفی', days: ['دوشنبه', 'پنجشنبه'], startTime: '08:00', endTime: '09:30', level: 'متوسط', sessions: 8, capacity: 10, enrolled: 7, price: '۳۲۰,۰۰۰', color: '#F59E0B', active: true },
-  { id: 4, title: 'سنگنوردی نوجوانان', trainerId: 'zeinab-farahani', trainerName: 'زینب فراهانی', days: ['دوشنبه', 'پنجشنبه'], startTime: '17:00', endTime: '18:30', level: 'مبتدی', sessions: 8, capacity: 10, enrolled: 6, price: '۲۸۰,۰۰۰', color: '#EA443C', active: true },
+  { id: 4, title: 'سنگنوردی نوجوانان', trainerId: 'zeinab-farahani', trainerName: 'زینب فراهانی', days: ['دوشنبه', 'پنجشنبه'], startTime: '17:00', endTime: '18:30', level: 'مبتدی', sessions: 8, capacity: 10, enrolled: 6, price: '۲۸۰,۰۰۰', color: '#275EAA', active: true },
   { id: 5, title: 'کلاس کودکان', trainerId: 'zeinab-farahani', trainerName: 'زینب فراهانی', days: ['جمعه'], startTime: '10:00', endTime: '11:30', level: 'مبتدی', sessions: 4, capacity: 10, enrolled: 9, price: '۲۰۰,۰۰۰', color: '#A855F7', active: true },
   { id: 6, title: 'بولدرینگ مقدماتی', trainerId: 'niloofar-heidari', trainerName: 'نیلوفر حیدری', days: ['شنبه', 'چهارشنبه'], startTime: '20:00', endTime: '21:30', level: 'مبتدی', sessions: 8, capacity: 12, enrolled: 5, price: '۲۵۰,۰۰۰', color: '#06B6D4', active: true },
   { id: 7, title: 'مسابقات و تکنیک', trainerId: 'masoud-mozafari', trainerName: 'مسعود مظفری', days: ['پنجشنبه'], startTime: '09:00', endTime: '11:00', level: 'پیشرفته', sessions: 4, capacity: 6, enrolled: 4, price: '۴۵۰,۰۰۰', color: '#10B981', active: true },
