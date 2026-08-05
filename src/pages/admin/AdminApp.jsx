@@ -8,7 +8,10 @@ import AdminPricing from './AdminPricing'
 import AdminGallery from './AdminGallery'
 import AdminSettings from './AdminSettings'
 import AdminClasses from './AdminClasses'
+import AdminBlog from './AdminBlog'
 import AdminMessages from './AdminMessages'
+import AdminRegistrations from './AdminRegistrations'
+import AdminWorkshop from './AdminWorkshop'
 
 const SESSION_KEY = 'davino_admin_auth'
 const TOKEN_KEY = 'davino_admin_token'
@@ -22,7 +25,14 @@ export default function AdminApp() {
     if (token) sessionStorage.setItem(TOKEN_KEY, token)
     setAuthed(true)
   }
-  const logout = () => {
+  const logout = async () => {
+    try {
+      const token = sessionStorage.getItem(TOKEN_KEY)
+      await fetch('/api/logout', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` },
+      })
+    } catch { /* ignore */ }
     sessionStorage.removeItem(SESSION_KEY)
     sessionStorage.removeItem(TOKEN_KEY)
     setAuthed(false)
@@ -38,7 +48,10 @@ export default function AdminApp() {
         <Route path="/pricing" element={<AdminPricing />} />
         <Route path="/gallery" element={<AdminGallery />} />
         <Route path="/classes" element={<AdminClasses />} />
+        <Route path="/blog" element={<AdminBlog />} />
         <Route path="/messages" element={<AdminMessages />} />
+        <Route path="/registrations" element={<AdminRegistrations />} />
+        <Route path="/workshop" element={<AdminWorkshop />} />
         <Route path="/settings" element={<AdminSettings />} />
         <Route path="*" element={<Navigate to="/admin" replace />} />
       </Routes>

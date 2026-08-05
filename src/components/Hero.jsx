@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useAdmin } from '../data/adminStore.jsx'
 
 const maskCubes = 'radial-gradient(115% 120% at 22% 12%, #000 8%, transparent 62%)'
@@ -79,7 +80,7 @@ export default function Hero() {
           </p>
 
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, alignItems: 'center', animation: 'dvUp .6s .2s both' }}>
-            <a href="#pricing" style={{
+            <Link to="/register" style={{
               background: 'var(--accent)', color: '#fff', fontWeight: 800, fontSize: 16,
               padding: '15px 38px', borderRadius: 12,
               boxShadow: '0 10px 28px rgba(234,68,60,.34)',
@@ -87,34 +88,18 @@ export default function Hero() {
             }}
               onMouseEnter={e => { e.target.style.transform = 'translateY(-2px)'; e.target.style.boxShadow = '0 16px 36px rgba(234,68,60,.48)' }}
               onMouseLeave={e => { e.target.style.transform = 'translateY(0)'; e.target.style.boxShadow = '0 10px 28px rgba(234,68,60,.34)' }}
-            >ثبت‌نام</a>
+            >ثبت‌نام</Link>
             <a href="#about" style={{
               color: 'var(--text)', background: 'var(--surface)', fontWeight: 700, fontSize: 15,
               padding: '15px 30px', borderRadius: 12,
               border: '1.5px solid var(--obtnbd)',
               transition: 'all .25s', display: 'inline-block',
             }}
-              onMouseEnter={e => { e.target.style.borderColor = 'var(--accent)'; e.target.style.color = 'var(--accent)' }}
-              onMouseLeave={e => { e.target.style.borderColor = 'var(--obtnbd)'; e.target.style.color = 'var(--text)' }}
-            >بیشتر بدان</a>
+              onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.color = 'var(--accent)' }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--obtnbd)'; e.currentTarget.style.color = 'var(--text)' }}
+            >با داوینو آشنا شو</a>
           </div>
 
-          {/* آمار */}
-          <div className="hero-stats" style={{
-            display: 'flex', flexWrap: 'wrap', gap: 36, marginTop: 52, paddingTop: 32,
-            borderTop: '1px solid var(--line)', animation: 'dvUp .6s .25s both',
-          }}>
-            {[
-              { num: '۱۲۰۰+', label: 'سنگنورد فعال' },
-              { num: '۱۸', label: 'دیواره متنوع' },
-              { num: '۹', label: 'سال تجربه' },
-            ].map(stat => (
-              <div key={stat.label}>
-                <div style={{ fontSize: '1.9rem', fontWeight: 900, color: 'var(--accent)', lineHeight: 1 }}>{stat.num}</div>
-                <div style={{ fontSize: 13, color: 'var(--t45)', marginTop: 6, fontWeight: 500 }}>{stat.label}</div>
-              </div>
-            ))}
-          </div>
         </div>
 
         {/* کارت عکس — همیشه تیره (انتخاب دیزاین) */}
@@ -157,17 +142,7 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* کارت‌های شناور */}
-          <div style={{
-            position: 'absolute', top: -16, left: -16,
-            background: '#17141a', border: '1px solid rgba(255,255,255,.12)',
-            borderRadius: 16, padding: '13px 19px',
-            boxShadow: '0 12px 30px rgba(0,0,0,.4)',
-            animation: 'dvFloat 4s ease-in-out infinite',
-          }}>
-            <div style={{ fontSize: 11, color: 'rgba(255,255,255,.5)', fontWeight: 500 }}>ارتفاع دیواره</div>
-            <div style={{ fontSize: 20, fontWeight: 900, color: 'var(--accent)', marginTop: 2 }}>{settings.heroWallHeight || '۱۵ متر'}</div>
-          </div>
+          {/* کارت شناور امتیاز کاربران */}
           <div style={{
             position: 'absolute', bottom: -16, right: -16,
             background: 'var(--accent)', borderRadius: 16, padding: '13px 19px',

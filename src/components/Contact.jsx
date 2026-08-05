@@ -153,7 +153,7 @@ export default function Contact() {
                   type="text" name="company" tabIndex={-1} autoComplete="off" aria-hidden="true"
                   value={form.company}
                   onChange={e => setForm(p => ({ ...p, company: e.target.value }))}
-                  style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0, pointerEvents: 'none' }}
+                  style={{ position: 'absolute', width: 1, height: 1, opacity: 0, overflow: 'hidden', clipPath: 'inset(50%)', pointerEvents: 'none' }}
                 />
                 <div>
                   <label style={{ display: 'block', fontSize: '14px', fontWeight: 600, marginBottom: '8px', color: 'var(--color-foreground-muted)' }}>

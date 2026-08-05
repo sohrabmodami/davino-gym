@@ -1,57 +1,8 @@
 /* ════════════════════════════════════════════════════
-   Davino — Design tokens (تم تیره/روشن)
-   data-theme روی <html> توسط ThemeProvider ست می‌شود.
-   پیش‌فرض: light (وقتی localStorage خالی است)
+   Davino — Design tokens
    ════════════════════════════════════════════════════ */
 
-:root, [data-theme="dark"] {
-  --bg: #0b0a0c;
-  --bg2: #0e0d11;
-  --surface: rgba(255,255,255,.04);
-  --surface-b: rgba(255,255,255,.08);
-  --line: rgba(255,255,255,.07);
-  --track: rgba(255,255,255,.1);
-  --text: #ffffff;
-  --t85: rgba(255,255,255,.82);
-  --t60: rgba(255,255,255,.6);
-  --t50: rgba(255,255,255,.5);
-  --t45: rgba(255,255,255,.44);
-  --t35: rgba(255,255,255,.34);
-  --nav: rgba(11,10,12,.82);
-  --navbd: rgba(255,255,255,.07);
-  --avb: #17151b;
-  --btnbg: #ffffff;
-  --btnfg: #111111;
-  --dot: rgba(255,255,255,.14);
-  --hdot: rgba(255,255,255,.05);
-  --hring: rgba(255,255,255,.05);
-  --hgrid: rgba(255,255,255,.07);
-  --cubeTop: rgba(255,255,255,.05);
-  --cubeL: rgba(255,255,255,.022);
-  --cubeR: rgba(0,0,0,.18);
-  --accentText: #f3a39d;
-  --obtnbd: rgba(255,255,255,.2);
-  --accent-soft: rgba(234,68,60,.12);
-  --accent-soft-b: rgba(234,68,60,.28);
-  --shadow-card: 0 20px 50px rgba(0,0,0,.45);
-  /* توکن‌های پنل ادمین */
-  --ad-page: #0e0d11;
-  --ad-side: #141215;
-  --ad-side-b: rgba(255,255,255,.06);
-  --ad-card: #1a181d;
-  --ad-card-b: rgba(255,255,255,.08);
-  --ad-text2: rgba(255,255,255,.6);
-  --ad-text3: rgba(255,255,255,.4);
-  --ad-row: rgba(255,255,255,.03);
-  --ad-rowh: rgba(255,255,255,.05);
-  --ad-th: rgba(255,255,255,.35);
-  --ad-side-item: rgba(255,255,255,.5);
-  --ad-side-hover: rgba(255,255,255,.06);
-  --ad-topbar: rgba(20,18,21,.9);
-  --ad-chip: rgba(255,255,255,.05);
-}
-
-[data-theme="light"] {
+:root {
   --bg: #f4f1ed;
   --bg2: #ffffff;
   --surface: #ffffff;
@@ -81,7 +32,7 @@
   --accent-soft: rgba(234,68,60,.12);
   --accent-soft-b: rgba(234,68,60,.28);
   --shadow-card: 0 20px 50px rgba(24,19,16,.12);
-  /* توکن‌های پنل ادمین — تم روشن */
+  /* توکن‌های پنل ادمین */
   --ad-page: #f5f3f0;
   --ad-side: #ffffff;
   --ad-side-b: #ece7e0;
@@ -96,10 +47,8 @@
   --ad-side-hover: #f4f1ec;
   --ad-topbar: rgba(255,255,255,.9);
   --ad-chip: #f4f1ec;
-}
 
-:root {
-  /* پالت برند — ثابت در هر دو تم */
+  /* پالت برند */
   --accent: #EA443C;
   --accent-deep: #c5342c;
   --success: #22C55E;
@@ -129,13 +78,24 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+/* overflow-x: clip روی html جلوی اسکرول افقی و زوم‌اوت موبایل را می‌گیرد؛
+   clip (برخلاف hidden) کانتینر اسکرول نمی‌سازد، پس sticky در پنل/پروفایل سالم می‌ماند.
+   background روی html + overscroll-behavior: none جلوی «سفیدی/کش‌آمدن زیر فوتر» در موبایل را می‌گیرد. */
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+  max-width: 100%;
+  background: var(--bg);
+  overscroll-behavior: none;
+}
 body {
   font-family: var(--font-body);
   background: var(--bg);
   color: var(--text);
   direction: rtl;
-  overflow-x: hidden;
+  overflow-x: clip;
+  max-width: 100%;
+  overscroll-behavior: none;
   -webkit-font-smoothing: antialiased;
   transition: background .3s, color .3s;
 }
@@ -150,22 +110,6 @@ img { max-width: 100%; display: block; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--track); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
-
-/* ── دکمه‌ی تغییر تم (مربع ۳۸px مطابق دیزاین) ── */
-.theme-toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 38px; height: 38px;
-  flex-shrink: 0;
-  background: var(--surface);
-  border: 1px solid var(--surface-b);
-  color: var(--text);
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all .2s;
-}
-.theme-toggle:hover { border-color: var(--accent); }
 
 /* ── انیمیشن‌ها ──
    نکته‌ی دیزاین: opacity انیمیت نمی‌شود تا اگر ساعت انیمیشن
@@ -203,18 +147,18 @@ img { max-width: 100%; display: block; }
   .about-grid { grid-template-columns: 1fr; gap: 40px; }
 }
 
-/* Gallery — گرید موزاییک با ارتفاع ردیف ثابت (مطابق دیزاین) */
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: 200px;
-  gap: 14px;
+/* Gallery — masonry واقعی بر اساس نسبت طبیعی هر تصویر (بدون کشیدگی) */
+.gallery-masonry {
+  column-count: 4;
+  column-gap: 14px;
 }
-.gallery-wide { grid-column: span 2; grid-row: span 1; }
-@media (max-width: 900px)  { .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 180px; } }
-@media (max-width: 900px)  { .gallery-wide { grid-column: span 2 !important; } }
-@media (max-width: 500px)  { .gallery-grid { grid-template-columns: 1fr; grid-auto-rows: 170px; } }
-@media (max-width: 500px)  { .gallery-wide { grid-column: span 1 !important; } }
+.gallery-masonry > * {
+  break-inside: avoid;
+  margin-bottom: 14px;
+}
+@media (max-width: 900px) { .gallery-masonry { column-count: 3; } }
+@media (max-width: 560px) { .gallery-masonry { column-count: 2; column-gap: 10px; } }
+@media (max-width: 560px) { .gallery-masonry > * { margin-bottom: 10px; } }
 
 /* Pricing */
 .pricing-grid {
@@ -303,6 +247,15 @@ img { max-width: 100%; display: block; }
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
 }
+
+/* Wall service — کارت‌های خدمات/متریال/مزایا/چرا-داوینو، ۴تایی در یک ردیف */
+.wall-features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+@media (max-width: 1000px) { .wall-features-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px)  { .wall-features-grid { grid-template-columns: 1fr; } }
 
 /* Classes preview */
 .classes-preview-grid {

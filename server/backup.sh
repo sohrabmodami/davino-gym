@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# بک‌آپ روزانه از داده‌های سایت (content.json + messages.json)
+# بک‌آپ روزانه از داده‌های سایت (content.json + messages.json + registrations.json)
 # هر اجرا یک کپی تاریخ‌دار از هر فایل می‌سازد و فقط ۱۴ نسخه‌ی آخر هر کدام را نگه می‌دارد.
 # روی سرور با cron هر شب اجرا می‌شود (راهنمای نصب در DEPLOY/پایین).
 
@@ -12,7 +12,7 @@ mkdir -p "$BACKUP_DIR"
 STAMP="$(date '+%Y-%m-%d_%H%M%S')"
 
 # هر فایل داده را جداگانه بک‌آپ بگیر و فقط KEEP نسخه‌ی آخرش را نگه دار
-for NAME in content messages; do
+for NAME in content messages registrations; do
   SRC="$DATA_DIR/$NAME.json"
   if [ ! -f "$SRC" ]; then
     echo "$(date '+%F %T') — هنوز فایلی برای بک‌آپ نیست ($SRC)"

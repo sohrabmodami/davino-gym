@@ -206,8 +206,19 @@ export default function AdminSettings() {
     e.target.value = ''
   }
 
-  const handleHeroCropped = (dataUrl) => {
-    setField('heroImage', dataUrl)
+  const handleHeroCropped = async (dataUrl) => {
+    const token = sessionStorage.getItem('davino_admin_token')
+    try {
+      const r = await fetch('/api/upload', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ data: dataUrl }),
+      })
+      const d = await r.json()
+      setField('heroImage', d.ok && d.url ? d.url : dataUrl)
+    } catch {
+      setField('heroImage', dataUrl)
+    }
     setHeroCropSrc(null)
   }
 
@@ -256,6 +267,17 @@ export default function AdminSettings() {
               </label>
             ))}
           </div>
+          <label style={{ display: 'flex', flexDirection: 'column', gap: 6, marginTop: 16 }}>
+            <span style={{ fontSize: 12, color: 'var(--ad-text2)', fontWeight: 700 }}>متن زیر لوگوی فوتر</span>
+            <textarea
+              className="settings-input"
+              value={form.footerDescription || ''}
+              onChange={e => setField('footerDescription', e.target.value)}
+              rows={3}
+              style={{ resize: 'vertical', lineHeight: 1.9 }}
+              placeholder="توضیح کوتاه درباره باشگاه که زیر لوگوی فوتر نمایش داده می‌شود"
+            />
+          </label>
         </div>
 
         {/* Social */}
@@ -320,11 +342,7 @@ export default function AdminSettings() {
               <span style={{ fontSize: 12, color: 'var(--ad-text2)', fontWeight: 700 }}>توضیحات زیر عنوان</span>
               <textarea className="settings-input" value={form.heroSubtitle || ''} onChange={e => setField('heroSubtitle', e.target.value)} rows={2} style={{ resize: 'vertical', lineHeight: 1.7 }} placeholder="از مبتدی تا حرفه‌ای — با مربیان مجرب..." />
             </label>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 12, paddingTop: 4 }}>
-              <label style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                <span style={{ fontSize: 12, color: 'var(--ad-text2)', fontWeight: 700 }}>ارتفاع دیواره (بج شناور)</span>
-                <input className="settings-input" value={form.heroWallHeight || ''} onChange={e => setField('heroWallHeight', e.target.value)} placeholder="۱۵ متر" />
-              </label>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, paddingTop: 4 }}>
               <label style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                 <span style={{ fontSize: 12, color: 'var(--ad-text2)', fontWeight: 700 }}>امتیاز کاربران (بج شناور)</span>
                 <input className="settings-input" value={form.heroRating || ''} onChange={e => setField('heroRating', e.target.value)} placeholder="۴.۹ ★" />

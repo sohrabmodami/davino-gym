@@ -167,12 +167,11 @@ function TrainerModal({ trainer, cropSrc, onRequestCrop, onSave, onClose, traine
   const [form, setForm] = useState(trainer ? {
     ...trainer,
     specialties: Array.isArray(trainer.specialties) ? trainer.specialties.join('، ') : trainer.specialties || '',
-    achievements: Array.isArray(trainer.achievements) ? trainer.achievements.join('، ') : trainer.achievements || '',
     days: [...(trainer.days || [])],
   } : {
     id: 'trainer-' + Date.now(), name: '', role: '', initial: '', tag: '', exp: '', sessions: '',
     level: '', cert: '', bio: '', gradFrom: '#1C2B3A', gradTo: '#0D1820',
-    specialties: '', achievements: '', days: [], photo: '',
+    specialties: '', days: [], photo: '',
   })
 
   const fileRef = useRef(null)
@@ -190,7 +189,6 @@ function TrainerModal({ trainer, cropSrc, onRequestCrop, onSave, onClose, traine
     onSave({
       ...form,
       specialties: form.specialties.split('،').map(s => s.trim()).filter(Boolean),
-      achievements: form.achievements.split('،').map(s => s.trim()).filter(Boolean),
     })
   }
 
@@ -207,7 +205,7 @@ function TrainerModal({ trainer, cropSrc, onRequestCrop, onSave, onClose, traine
 
   const fields = [
     ['name','نام کامل'], ['role','تخصص'], ['initial','حرف اول'], ['tag','برچسب'],
-    ['exp','سابقه'], ['sessions','جلسات'], ['level','سطح'], ['cert','مدرک'],
+    ['exp','سابقه'], ['sessions','جلسات'], ['cert','مدرک'],
   ]
 
   return (
@@ -273,13 +271,6 @@ function TrainerModal({ trainer, cropSrc, onRequestCrop, onSave, onClose, traine
             <label>
               <span>تخصص‌ها (با ویرگول فارسی جدا کن)</span>
               <input className="admin-input" value={form.specialties} onChange={e => set('specialties', e.target.value)} />
-            </label>
-          </div>
-
-          <div className="admin-field" style={{ marginBottom: 16 }}>
-            <label>
-              <span>افتخارات (با ویرگول فارسی جدا کن)</span>
-              <input className="admin-input" value={form.achievements} onChange={e => set('achievements', e.target.value)} />
             </label>
           </div>
 
@@ -412,8 +403,23 @@ export default function AdminTrainers() {
     setCropState({ src, onDone })
   }
 
-  const handleCropped = (dataUrl) => {
-    cropState?.onDone(dataUrl)
+  const handleCropped = async (dataUrl) => {
+    const token = sessionStorage.getItem('davino_admin_token')
+    try {
+      const r = await fetch('/api/upload', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ data: dataUrl }),
+      })
+      const d = await r.json()
+      if (d.ok && d.url) {
+        cropState?.onDone(d.url)
+      } else {
+        cropState?.onDone(dataUrl)
+      }
+    } catch {
+      cropState?.onDone(dataUrl)
+    }
     setCropState(null)
   }
 

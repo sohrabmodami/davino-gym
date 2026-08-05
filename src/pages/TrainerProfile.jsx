@@ -1,8 +1,8 @@
 import { useParams, Link } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useAdmin } from '../data/adminStore.jsx'
-import { ThemeToggle } from '../data/themeStore.jsx'
 
+const faNum = (n) => String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d])
 const WEEK_DAYS = ['شنبه', 'یکشنبه', 'دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنجشنبه', 'جمعه']
 
 /* rgba کمرنگ از رنگ هگز کلاس */
@@ -73,7 +73,6 @@ export default function TrainerProfile() {
             مربیان
           </Link>
           <span style={{ fontFamily: 'var(--font-latin)', fontSize: 13, fontWeight: 700, letterSpacing: '.18em', color: 'var(--t45)' }}>DAVINO</span>
-          <ThemeToggle />
         </div>
 
         {/* ── هیرو ── */}
@@ -184,10 +183,8 @@ export default function TrainerProfile() {
           </div>
         </div>
 
-        {/* ── بیو + تخصص‌ها + افتخارات ── */}
+        {/* ── درباره مربی ── */}
         <div style={{
-          display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: 'clamp(28px, 4vw, 40px)',
           padding: '38px clamp(24px, 4vw, 44px) 44px',
           borderTop: '1px solid var(--line)',
         }}>
@@ -202,15 +199,6 @@ export default function TrainerProfile() {
                 }}>{s}</span>
               ))}
             </div>
-          </div>
-          <div>
-            <div style={{ fontSize: 11, fontWeight: 800, color: 'var(--accent)', letterSpacing: '.14em', marginBottom: 16 }}>افتخارات</div>
-            {trainer.achievements.map((a, i) => (
-              <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 13, marginBottom: 16 }}>
-                <span style={{ fontFamily: 'var(--font-latin)', fontSize: 13, fontWeight: 700, color: 'var(--t45)' }}>{String(i + 1).padStart(2, '0')}</span>
-                <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--text)', lineHeight: 1.5 }}>{a}</span>
-              </div>
-            ))}
           </div>
         </div>
 

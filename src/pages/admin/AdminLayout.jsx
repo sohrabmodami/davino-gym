@@ -1,14 +1,17 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { ThemeToggle } from '../../data/themeStore.jsx'
+import { useAdmin } from '../../data/adminStore.jsx'
 
 const PAGE_TITLES = {
   '/admin': 'داشبورد',
   '/admin/trainers': 'مربیان',
   '/admin/pricing': 'قیمت‌ها',
   '/admin/classes': 'کلاس‌ها',
+  '/admin/blog': 'بلاگ',
   '/admin/gallery': 'گالری',
   '/admin/messages': 'پیام‌ها',
+  '/admin/registrations': 'درخواست‌های ثبت‌نام',
+  '/admin/workshop': 'ثبت‌نام کارگاه',
   '/admin/settings': 'تنظیمات',
 }
 
@@ -30,8 +33,20 @@ const navItems = [
     icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>,
   },
   {
+    path: '/admin/blog', label: 'بلاگ',
+    icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/><line x1="9" y1="7" x2="16" y2="7"/><line x1="9" y1="11" x2="14" y2="11"/></svg>,
+  },
+  {
     path: '/admin/gallery', label: 'گالری',
     icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>,
+  },
+  {
+    path: '/admin/registrations', label: 'درخواست‌های ثبت‌نام',
+    icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>,
+  },
+  {
+    path: '/admin/workshop', label: 'ثبت‌نام کارگاه',
+    icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/><path d="M8 7h8M8 11h6"/></svg>,
   },
   {
     path: '/admin/messages', label: 'پیام‌ها',
@@ -75,6 +90,7 @@ const CSS = `
 export default function AdminLayout({ children, onLogout }) {
   const { pathname } = useLocation()
   const [collapsed, setCollapsed] = useState(false)
+  const { saveError, clearSaveError } = useAdmin()
 
   const isActive = (item) => item.exact ? pathname === item.path : pathname.startsWith(item.path)
   const pageTitle = PAGE_TITLES[pathname] || (pathname.startsWith('/admin/') ? PAGE_TITLES[`/admin/${pathname.split('/')[2]}`] : '') || 'داشبورد'
@@ -212,7 +228,6 @@ export default function AdminLayout({ children, onLogout }) {
             <input placeholder="جستجو…" style={{ flex: 1, background: 'none', border: 'none', outline: 'none', color: 'var(--text)', fontSize: 13, fontFamily: 'Vazirmatn, sans-serif' }} />
           </div>
           <div style={{ marginRight: 'auto', display: 'flex', alignItems: 'center', gap: 12 }}>
-            <ThemeToggle />
             <div style={{ display: 'flex', alignItems: 'center', gap: 9 }}>
               <div style={{ width: 34, height: 34, borderRadius: '50%', background: 'linear-gradient(135deg, #EA443C, #c5342c)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: 13, fontWeight: 800, flexShrink: 0 }}>ا</div>
               <div style={{ lineHeight: 1.2 }}>
@@ -222,6 +237,18 @@ export default function AdminLayout({ children, onLogout }) {
             </div>
           </div>
         </div>
+
+        {saveError && (
+          <div style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12,
+            margin: '14px clamp(20px, 3vw, 40px) 0', padding: '12px 16px',
+            background: 'rgba(239,68,68,.1)', border: '1px solid rgba(239,68,68,.3)',
+            borderRadius: 12, color: '#ef4444', fontSize: 13, fontWeight: 600,
+          }}>
+            <span>⚠ {saveError}</span>
+            <button onClick={clearSaveError} style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', fontSize: 16, padding: 4, flexShrink: 0 }}>✕</button>
+          </div>
+        )}
 
         {children}
       </main>

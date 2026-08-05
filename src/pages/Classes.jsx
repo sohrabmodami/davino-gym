@@ -5,12 +5,8 @@ import Footer from '../components/Footer'
 
 const DAYS_ALL = ['شنبه', 'یکشنبه', 'دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنجشنبه', 'جمعه']
 
-const LEVEL_META = {
-  'مبتدی':     { bg: 'rgba(34,197,94,.14)',   color: '#4ade80',            border: 'rgba(34,197,94,.28)' },
-  'متوسط':     { bg: 'rgba(234,68,60,.14)',   color: 'var(--accentText)',  border: 'rgba(234,68,60,.28)' },
-  'پیشرفته':   { bg: 'rgba(59,130,246,.14)',  color: '#60a5fa',            border: 'rgba(59,130,246,.28)' },
-  'همه سطوح': { bg: 'rgba(161,161,170,.14)', color: 'var(--t60)',         border: 'rgba(161,161,170,.28)' },
-}
+const ALL_LEVELS = 'مبتدی تا پیشرفته'
+const LEVEL_BADGE = { bg: 'rgba(161,161,170,.14)', color: 'var(--t60)', border: 'rgba(161,161,170,.28)' }
 
 function timeToMin(t) {
   const [h, m] = t.split(':').map(Number)
@@ -98,7 +94,6 @@ const CSS = `
 `
 
 function ClassCard({ cls, idx, trainerObj }) {
-  const lm = LEVEL_META[cls.level] || LEVEL_META['همه سطوح']
   const pct = cls.capacity > 0 ? Math.round((cls.enrolled / cls.capacity) * 100) : 0
   const full = cls.enrolled >= cls.capacity
   const dur = duration(cls.startTime, cls.endTime)
@@ -121,8 +116,8 @@ function ClassCard({ cls, idx, trainerObj }) {
             <span style={{ fontSize: 22, fontWeight: 700, color: 'var(--text)', fontFamily: 'var(--font-latin)', lineHeight: 1 }}>{cls.startTime}</span>
             <span style={{ fontSize: 12, color: 'var(--t35)', fontWeight: 600 }}>— {cls.endTime}</span>
           </div>
-          <span style={{ fontSize: 11, fontWeight: 800, padding: '4px 11px', borderRadius: 999, background: lm.bg, color: lm.color, border: `1px solid ${lm.border}` }}>
-            {cls.level}
+          <span style={{ fontSize: 11, fontWeight: 800, padding: '4px 11px', borderRadius: 999, background: LEVEL_BADGE.bg, color: LEVEL_BADGE.color, border: `1px solid ${LEVEL_BADGE.border}`, whiteSpace: 'nowrap' }}>
+            {ALL_LEVELS}
           </span>
         </div>
 
@@ -192,20 +187,17 @@ function WeekView({ classes, nameOf }) {
           return (
             <div key={day}>
               <div className="week-col-head">{day}</div>
-              {dayCls.map(cls => {
-                const lm = LEVEL_META[cls.level] || LEVEL_META['همه سطوح']
-                return (
+              {dayCls.map(cls => (
                   <div key={cls.id} className="week-card" style={{ '--c': cls.color }}>
                     <div style={{ fontSize: 13, fontWeight: 900, color: 'var(--text)', marginBottom: 3 }}>{cls.title}</div>
                     <div style={{ fontSize: 12, fontWeight: 700, color: cls.color, marginBottom: 4 }}>{cls.startTime} — {cls.endTime}</div>
                     <div style={{ fontSize: 11, color: 'var(--t50)', marginBottom: 6 }}>{nameOf(cls)}</div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span style={{ fontSize: 10, fontWeight: 800, padding: '2px 8px', borderRadius: 999, background: lm.bg, color: lm.color }}>{cls.level}</span>
-                      <span style={{ fontSize: 10, color: 'var(--t45)', fontWeight: 700 }}>{cls.sessions || 8}×/ماه</span>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 6 }}>
+                      <span style={{ fontSize: 10, fontWeight: 800, padding: '2px 8px', borderRadius: 999, background: LEVEL_BADGE.bg, color: LEVEL_BADGE.color, whiteSpace: 'nowrap' }}>{ALL_LEVELS}</span>
+                      <span style={{ fontSize: 10, color: 'var(--t45)', fontWeight: 700, whiteSpace: 'nowrap' }}>{cls.sessions || 8}×/ماه</span>
                     </div>
                   </div>
-                )
-              })}
+              ))}
               {dayCls.length === 0 && (
                 <div style={{ textAlign: 'center', padding: '24px 8px', color: 'var(--dot)', fontSize: 20 }}>—</div>
               )}
@@ -220,7 +212,6 @@ function WeekView({ classes, nameOf }) {
 export default function Classes() {
   const { classes = [], trainers = [] } = useAdmin()
   const [day, setDay] = useState('همه')
-  const [level, setLevel] = useState('همه')
   const [trainer, setTrainer] = useState('همه مربیان')
   const [sessions, setSessions] = useState('همه')
   const [view, setView] = useState('card')
@@ -235,12 +226,11 @@ export default function Classes() {
   const active = classes.filter(c => c.active)
   const trainerNames = ['همه مربیان', ...new Set(active.map(nameOf))]
 
-  // فیلترهای سطح/مربی/جلسات (بدون فیلتر روز) — برای هر دو نمای کارت و هفتگی مشترک‌اند
+  // فیلترهای مربی/جلسات (بدون فیلتر روز) — برای هر دو نمای کارت و هفتگی مشترک‌اند
   const byAttrs = useMemo(() => active
-    .filter(c => level === 'همه' || c.level === level)
     .filter(c => trainer === 'همه مربیان' || nameOf(c) === trainer)
     .filter(c => sessions === 'همه' || String(c.sessions || 8) === sessions)
-  , [classes, trainers, level, trainer, sessions])
+  , [classes, trainers, trainer, sessions])
 
   // نمای کارت علاوه بر بالا، فیلتر روز را هم اعمال می‌کند
   const filtered = useMemo(() => byAttrs
@@ -248,7 +238,7 @@ export default function Classes() {
     .sort((a, b) => timeToMin(a.startTime) - timeToMin(b.startTime))
   , [byAttrs, day])
 
-  const hasFilter = day !== 'همه' || level !== 'همه' || trainer !== 'همه مربیان' || sessions !== 'همه'
+  const hasFilter = day !== 'همه' || trainer !== 'همه مربیان' || sessions !== 'همه'
 
   const totalSpots = active.reduce((s, c) => s + Math.max(0, c.capacity - c.enrolled), 0)
 
@@ -278,7 +268,7 @@ export default function Classes() {
                 برنامه کلاس‌های سنگنوردی
               </h1>
               <p style={{ fontSize: 15, color: 'var(--t50)', fontFamily: 'Vazirmatn', margin: 0, lineHeight: 1.7 }}>
-                کلاس مناسب سطح و زمانت رو انتخاب کن و همین هفته شروع کن
+                کلاس مناسب زمانت رو انتخاب کن و همین هفته شروع کن
               </p>
             </div>
             {/* Quick stats */}
@@ -319,10 +309,6 @@ export default function Classes() {
 
           {/* Row 2: dropdowns + view toggle */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, paddingBottom: 10, borderTop: '1px solid var(--line)', paddingTop: 10 }}>
-            <select className="chip-select" value={level} onChange={e => setLevel(e.target.value)}>
-              <option value="همه">همه سطوح</option>
-              {['مبتدی', 'متوسط', 'پیشرفته'].map(l => <option key={l} value={l}>{l}</option>)}
-            </select>
             <select className="chip-select" value={trainer} onChange={e => setTrainer(e.target.value)}>
               {trainerNames.map(t => <option key={t}>{t}</option>)}
             </select>
@@ -354,7 +340,7 @@ export default function Classes() {
               {view === 'week' ? 'نمای هفتگی' : `${filtered.length} کلاس`}
             </p>
             {hasFilter && (
-              <button onClick={() => { setDay('همه'); setLevel('همه'); setTrainer('همه مربیان'); setSessions('همه') }}
+              <button onClick={() => { setDay('همه'); setTrainer('همه مربیان'); setSessions('همه') }}
                 style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 12, color: 'var(--accent)', fontFamily: 'Vazirmatn', fontWeight: 700 }}>
                 پاک کردن فیلترها ×
               </button>

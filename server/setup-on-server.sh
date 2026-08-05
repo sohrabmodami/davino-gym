@@ -1,34 +1,59 @@
 #!/usr/bin/env bash
 # ────────────────────────────────────────────────────────────
-# نصب داوینو روی سرور — بدون نیاز به اینترنت یا نصب چیزی
-# فقط Node لازم است (که از قبل روی سرورت هست).
+# نصب داوینو روی سرور — بدون نیاز به اینترنت
+# فقط Node لازم است.
 #
 # روی سرور، داخل پوشه‌ی پروژه، این را اجرا کن:
-#     bash server/setup-on-server.sh
+#     sudo bash server/setup-on-server.sh
 #
-# اختیاری: پورت و رمز را خودت بده (پیش‌فرض: پورت 80 و رمز davino1394)
-#     bash server/setup-on-server.sh 80 یک‌رمز‌قوی
+# اختیاری: پورت (پیش‌فرض 80) را می‌توانی بدهی:
+#     sudo bash server/setup-on-server.sh 443
 # ────────────────────────────────────────────────────────────
 set -e
 
 PORT="${1:-80}"
-PASS="${2:-davino1394}"
-
-# مسیر پوشه‌ی پروژه (یک پوشه بالاتر از این اسکریپت)
 DIR="$(cd "$(dirname "$0")/.." && pwd)"
 NODE="$(command -v node)"
+USER="davino"
+ENV_FILE="/etc/davino.env"
 
 if [ -z "$NODE" ]; then
-  echo "❌ Node پیدا نشد. اول Node را نصب کن."
+  echo "Node پیدا نشد. اول Node را نصب کن."
   exit 1
 fi
 if [ ! -d "$DIR/dist" ]; then
-  echo "❌ پوشه‌ی dist پیدا نشد. مطمئن شو فایل‌های build شده را آپلود کرده‌ای."
+  echo "پوشه dist پیدا نشد. مطمئن شو فایل‌های build شده را آپلود کرده‌ای."
   exit 1
 fi
 
-echo "▶ ساخت سرویس systemd…"
-cat > /etc/systemd/system/davino.service <<EOF
+# ── رمز ادمین (مخفی) ──
+if [ -f "$ENV_FILE" ] && grep -q '^ADMIN_PASSWORD=' "$ENV_FILE"; then
+  echo "رمز قبلاً در $ENV_FILE تنظیم شده. برای تغییر حذفش کن."
+else
+  echo "=============================================="
+  echo "   رمز ادمین را وارد کن (حداقل ۸ کاراکتر)"
+  echo "=============================================="
+  read -r -s ADMIN_PASSWORD
+  echo
+  if [ ${#ADMIN_PASSWORD} -lt 8 ]; then
+    echo "❌ رمز باید حداقل ۸ کاراکتر باشد."
+    exit 1
+  fi
+  echo "ADMIN_PASSWORD=$ADMIN_PASSWORD" > "$ENV_FILE"
+  chmod 600 "$ENV_FILE"
+  echo "✓ رمز در $ENV_FILE ذخیره شد (فقط root می‌خواند)"
+fi
+
+# ── کاربر اختصاصی ──
+if ! id "$USER" &>/dev/null; then
+  useradd -r -s /bin/false -d "$DIR" "$USER"
+  echo "✓ کاربر $USER ساخته شد"
+fi
+chown -R "$USER:$USER" "$DIR/server/data" 2>/dev/null || true
+
+# ── سرویس systemd ──
+UNIT="/etc/systemd/system/davino.service"
+cat > "$UNIT" <<EOF
 [Unit]
 Description=Davino Climbing Gym
 After=network.target
@@ -36,12 +61,16 @@ After=network.target
 [Service]
 Type=simple
 WorkingDirectory=$DIR
+EnvironmentFile=$ENV_FILE
 Environment=PORT=$PORT
-Environment=ADMIN_PASSWORD=$PASS
 ExecStart=$NODE $DIR/server/index.mjs
 Restart=always
 RestartSec=3
-User=root
+User=$USER
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=$DIR/server/data
+PrivateTmp=true
 
 [Install]
 WantedBy=multi-user.target
@@ -52,11 +81,13 @@ systemctl enable davino
 systemctl restart davino
 
 echo ""
-echo "✅ تمام شد! سایت روی پورت $PORT اجرا شد."
-echo "   وضعیت سرویس:"
+echo "✅ نصب تمام شد! سایت روی پورت $PORT."
+echo "   وضعیت:"
 systemctl status davino --no-pager | head -6
 echo ""
 echo "   دستورهای مفید:"
-echo "     systemctl restart davino   ← ری‌استارت بعد از آپدیت فایل‌ها"
+echo "     systemctl restart davino   ← ری‌استارت بعد از آپدیت"
 echo "     systemctl status davino    ← دیدن وضعیت"
 echo "     journalctl -u davino -n 50 ← دیدن لاگ‌ها"
+echo ""
+echo "   ⚠  برای HTTPS حتماً از reverse proxy Nginx با certbot استفاده کن"

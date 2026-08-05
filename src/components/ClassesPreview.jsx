@@ -1,12 +1,7 @@
 import { useAdmin } from '../data/adminStore.jsx'
 import { useNavigate } from 'react-router-dom'
 
-const LEVEL_COLORS = {
-  'مبتدی':     { bg: 'rgba(34,197,94,.14)',  color: '#4ade80', light: '#16a34a' },
-  'متوسط':     { bg: 'rgba(234,68,60,.14)',  color: 'var(--accentText)' },
-  'پیشرفته':   { bg: 'rgba(59,130,246,.14)', color: '#60a5fa', light: '#2563eb' },
-  'همه سطوح': { bg: 'rgba(161,161,170,.14)', color: 'var(--t60)' },
-}
+const ALL_LEVELS = 'مبتدی تا پیشرفته'
 
 const CSS = `
   .cls-preview-card {
@@ -84,7 +79,6 @@ export default function ClassesPreview() {
         {/* کارت‌ها */}
         <div className="classes-preview-grid">
           {featured.map((cls, i) => {
-            const lc = LEVEL_COLORS[cls.level] || LEVEL_COLORS['همه سطوح']
             const pct = Math.round((cls.enrolled / cls.capacity) * 100)
             return (
               <div key={cls.id} className="cls-preview-card" style={{ '--c': cls.color, animationDelay: `${i * 80}ms` }}>
@@ -105,7 +99,7 @@ export default function ClassesPreview() {
 
                 <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginBottom: 10 }}>
                   <span style={{ fontSize: 12, color: 'var(--t60)', fontWeight: 600 }}>{nameOf(cls)}</span>
-                  <span style={{ marginRight: 'auto', fontSize: 10, fontWeight: 700, padding: '2px 9px', borderRadius: 999, background: lc.bg, color: lc.color }}>{cls.level}</span>
+                  <span style={{ marginRight: 'auto', fontSize: 10, fontWeight: 700, padding: '2px 9px', borderRadius: 999, background: 'rgba(161,161,170,.14)', color: 'var(--t60)', whiteSpace: 'nowrap' }}>{ALL_LEVELS}</span>
                 </div>
                 <div style={{ display: 'inline-flex', alignItems: 'center', gap: 5, marginBottom: 12, background: 'var(--surface-b)', borderRadius: 8, padding: '4px 10px' }}>
                   <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--t45)" strokeWidth="2.5" strokeLinecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>

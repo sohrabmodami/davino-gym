@@ -56,6 +56,7 @@ const ClockIcon = () => (
 
 export default function Footer() {
   const { settings } = useAdmin()
+  const footerDescription = settings.footerDescription ?? 'از ۱۳۹۴ تاکنون، خانه‌ی سنگنوردان تهران. بزرگ‌ترین باشگاه سنگنوردی سرپوشیده با ۱۸ مسیر و ۱۵ متر ارتفاع.'
 
   const allSocials = [
     { key: 'instagram', icon: <InstagramIcon />, label: 'اینستاگرام', href: settings.instagram, color: '#E1306C', visKey: 'instagramVisible' },
@@ -78,17 +79,19 @@ export default function Footer() {
     <footer style={{ background: '#070608', color: '#fff', direction: 'rtl', borderTop: '1px solid rgba(255,255,255,.07)' }}>
 
       {/* Main grid */}
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '56px clamp(24px, 4vw, 40px) 36px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 'clamp(36px, 5vw, 64px)', marginBottom: 44 }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '40px clamp(24px, 4vw, 40px) 22px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 'clamp(28px, 4vw, 52px)', marginBottom: 30 }}>
 
           {/* Brand */}
           <div>
             <div style={{ marginBottom: 18 }}>
               <Logo size={1.1} dark />
             </div>
-            <p style={{ fontSize: 13.5, color: 'rgba(255,255,255,.4)', lineHeight: 2, marginBottom: 28, maxWidth: 320 }}>
-              از ۱۳۹۴ تاکنون، خانه‌ی سنگنوردان تهران. بزرگ‌ترین باشگاه سنگنوردی سرپوشیده با ۱۸ مسیر و ۱۵ متر ارتفاع.
-            </p>
+            {footerDescription && (
+              <p style={{ fontSize: 13.5, color: 'rgba(255,255,255,.4)', lineHeight: 2, marginBottom: 28, maxWidth: 320, whiteSpace: 'pre-line' }}>
+                {footerDescription}
+              </p>
+            )}
 
             {/* Phone numbers */}
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 24 }}>
@@ -167,10 +170,17 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div style={{ borderTop: '1px solid rgba(255,255,255,.07)', paddingTop: 24, display: 'flex', justifyContent: 'center' }}>
+        <div style={{ borderTop: '1px solid rgba(255,255,255,.07)', paddingTop: 16, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
           <p style={{ fontSize: 12, color: 'rgba(255,255,255,.2)' }}>
             © ۱۴۰۳ داوینو کلایمینگ — تمامی حقوق محفوظ است
           </p>
+          <a href="https://sohrabmodami.com" target="_blank" rel="noopener noreferrer"
+            style={{ fontSize: 12, color: 'rgba(255,255,255,.3)', fontFamily: 'var(--font-latin)', letterSpacing: '.02em', direction: 'ltr', textDecoration: 'none', transition: 'color .2s' }}
+            onMouseEnter={e => e.currentTarget.style.color = '#EA443C'}
+            onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,.3)'}
+          >
+            Design &amp; Developed by Sohrab Modami
+          </a>
         </div>
       </div>
 

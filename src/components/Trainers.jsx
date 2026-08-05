@@ -44,7 +44,7 @@ export default function Trainers() {
             padding: '6px 15px', marginBottom: 16,
           }}>تیم مربیان</div>
           <h2 style={{ fontSize: 'clamp(1.9rem, 4vw, 2.8rem)', fontWeight: 900, letterSpacing: '-.01em', margin: '0 0 12px', color: 'var(--text)' }}>
-            از بهترین‌ها یاد بگیر
+            با مربیان آشنا شو
           </h2>
           <p style={{ fontSize: 16, color: 'var(--t50)', maxWidth: 460, margin: '0 auto', lineHeight: 1.75 }}>
             مربیان مجرب و قهرمانان ملی، همراه قدم‌به‌قدم مسیرت

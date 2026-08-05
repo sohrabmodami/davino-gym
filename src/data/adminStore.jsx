@@ -1,16 +1,10 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import { trainers as defaultTrainers } from './trainers'
+import { articles as defaultArticles } from './articles'
 
-const STORAGE_KEY = 'davino_admin'
+const STORAGE_KEY = 'davino_admin_v2' // v2: گالری از کش حذف شد؛ کش قدیمی (خرابِ فراتر از سقف) دور ریخته می‌شود
 
-const defaultGallery = [
-  { id: 1, title: 'دیواره Lead', category: 'دیواره', span: 'wide', color: '#1a1a2e', accent: '#EA443C' },
-  { id: 2, title: 'بولدرینگ', category: 'بولدرینگ', span: 'normal', color: '#16213e', accent: '#3B82F6' },
-  { id: 3, title: 'کلاس کودکان', category: 'رویداد', span: 'normal', color: '#0f3460', accent: '#22C55E' },
-  { id: 4, title: 'مسابقات ملی', category: 'رویداد', span: 'wide', color: '#533483', accent: '#A855F7' },
-  { id: 5, title: 'تمرین قدرتی', category: 'تمرین', span: 'normal', color: '#2c1810', accent: '#F59E0B' },
-  { id: 6, title: 'دیواره سرعت', category: 'دیواره', span: 'normal', color: '#0d2137', accent: '#06B6D4' },
-]
+const defaultGallery = []
 
 /* ۷ پکیج: ۴ کلاس گروهی (ماتریس بزرگسالان/کودکان × ۴/۸ جلسه) + ۳ تک‌جلسه/آزاد
    kind: 'group' | 'single'
@@ -106,10 +100,16 @@ const defaultSettings = {
   heroWallHeight: '۱۵ متر',
   heroRating: '۴.۹ ★',
   heroCardTitle: 'دیواره‌های حرفه‌ای',
+  footerDescription: 'از ۱۳۹۴ تاکنون، خانه‌ی سنگنوردان تهران. بزرگ‌ترین باشگاه سنگنوردی سرپوشیده با ۱۸ مسیر و ۱۵ متر ارتفاع.',
 }
 
 const TOKEN_KEY = 'davino_admin_token' // رمز ادمین برای نوشتن روی سرور (sessionStorage)
-const API = '/api/content'
+const API = '/api/content'            // کامل (شامل گالری) — سنگین
+const CORE_API = '/api/content-core'  // سبک (بدون گالری) — برای نمایش سریع متن/هیرو
+
+// کش نسخهٔ قدیمی (davino_admin) ممکن است تا ~۵MB دادهٔ خراب داشته باشد و سهم localStorage را پر کند
+// و باعث fail شدن نوشتن کش جدید شود — یک‌بار پاکش کن.
+try { localStorage.removeItem('davino_admin') } catch { /* ignore */ }
 
 function load() {
   try {
@@ -118,8 +118,14 @@ function load() {
   } catch { return null }
 }
 
+// گالری (عکس‌های base64 حجیم) در کش localStorage ذخیره نمی‌شود؛ وگرنه حجم از سقف
+// مرورگر (~۵MB) رد می‌شود و نوشتن fail می‌کند و کش برای همیشه «قدیمی» می‌ماند (منشأ فلش).
+// گالری همیشه از سرور خوانده می‌شود.
 function save(data) {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)) } catch {}
+  try {
+    const { gallery, ...light } = data
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(light))
+  } catch {}
 }
 
 function getToken() {
@@ -151,30 +157,48 @@ export function AdminProvider({ children }) {
   const [pricing, setPricing] = useState(storedPricing)
   const [settings, setSettings] = useState(stored?.settings ?? defaultSettings)
   const [classes, setClasses] = useState(storedClasses)
+  const [articles, setArticles] = useState(Array.isArray(stored?.articles) ? stored.articles : defaultArticles)
   // تا وقتی از سرور نخوانده‌ایم، روی سرور نمی‌نویسیم (تا داده‌ی سرور با پیش‌فرض پاک نشود)
-  const [hydrated, setHydrated] = useState(false)
+  const [hydrated, setHydrated] = useState(false)   // کامل (شامل گالری) — شرط نوشتن روی سرور
+  const [coreReady, setCoreReady] = useState(false) // هستهٔ سبک آماده — شرط نمایش صفحه
+  const [saveError, setSaveError] = useState(null)
+  // اگر کش لوکال داشتیم، همان را نشان بده؛ اگر نه، تا پاسخ سرور صبر کن تا داده‌ی پیش‌فرض «فلش» نشود
+  const hadCache = stored != null
 
   // ── خواندن محتوا از سرور هنگام بارگذاری (همه‌ی بازدیدکننده‌ها یک نسخه می‌بینند) ──
   useEffect(() => {
     let cancelled = false
+    // اعمال داده‌ی سرور روی state (هم برای هستهٔ سبک، هم برای پاسخ کامل)
+    const apply = (data) => {
+      if (cancelled || !data || typeof data !== 'object') return
+      if (Array.isArray(data.trainers)) setTrainers(data.trainers)
+      if (Array.isArray(data.gallery)) setGallery(data.gallery)
+      if (Array.isArray(data.pricing)) setPricing(data.pricing.every(p => p.kind) ? data.pricing : defaultPricing)
+      if (data.settings && typeof data.settings === 'object') setSettings(data.settings)
+      if (Array.isArray(data.classes)) setClasses(migrateClasses(data.classes, data.trainers || initialTrainers))
+      if (Array.isArray(data.articles)) setArticles(data.articles)
+    }
+
+    // مرحله ۱ — هستهٔ سبک (بدون گالری، ~۱مگ): سریع می‌رسد تا متن‌ها/هیرو زود درست شوند
+    fetch(CORE_API)
+      .then(r => (r.ok ? r.json() : null))
+      .then(apply)
+      .catch(() => {})
+      .finally(() => { if (!cancelled) setCoreReady(true) })
+
+    // مرحله ۲ — کامل (شامل گالری، سنگین): گالری را پر می‌کند و اجازهٔ ذخیره روی سرور را می‌دهد
     fetch(API)
       .then(r => (r.ok ? r.json() : null))
-      .then(data => {
-        if (cancelled || !data || typeof data !== 'object') return
-        if (Array.isArray(data.trainers)) setTrainers(data.trainers)
-        if (Array.isArray(data.gallery)) setGallery(data.gallery)
-        if (Array.isArray(data.pricing)) setPricing(data.pricing.every(p => p.kind) ? data.pricing : defaultPricing)
-        if (data.settings && typeof data.settings === 'object') setSettings(data.settings)
-        if (Array.isArray(data.classes)) setClasses(migrateClasses(data.classes, data.trainers || initialTrainers))
-      })
+      .then(apply)
       .catch(() => {}) // سرور در دسترس نیست → از کش localStorage/پیش‌فرض استفاده می‌شود
-      .finally(() => { if (!cancelled) setHydrated(true) })
+      .finally(() => { if (!cancelled) { setCoreReady(true); setHydrated(true) } })
+
     return () => { cancelled = true }
   }, [])
 
   // ── ذخیره: همیشه در localStorage (کش)، و روی سرور فقط وقتی ادمین وارد شده ──
   useEffect(() => {
-    const data = { trainers, gallery, pricing, settings, classes }
+    const data = { trainers, gallery, pricing, settings, classes, articles }
     save(data)
     if (!hydrated) return
     const token = getToken()
@@ -184,10 +208,20 @@ export function AdminProvider({ children }) {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
         body: JSON.stringify(data),
-      }).catch(() => {})
+      })
+        .then(r => {
+          if (!r.ok) {
+            setSaveError(r.status === 413
+              ? 'حجم اطلاعات (عکس‌ها) بیش از حد مجاز سرور است — چند عکس رو حذف کن یا حجم عکس‌ها رو کم کن'
+              : `ذخیره روی سرور ناموفق بود (کد ${r.status})`)
+          } else {
+            setSaveError(null)
+          }
+        })
+        .catch(() => setSaveError('اتصال به سرور برقرار نشد — تغییرات فقط روی همین مرورگر ذخیره شد'))
     }, 600) // debounce تا چند ادیت پشت‌سرهم یک‌بار ذخیره شود
     return () => clearTimeout(t)
-  }, [trainers, gallery, pricing, settings, classes, hydrated])
+  }, [trainers, gallery, pricing, settings, classes, articles, hydrated])
 
   const updateTrainer = (id, patch) => {
     setTrainers(ts => ts.map(t => t.id === id ? { ...t, ...patch } : t))
@@ -212,8 +246,11 @@ export function AdminProvider({ children }) {
   const deleteGalleryItem = (id) =>
     setGallery(gs => gs.filter(g => g.id !== id))
 
-  const addGalleryItem = (item) =>
-    setGallery(gs => [...gs, { ...item, id: Date.now() }])
+  const addGalleryItems = (items) =>
+    setGallery(gs => [...gs, ...items.map((it, i) => ({ ...it, id: Date.now() + i }))])
+
+  const reorderGallery = (newGallery) =>
+    setGallery(newGallery)
 
   const addClass = (item) =>
     setClasses(cs => [...cs, { ...item, id: Date.now() }])
@@ -224,13 +261,25 @@ export function AdminProvider({ children }) {
   const deleteClass = (id) =>
     setClasses(cs => cs.filter(c => c.id !== id))
 
+  const addArticle = (item) =>
+    setArticles(as => [{ ...item, id: Date.now(), date: new Date().toISOString() }, ...as])
+
+  const updateArticle = (id, patch) =>
+    setArticles(as => as.map(a => a.id === id ? { ...a, ...patch } : a))
+
+  const deleteArticle = (id) =>
+    setArticles(as => as.filter(a => a.id !== id))
+
   return (
     <AdminContext.Provider value={{
-      trainers, gallery, pricing, settings, classes,
+      trainers, gallery, pricing, settings, classes, articles,
       updateTrainer, deleteTrainer, addTrainer,
       updatePlan, updateSettings,
-      deleteGalleryItem, addGalleryItem,
+      deleteGalleryItem, addGalleryItems, reorderGallery,
       addClass, updateClass, deleteClass,
+      addArticle, updateArticle, deleteArticle,
+      hydrated, coreReady, ready: coreReady || hadCache,
+      saveError, clearSaveError: () => setSaveError(null),
     }}>
       {children}
     </AdminContext.Provider>

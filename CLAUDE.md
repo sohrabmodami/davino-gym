@@ -20,14 +20,14 @@ For local full-stack dev, run `npm run server` and `npm run dev` in two terminal
 ## Key Architecture
 
 ### State / Data
-- Content is persisted **server-side** in `server/data/content.json` via the Node API (`server/index.js`).
+- Content is persisted **server-side** in `server/data/content.json` via the Node API (`server/index.mjs`).
 - `src/data/adminStore.jsx` (React Context, hook `useAdmin()`) hydrates from `GET /api/content` on mount, and the admin (when logged in, token in `sessionStorage.davino_admin_token`) auto-saves changes via `PUT /api/content` (debounced). `localStorage` (`davino_admin`) is kept only as an offline cache/fallback.
 - `useAdmin()` gives `trainers`, `classes`, `gallery`, `pricing`, `settings`, and their mutators.
 - Default data (`defaultClasses`, `defaultSettings`, etc.) is used only when neither the server nor localStorage has content.
 - Migrations: pricing without `kind` → replaced by new 7-package default; classes without `trainerId` → linked to a trainer by name match.
 
-### Backend (`server/index.js`)
-- Express. `GET /api/content` (public), `POST /api/login` (checks `ADMIN_PASSWORD` env), `PUT /api/content` (requires `Authorization: Bearer <password>`).
+### Backend (`server/index.mjs`)
+- Plain Node HTTP server. `GET /api/content` (public), `POST /api/login` (checks `ADMIN_PASSWORD` env), `PUT /api/content` (requires `Authorization: Bearer <password>`).
 - Stores to `server/data/content.json` (gitignored — survives deploys). See `DEPLOY.md` for VPS setup.
 
 ### Routing

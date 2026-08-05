@@ -1,17 +1,17 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import Logo from './Logo'
-import { ThemeToggle } from '../data/themeStore.jsx'
 
 const navLinks = [
-  { label: 'خانه',      id: 'hero' },
-  { label: 'درباره ما', id: 'about' },
-  { label: 'خدمات',     id: 'services' },
-  { label: 'مربیان',    id: 'trainers' },
-  { label: 'کلاس‌ها',   href: '/classes' },
-  { label: 'گالری',     id: 'gallery' },
-  { label: 'قیمت‌ها',   id: 'pricing' },
-  { label: 'تماس',      id: 'contact' },
+  { label: 'خانه',        id: 'hero' },
+  { label: 'خدمات',       id: 'services' },
+  { label: 'ساخت دیواره', id: 'climbing-wall' },
+  { label: 'مربیان',      id: 'trainers' },
+  { label: 'کلاس‌ها',     href: '/classes' },
+  { label: 'بلاگ',        href: '/blog' },
+  { label: 'گالری',       id: 'gallery' },
+  { label: 'قیمت‌ها',     id: 'pricing' },
+  { label: 'تماس با ما',  id: 'contact' },
 ]
 
 const CSS = `
@@ -184,9 +184,8 @@ export default function Navbar() {
             {navLinks.map(l => renderLink(l, 'nav-item'))}
           </nav>
 
-          {/* Actions: theme toggle + CTA + burger */}
+          {/* Actions: CTA + burger */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
-            <ThemeToggle />
             <a href="https://athlete.ifsm.ir/login" target="_blank" rel="noopener noreferrer" className="nav-cta-btn nav-bar-cta">دریافت بیمه ورزشی</a>
             <button
               className="nav-burger"

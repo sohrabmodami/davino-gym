@@ -1,8 +1,7 @@
 import { useState } from 'react'
 
 const DAYS_LIST = ['شنبه', 'یکشنبه', 'دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنجشنبه', 'جمعه']
-const LEVELS = ['مبتدی', 'متوسط', 'پیشرفته']
-const COLORS = ['#EA443C', '#22C55E', '#3B82F6', '#F59E0B', '#A855F7', '#06B6D4', '#10B981', '#F97316']
+const COLORS =['#EA443C', '#22C55E', '#3B82F6', '#F59E0B', '#A855F7', '#06B6D4', '#10B981', '#F97316']
 
 const CSS = `
   @keyframes cmFadeIn { from{opacity:0} to{opacity:1} }
@@ -35,7 +34,7 @@ export function Toggle({ checked, onChange }) {
 export default function ClassModal({ cls, trainers = [], lockedTrainerId = null, onSave, onClose }) {
   const [form, setForm] = useState(cls || {
     title: '', trainerId: lockedTrainerId || '', trainerName: '', days: [], startTime: '09:00', endTime: '10:00',
-    level: 'مبتدی', sessions: 8, capacity: 10, enrolled: 0, price: '', color: '#EA443C', active: true,
+    sessions: 8, capacity: 10, enrolled: 0, price: '', color: '#EA443C', active: true,
   })
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }))
   const toggleDay = d => set('days', form.days.includes(d) ? form.days.filter(x => x !== d) : [...form.days, d])
@@ -82,12 +81,6 @@ export default function ClassModal({ cls, trainers = [], lockedTrainerId = null,
                   {trainers.map(t => <option key={t.id} value={t.id}>{t.name}</option>)}
                 </select>
               )}
-            </label>
-            <label style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
-              <span style={{ fontSize: 11, color: 'var(--ad-text2)', fontWeight: 700 }}>سطح</span>
-              <select className="cm-input" value={form.level} onChange={e => set('level', e.target.value)}>
-                {LEVELS.map(l => <option key={l}>{l}</option>)}
-              </select>
             </label>
             <label style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
               <span style={{ fontSize: 11, color: 'var(--ad-text2)', fontWeight: 700 }}>نوع کلاس (جلسات ماهانه)</span>

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useAdmin } from '../data/adminStore.jsx'
 
 /* «۴۸۰,۰۰۰» → «۴۸۰» برای نمایش بزرگ + واحد جدا */
@@ -46,10 +47,10 @@ function GroupCardPopular({ plan }) {
             </div>
           ))}
         </div>
-        <a href="#contact" style={{ display: 'block', textAlign: 'center', width: '100%', padding: 14, borderRadius: 12, fontWeight: 800, fontSize: 14, background: 'var(--accent)', color: '#fff', boxShadow: '0 8px 24px rgba(234,68,60,.4)', transition: 'all .2s' }}
+        <Link to={`/register?plan=${encodeURIComponent(plan.id)}`} style={{ display: 'block', textAlign: 'center', width: '100%', padding: 14, borderRadius: 12, fontWeight: 800, fontSize: 14, background: 'var(--accent)', color: '#fff', boxShadow: '0 8px 24px rgba(234,68,60,.4)', transition: 'all .2s' }}
           onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.02)'}
           onMouseLeave={e => e.currentTarget.style.transform = 'none'}
-        >{plan.cta}</a>
+        >{plan.cta}</Link>
       </div>
     </div>
   )
@@ -78,10 +79,10 @@ function GroupCardRegular({ plan }) {
           </div>
         ))}
       </div>
-      <a href="#contact" style={{ display: 'block', textAlign: 'center', width: '100%', padding: 13, borderRadius: 12, fontWeight: 700, fontSize: 14, background: 'rgba(255,255,255,.06)', color: '#fff', border: '1.5px solid rgba(255,255,255,.2)', transition: 'all .2s' }}
+      <Link to={`/register?plan=${encodeURIComponent(plan.id)}`} style={{ display: 'block', textAlign: 'center', width: '100%', padding: 13, borderRadius: 12, fontWeight: 700, fontSize: 14, background: 'rgba(255,255,255,.06)', color: '#fff', border: '1.5px solid rgba(255,255,255,.2)', transition: 'all .2s' }}
         onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.background = 'rgba(234,68,60,.15)' }}
         onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,.2)'; e.currentTarget.style.background = 'rgba(255,255,255,.06)' }}
-      >{plan.cta}</a>
+      >{plan.cta}</Link>
     </div>
   )
 }
@@ -110,10 +111,10 @@ function SingleCard({ plan }) {
           </div>
         ))}
       </div>
-      <a href="#contact" style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 700, color: plan.color }}>
+      <Link to={`/register?plan=${encodeURIComponent(plan.id)}`} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 700, color: plan.color }}>
         {plan.cta}
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      </a>
+      </Link>
     </div>
   )
 }
