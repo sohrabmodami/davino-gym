@@ -12,6 +12,7 @@ const PAGE_TITLES = {
   '/admin/messages': 'پیام‌ها',
   '/admin/registrations': 'درخواست‌های ثبت‌نام',
   '/admin/workshop': 'ثبت‌نام کارگاه',
+  '/admin/nature-kids': 'ثبت‌نام طبیعت کودکان',
   '/admin/settings': 'تنظیمات',
 }
 
@@ -47,6 +48,10 @@ const navItems = [
   {
     path: '/admin/workshop', label: 'ثبت‌نام کارگاه',
     icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/><path d="M8 7h8M8 11h6"/></svg>,
+  },
+  {
+    path: '/admin/nature-kids', label: 'ثبت‌نام طبیعت کودکان',
+    icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 20h18"/><path d="M5 20V10l7-7 7 7v10"/><path d="M9 20v-6h6v6"/></svg>,
   },
   {
     path: '/admin/messages', label: 'پیام‌ها',

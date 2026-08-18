@@ -32,6 +32,7 @@ const DATA_FILE = path.join(DATA_DIR, 'content.json')
 const MSG_FILE = path.join(DATA_DIR, 'messages.json')
 const REG_FILE = path.join(DATA_DIR, 'registrations.json')
 const WORKSHOP_FILE = path.join(DATA_DIR, 'workshop-registrations.json')
+const NATURE_KIDS_FILE = path.join(DATA_DIR, 'nature-kids-registrations.json')
 const DIST_DIR = path.join(ROOT, 'dist')
 const UPLOAD_DIR = path.join(__dirname, 'uploads')
 
@@ -82,6 +83,9 @@ const WORKSHOP_CONCERNS = new Set([
 ])
 const WORKSHOP_HEARD = new Set(['اینستاگرام', 'دوستان و آشنایان', 'سایت داوینو', 'کانال تلگرام', 'سایر'])
 const WORKSHOP_GENDERS = new Set(['پسر', 'دختر'])
+const NATURE_RELATIONS = new Set(['پدر', 'مادر', 'ولی'])
+const NATURE_HEARD = new Set(['اینستاگرام', 'دوستان و آشنایان', 'سایت داوینو', 'کانال تلگرام', 'سایر'])
+const NATURE_KIDS_PRICE = '۱،۲۵۰،۰۰۰'
 
 function encryptRegistration(reg) {
   const r = { ...reg }
@@ -231,6 +235,36 @@ async function writeWorkshopRegistrations(arr) {
   const tmp = WORKSHOP_FILE + '.tmp'
   await fsp.writeFile(tmp, JSON.stringify(enc))
   await fsp.rename(tmp, WORKSHOP_FILE)
+}
+
+function encryptNatureKids(reg) {
+  const r = { ...reg }
+  if (r.parentPhone && !isEncrypted(r.parentPhone)) r.parentPhone = encrypt(r.parentPhone)
+  if (r.medicalNotes && !isEncrypted(r.medicalNotes)) r.medicalNotes = encrypt(r.medicalNotes)
+  return r
+}
+
+function decryptNatureKids(reg) {
+  const r = { ...reg }
+  if (r.parentPhone && isEncrypted(r.parentPhone)) r.parentPhone = decrypt(r.parentPhone)
+  if (r.medicalNotes && isEncrypted(r.medicalNotes)) r.medicalNotes = decrypt(r.medicalNotes)
+  return r
+}
+
+async function readNatureKidsRaw() {
+  const data = await readJson(NATURE_KIDS_FILE)
+  return Array.isArray(data) ? data : []
+}
+
+async function readNatureKidsRegistrations() {
+  return (await readNatureKidsRaw()).map(decryptNatureKids)
+}
+
+async function writeNatureKidsRegistrations(arr) {
+  const enc = arr.map(encryptNatureKids)
+  const tmp = NATURE_KIDS_FILE + '.tmp'
+  await fsp.writeFile(tmp, JSON.stringify(enc))
+  await fsp.rename(tmp, NATURE_KIDS_FILE)
 }
 
 // ── محدودیت تلاش لاگین ──
@@ -712,6 +746,83 @@ const server = http.createServer(async (req, res) => {
         return sendJson(res, 400, { ok: false, error: 'اطلاعات درخواست‌ها معتبر نیست' })
       }
       await writeWorkshopRegistrations(body.registrations)
+      return sendJson(res, 200, { ok: true })
+    } catch { return sendJson(res, 400, { ok: false, error: 'دادهٔ نامعتبر' }) }
+  }
+
+  // ── ثبت‌نام سنگ‌نوردی طبیعت کودکان ──
+  if (p === '/api/nature-kids-registrations' && req.method === 'POST') {
+    const ip = clientIp(req)
+    if (msgRateLimited(ip)) return sendJson(res, 429, { ok: false, error: 'تعداد درخواست‌ها زیاد است — کمی بعد دوباره تلاش کن' })
+    try {
+      const body = JSON.parse((await readBody(req)) || '{}')
+      if (String(body.company || '').trim()) return sendJson(res, 200, { ok: true })
+
+      const parentName = String(body.parentName || '').trim().slice(0, 120)
+      const parentPhone = normalizeDigits(body.parentPhone || '').replace(/\D/g, '').slice(0, 11)
+      const relation = String(body.relation || '').trim()
+      const childName = String(body.childName || '').trim().slice(0, 120)
+      const childAge = normalizeDigits(body.childAge || '').replace(/\D/g, '').slice(0, 2)
+      const childGender = String(body.childGender || '').trim()
+      const medicalNotes = String(body.medicalNotes || '').trim().slice(0, 500)
+      const notes = String(body.notes || '').trim().slice(0, 1000)
+      const heardFrom = String(body.heardFrom || '').trim()
+      const heardOther = String(body.heardOther || '').trim().slice(0, 200)
+
+      if (!parentName || !/^09\d{9}$/.test(parentPhone) || !NATURE_RELATIONS.has(relation)) {
+        return sendJson(res, 400, { ok: false, error: 'اطلاعات والدین کامل یا معتبر نیست' })
+      }
+      if (!childName || !childAge || !WORKSHOP_GENDERS.has(childGender)) {
+        return sendJson(res, 400, { ok: false, error: 'اطلاعات کودک کامل نیست' })
+      }
+      const ageNum = Number(childAge)
+      if (!Number.isInteger(ageNum) || ageNum < 1 || ageNum > 17) {
+        return sendJson(res, 400, { ok: false, error: 'سن کودک باید بین ۱ تا ۱۷ سال باشد' })
+      }
+      let isMember
+      if (body.isMember === true || body.isMember === 'yes' || body.isMember === 'بله') isMember = true
+      else if (body.isMember === false || body.isMember === 'no' || body.isMember === 'خیر') isMember = false
+      else return sendJson(res, 400, { ok: false, error: 'عضویت در باشگاه را مشخص کنید' })
+      if (body.consent !== true) {
+        return sendJson(res, 400, { ok: false, error: 'رضایت والدین برای ثبت‌نام لازم است' })
+      }
+      if (!NATURE_HEARD.has(heardFrom)) return sendJson(res, 400, { ok: false, error: 'منبع آشنایی را انتخاب کنید' })
+      if (heardFrom === 'سایر' && !heardOther) {
+        return sendJson(res, 400, { ok: false, error: 'لطفاً منبع آشنایی را بنویسید' })
+      }
+
+      const list = await readNatureKidsRaw()
+      list.unshift(encryptNatureKids({
+        id: Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
+        parentName, parentPhone, relation,
+        childName, childAge, childGender, isMember,
+        medicalNotes, notes, heardFrom, heardOther,
+        price: NATURE_KIDS_PRICE,
+        consent: true,
+        status: 'pending',
+        date: new Date().toISOString(),
+      }))
+      if (list.length > 2000) list.length = 2000
+      await writeNatureKidsRegistrations(list)
+      noteMsgSubmit(ip)
+      return sendJson(res, 200, { ok: true })
+    } catch { return sendJson(res, 400, { ok: false, error: 'دادهٔ نامعتبر' }) }
+  }
+
+  if (p === '/api/nature-kids-registrations' && req.method === 'GET') {
+    if (!isAuthed(req)) return sendJson(res, 401, { ok: false, error: 'دسترسی غیرمجاز' })
+    return sendJson(res, 200, { ok: true, registrations: await readNatureKidsRegistrations() })
+  }
+
+  if (p === '/api/nature-kids-registrations' && req.method === 'PUT') {
+    if (!isAuthed(req)) return sendJson(res, 401, { ok: false, error: 'دسترسی غیرمجاز' })
+    try {
+      const body = JSON.parse((await readBody(req)) || '{}')
+      const allowedStatuses = new Set(['pending', 'contacted', 'completed', 'cancelled'])
+      if (!Array.isArray(body.registrations) || body.registrations.some(item => !item || !item.id || !allowedStatuses.has(item.status))) {
+        return sendJson(res, 400, { ok: false, error: 'اطلاعات درخواست‌ها معتبر نیست' })
+      }
+      await writeNatureKidsRegistrations(body.registrations)
       return sendJson(res, 200, { ok: true })
     } catch { return sendJson(res, 400, { ok: false, error: 'دادهٔ نامعتبر' }) }
   }

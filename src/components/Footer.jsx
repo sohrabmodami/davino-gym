@@ -28,6 +28,7 @@ const navLinks = [
   { label: 'خدمات',     href: '/#services' },
   { label: 'مربیان',    href: '/#trainers' },
   { label: 'کلاس‌ها',   href: '/classes' },
+  { label: 'طبیعت کودکان', href: '/nature-kids' },
   { label: 'گالری',     href: '/#gallery' },
   { label: 'قیمت‌ها',   href: '/#pricing' },
   { label: 'تماس با ما',href: '/#contact' },

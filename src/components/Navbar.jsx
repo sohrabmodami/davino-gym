@@ -8,6 +8,7 @@ const navLinks = [
   { label: 'ساخت دیواره', id: 'climbing-wall' },
   { label: 'مربیان',      id: 'trainers' },
   { label: 'کلاس‌ها',     href: '/classes' },
+  { label: 'طبیعت کودکان', href: '/nature-kids' },
   { label: 'بلاگ',        href: '/blog' },
   { label: 'گالری',       id: 'gallery' },
   { label: 'قیمت‌ها',     id: 'pricing' },

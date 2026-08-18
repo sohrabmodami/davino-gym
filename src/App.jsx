@@ -15,6 +15,8 @@ import TrainerProfile from './pages/TrainerProfile'
 import Classes from './pages/Classes'
 import Register from './pages/Register'
 import WorkshopRegister from './pages/WorkshopRegister'
+import NatureKidsRegister from './pages/NatureKidsRegister'
+import NatureKidsBanner from './components/NatureKidsBanner'
 import Blog from './pages/Blog'
 import Article from './pages/Article'
 import WallConstruction from './pages/WallConstruction'
@@ -43,6 +45,7 @@ function HomePage() {
       <Navbar />
       <main>
         <Hero />
+        <NatureKidsBanner />
         <About />
         <Management />
         <Services />
@@ -68,6 +71,7 @@ export default function App() {
           <Route path="/classes" element={<ErrorBoundary><Classes /></ErrorBoundary>} />
           <Route path="/register" element={<ErrorBoundary><Register /></ErrorBoundary>} />
           <Route path="/workshop" element={<ErrorBoundary><WorkshopRegister /></ErrorBoundary>} />
+          <Route path="/nature-kids" element={<ErrorBoundary><NatureKidsRegister /></ErrorBoundary>} />
           <Route path="/blog" element={<ErrorBoundary><Blog /></ErrorBoundary>} />
           <Route path="/blog/:slug" element={<ErrorBoundary><Article /></ErrorBoundary>} />
           <Route path="/wall-construction" element={<ErrorBoundary><WallConstruction /></ErrorBoundary>} />
