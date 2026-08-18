@@ -12,6 +12,7 @@ import AdminBlog from './AdminBlog'
 import AdminMessages from './AdminMessages'
 import AdminRegistrations from './AdminRegistrations'
 import AdminWorkshop from './AdminWorkshop'
+import AdminNatureKids from './AdminNatureKids'
 
 const SESSION_KEY = 'davino_admin_auth'
 const TOKEN_KEY = 'davino_admin_token'
@@ -52,6 +53,7 @@ export default function AdminApp() {
         <Route path="/messages" element={<AdminMessages />} />
         <Route path="/registrations" element={<AdminRegistrations />} />
         <Route path="/workshop" element={<AdminWorkshop />} />
+        <Route path="/nature-kids" element={<AdminNatureKids />} />
         <Route path="/settings" element={<AdminSettings />} />
         <Route path="*" element={<Navigate to="/admin" replace />} />
       </Routes>
