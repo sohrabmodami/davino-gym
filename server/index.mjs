@@ -763,10 +763,6 @@ const server = http.createServer(async (req, res) => {
       const childName = String(body.childName || '').trim().slice(0, 120)
       const childAge = normalizeDigits(body.childAge || '').replace(/\D/g, '').slice(0, 2)
       const childGender = String(body.childGender || '').trim()
-      let isMember
-      if (body.isMember === true || body.isMember === 'yes' || body.isMember === 'بله') isMember = true
-      else if (body.isMember === false || body.isMember === 'no' || body.isMember === 'خیر') isMember = false
-      else return sendJson(res, 400, { ok: false, error: 'عضویت در باشگاه را مشخص کنید' })
       const medicalNotes = String(body.medicalNotes || '').trim().slice(0, 500)
       const notes = String(body.notes || '').trim().slice(0, 1000)
       const heardFrom = String(body.heardFrom || '').trim()
@@ -782,6 +778,10 @@ const server = http.createServer(async (req, res) => {
       if (!Number.isInteger(ageNum) || ageNum < 1 || ageNum > 17) {
         return sendJson(res, 400, { ok: false, error: 'سن کودک باید بین ۱ تا ۱۷ سال باشد' })
       }
+      let isMember
+      if (body.isMember === true || body.isMember === 'yes' || body.isMember === 'بله') isMember = true
+      else if (body.isMember === false || body.isMember === 'no' || body.isMember === 'خیر') isMember = false
+      else return sendJson(res, 400, { ok: false, error: 'عضویت در باشگاه را مشخص کنید' })
       if (body.consent !== true) {
         return sendJson(res, 400, { ok: false, error: 'رضایت والدین برای ثبت‌نام لازم است' })
       }
