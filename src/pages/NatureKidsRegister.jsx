@@ -2,7 +2,10 @@ import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { ArrowRight, Check } from '@phosphor-icons/react'
 import Logo from '../components/Logo'
+import BankCard from '../components/BankCard'
 import useSeo from '../hooks/useSeo'
+
+const PRICE = '۱،۲۵۰،۰۰۰'
 
 const GEAR = [
   'لباس مناسب و راحت برای فعالیت ورزشی',
@@ -179,9 +182,26 @@ export default function NatureKidsRegister() {
             <p style={{ color: 'var(--t60)', lineHeight: 1.9, marginBottom: 8, fontSize: 15 }}>
               {form.childName.trim() || 'کودک'} — با هماهنگی {form.parentName.trim() || 'والدین'}
             </p>
-            <p style={{ color: 'var(--t60)', lineHeight: 1.9, marginBottom: 28, fontSize: 14.5 }}>
-              همکاران آکادمی داوینو برای تأیید ظرفیت و هماهنگی نهایی با شما تماس می‌گیرند.
+            <p style={{ color: 'var(--text)', fontWeight: 800, fontSize: 18, marginBottom: 28 }}>
+              مبلغ قابل پرداخت: <span style={{ color: 'var(--accent)' }}>{PRICE}</span> <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--t50)' }}>تومان</span>
             </p>
+
+            <div style={{
+              textAlign: 'right', background: 'var(--bg2)', border: '1px solid var(--surface-b)',
+              borderRadius: 16, padding: '22px 20px', marginBottom: 28, lineHeight: 1.95,
+            }}>
+              <div style={{ fontSize: 13, fontWeight: 800, color: 'var(--accent)', marginBottom: 12 }}>مراحل ثبت‌نام قطعی</div>
+              <p style={{ fontSize: 14.5, color: 'var(--t60)', margin: '0 0 18px' }}>
+                برای نهایی شدن ثبت‌نام، مبلغ <strong style={{ color: 'var(--text)' }}>{PRICE} تومان</strong> را به کارت زیر واریز کنید:
+              </p>
+              <BankCard />
+              <p style={{ fontSize: 14.5, color: 'var(--t60)', margin: 0 }}>
+                سپس تصویر رسید واریز را در پیام‌رسان بله یا تلگرام به شماره{' '}
+                <a href="tel:09201246057" dir="ltr" style={{ color: 'var(--accent)', fontWeight: 800, whiteSpace: 'nowrap' }}>0920&nbsp;124&nbsp;6057</a>
+                {' '}ارسال کنید تا ثبت‌نام شما قطعی شود.
+              </p>
+            </div>
+
             <Link to="/" style={{ display: 'inline-flex', padding: '12px 24px', borderRadius: 11, background: 'var(--accent)', color: '#fff', fontWeight: 800 }}>بازگشت به صفحه اصلی</Link>
           </div>
         ) : (
@@ -208,6 +228,10 @@ export default function NatureKidsRegister() {
                 <div className="nk-meta-item" style={{ gridColumn: '1 / -1' }}>
                   <div className="k">پذیرایی</div>
                   <div className="v">یک وعده صبحانه مختصر برای شرکت‌کنندگان در نظر گرفته شده است.</div>
+                </div>
+                <div className="nk-meta-item" style={{ gridColumn: '1 / -1' }}>
+                  <div className="k">هزینه ثبت‌نام</div>
+                  <div className="v">{PRICE} تومان — برای هر کودک</div>
                 </div>
               </div>
             </section>
@@ -344,8 +368,10 @@ export default function NatureKidsRegister() {
                   </div>
                 )}
                 <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: 16 }}>
-                  <div style={{ fontSize: 13, color: 'var(--t50)', lineHeight: 1.8 }}>
-                    ظرفیت محدود است؛ پس از ثبت، برای هماهنگی نهایی تماس می‌گیریم.
+                  <div>
+                    <div style={{ fontSize: 12, color: 'var(--t45)', fontWeight: 800, marginBottom: 6 }}>هزینه ثبت‌نام</div>
+                    <div style={{ fontSize: 22, fontWeight: 900 }}>{PRICE} <small style={{ fontSize: 13, fontWeight: 600, color: 'var(--t50)' }}>تومان</small></div>
+                    <div style={{ fontSize: 12, color: 'var(--t50)', marginTop: 4 }}>برای هر کودک</div>
                   </div>
                   <button type="submit" disabled={sending} style={{ minWidth: 180, minHeight: 48, padding: '0 28px', borderRadius: 11, background: 'var(--accent)', color: '#fff', fontSize: 15, fontWeight: 900, opacity: sending ? .65 : 1 }}>
                     {sending ? 'در حال ثبت…' : 'ثبت‌نام'}

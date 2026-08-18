@@ -85,6 +85,7 @@ const WORKSHOP_HEARD = new Set(['اینستاگرام', 'دوستان و آشن�
 const WORKSHOP_GENDERS = new Set(['پسر', 'دختر'])
 const NATURE_RELATIONS = new Set(['پدر', 'مادر', 'ولی'])
 const NATURE_HEARD = new Set(['اینستاگرام', 'دوستان و آشنایان', 'سایت داوینو', 'کانال تلگرام', 'سایر'])
+const NATURE_KIDS_PRICE = '۱،۲۵۰،۰۰۰'
 
 function encryptRegistration(reg) {
   const r = { ...reg }
@@ -796,6 +797,7 @@ const server = http.createServer(async (req, res) => {
         parentName, parentPhone, relation,
         childName, childAge, childGender, isMember,
         medicalNotes, notes, heardFrom, heardOther,
+        price: NATURE_KIDS_PRICE,
         consent: true,
         status: 'pending',
         date: new Date().toISOString(),

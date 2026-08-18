@@ -47,11 +47,11 @@ function csvEscape(value) {
 
 function exportCsv(registrations) {
   const headers = [
-    'تاریخ', 'وضعیت', 'نام کودک', 'سن', 'جنسیت', 'عضو باشگاه',
+    'تاریخ', 'وضعیت', 'مبلغ', 'نام کودک', 'سن', 'جنسیت', 'عضو باشگاه',
     'نام والد', 'نسبت', 'موبایل', 'داروها / شرایط پزشکی', 'توضیحات', 'منبع آشنایی', 'سایر منبع',
   ]
   const rows = registrations.map(item => [
-    item.date, STATUSES[item.status]?.label || item.status,
+    item.date, STATUSES[item.status]?.label || item.status, item.price,
     item.childName, item.childAge, item.childGender, item.isMember ? 'بله' : 'خیر',
     item.parentName, item.relation, item.parentPhone,
     item.medicalNotes, item.notes, item.heardFrom, item.heardOther,
@@ -155,7 +155,7 @@ export default function AdminNatureKids() {
                       <h2 style={{ fontSize: 16, fontWeight: 900, color: 'var(--text)' }}>{item.childName || 'بدون نام'}</h2>
                       <span style={{ fontSize: 10.5, color: status.color, background: `${status.color}16`, border: `1px solid ${status.color}38`, borderRadius: 999, padding: '3px 9px', fontWeight: 800 }}>{status.label}</span>
                       <span style={{ fontSize: 10.5, color: 'var(--ad-text3)', background: 'var(--ad-rowh)', borderRadius: 999, padding: '3px 9px', fontWeight: 800 }}>
-                        {item.childAge ? `${item.childAge} ساله` : 'سن نامشخص'} {item.childGender ? `— ${item.childGender}` : ''}
+                        {item.childAge ? `${item.childAge} ساله` : 'سن نامشخص'} {item.childGender ? `— ${item.childGender}` : ''} {item.price ? `— ${item.price} تومان` : ''}
                       </span>
                     </div>
                     <div style={{ fontSize: 11.5, color: 'var(--ad-text3)' }}>ثبت: {faDate(item.date)}</div>
@@ -173,6 +173,7 @@ export default function AdminNatureKids() {
                   <Detail label="نام والد / ولی" value={item.parentName} />
                   <Detail label="نسبت" value={item.relation} />
                   <Detail label="موبایل" value={item.parentPhone} ltr />
+                  <Detail label="مبلغ" value={item.price ? `${item.price} تومان` : '—'} />
                   <Detail label="منبع آشنایی" value={item.heardFrom === 'سایر' && item.heardOther ? `سایر: ${item.heardOther}` : item.heardFrom} />
                   <Detail label="داروها / شرایط پزشکی" value={item.medicalNotes} full />
                   <Detail label="توضیحات" value={item.notes} full />
