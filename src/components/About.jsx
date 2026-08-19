@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 const paragraphs = [
   'آکادمی سنگنوردی داوینو، زیرمجموعه گروه داوین، فعالیت خود را از سال ۱۳۹۶ در مجتمع تجاری مگامال تهران آغاز کرده است. هدف ما از ابتدا ایجاد محیطی تخصصی، ایمن و استاندارد برای آموزش و توسعه ورزش سنگنوردی در تمامی گروه‌های سنی بوده است.',
   'در داوینو، آموزش سنگنوردی برای کودکان، نوجوانان و بزرگسالان با رویکردی علمی و متناسب با نیازهای هر رده سنی ارائه می‌شود. ما بر این باوریم که هر فرد مسیر یادگیری و پیشرفت منحصربه‌فردی دارد؛ به همین دلیل کلاس‌های آموزشی به‌صورت نیمه‌خصوصی و با ظرفیت محدود برگزار می‌شوند تا هر هنرجو از توجه، آموزش و پشتیبانی کافی برخوردار باشد.',
@@ -79,6 +81,40 @@ export default function About() {
               </div>
             </div>
           </div>
+        </div>
+
+        <div style={{
+          marginTop: 'clamp(36px, 5vw, 52px)',
+          background: 'var(--surface)',
+          border: '1px solid var(--surface-b)',
+          borderRadius: 24,
+          padding: 'clamp(24px, 3vw, 32px)',
+          display: 'flex',
+          flexWrap: 'wrap',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: 20,
+        }}>
+          <div style={{ flex: '1 1 280px' }}>
+            <div style={{ fontSize: 12, fontWeight: 800, color: 'var(--accent)', marginBottom: 8 }}>درباره مدیریت مجموعه</div>
+            <div style={{ fontSize: 'clamp(16px, 2vw, 18px)', fontWeight: 800, color: 'var(--text)', marginBottom: 6 }}>مهدی بنهری</div>
+            <p style={{ fontSize: 14, color: 'var(--t50)', lineHeight: 1.8, margin: 0 }}>
+              مدیرعامل آکادمی سنگنوردی داوینو و رئیس هیئت‌مدیره شرکت پیشگام تدبیر داوین
+            </p>
+          </div>
+          <Link
+            to="/management"
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: 8,
+              background: 'var(--accent)', color: '#fff', textDecoration: 'none',
+              fontSize: 14, fontWeight: 800, padding: '12px 22px', borderRadius: 14,
+              boxShadow: '0 8px 26px rgba(39,94,170,0.28)',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            مطالعه بیوگرافی
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </Link>
         </div>
       </div>
     </section>

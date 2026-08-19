@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
-import Management from './components/Management'
 import Services from './components/Services'
 import ClimbingWallService from './components/ClimbingWallService'
 import Trainers from './components/Trainers'
@@ -20,6 +19,7 @@ import NatureKidsBanner from './components/NatureKidsBanner'
 import Blog from './pages/Blog'
 import Article from './pages/Article'
 import WallConstruction from './pages/WallConstruction'
+import Management from './pages/Management'
 import AdminApp from './pages/admin/AdminApp'
 import ErrorBoundary from './components/ErrorBoundary'
 import { AdminProvider, useAdmin } from './data/adminStore.jsx'
@@ -47,7 +47,6 @@ function HomePage() {
         <Hero />
         <NatureKidsBanner />
         <About />
-        <Management />
         <Services />
         <ClimbingWallService />
         <Trainers />
@@ -75,6 +74,7 @@ export default function App() {
           <Route path="/blog" element={<ErrorBoundary><Blog /></ErrorBoundary>} />
           <Route path="/blog/:slug" element={<ErrorBoundary><Article /></ErrorBoundary>} />
           <Route path="/wall-construction" element={<ErrorBoundary><WallConstruction /></ErrorBoundary>} />
+          <Route path="/management" element={<ErrorBoundary><Management /></ErrorBoundary>} />
           <Route path="/admin/*" element={<ErrorBoundary><AdminApp /></ErrorBoundary>} />
         </Routes>
       </BrowserRouter>

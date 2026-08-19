@@ -17,12 +17,15 @@ const highlights = [
   { label: 'بازرگانی', value: 'بیش از ۱۰ سال مدیریت فروشگاه داوینو · نماینده Petzl، Beal و La Sportiva' },
 ]
 
-export default function Management() {
+export default function Management({ asPage = false }) {
+  const TitleTag = asPage ? 'h1' : 'h2'
   return (
     <section id="management" style={{
-      padding: 'clamp(70px, 8vw, 100px) clamp(24px, 4vw, 40px)',
+      padding: asPage
+        ? 'calc(66px + clamp(36px, 5vw, 56px)) clamp(24px, 4vw, 40px) clamp(70px, 8vw, 100px)'
+        : 'clamp(70px, 8vw, 100px) clamp(24px, 4vw, 40px)',
       background: 'var(--bg)',
-      borderTop: '1px solid var(--line)',
+      borderTop: asPage ? 'none' : '1px solid var(--line)',
       transition: 'background .3s',
     }}>
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
@@ -34,9 +37,9 @@ export default function Management() {
             border: '1px solid rgba(39,94,170,.22)', borderRadius: 999,
             padding: '6px 15px', marginBottom: 20,
           }}>درباره مدیریت مجموعه</div>
-          <h2 style={{ fontSize: 'clamp(1.9rem, 4vw, 2.8rem)', fontWeight: 900, lineHeight: 1.18, letterSpacing: '-.01em', margin: '0 0 10px', color: 'var(--text)' }}>
+          <TitleTag style={{ fontSize: 'clamp(1.9rem, 4vw, 2.8rem)', fontWeight: 900, lineHeight: 1.18, letterSpacing: '-.01em', margin: '0 0 10px', color: 'var(--text)' }}>
             مهدی <span style={{ color: 'var(--accent)' }}>بنهری</span>
-          </h2>
+          </TitleTag>
           <p style={{ fontSize: 'clamp(14px, 2vw, 16px)', color: 'var(--t50)', margin: 0, lineHeight: 1.8, maxWidth: 560 }}>
             مدیرعامل آکادمی سنگنوردی داوینو و رئیس هیئت‌مدیره شرکت پیشگام تدبیر داوین
           </p>
