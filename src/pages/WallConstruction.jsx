@@ -4,9 +4,7 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import RichText from '../components/RichText'
 import useSeo from '../hooks/useSeo'
-
-const phoneDisplay = '۰۹۱۲۱۲۴۶۰۵۷'
-const phoneHref = '09121246057'
+import { useAdmin } from '../data/adminStore.jsx'
 
 const CONTENT = `فضایی متفاوت برای ورزش، آموزش و هیجان
 
@@ -115,6 +113,9 @@ const CONTENT = `فضایی متفاوت برای ورزش، آموزش و هی�
 اگر به دنبال ایجاد فضایی متفاوت، مدرن و جذاب برای مجموعه خود هستید، داوینو آماده است تا با ارائه راهکارهای تخصصی، رؤیای داشتن یک دیواره سنگنوردی استاندارد را به واقعیت تبدیل کند.`
 
 export default function WallConstruction() {
+  const { settings } = useAdmin()
+  const mobile = settings.mobile
+
   useSeo({
     title: 'طراحی و احداث دیواره سنگنوردی | آکادمی سنگنوردی داوینو',
     description: 'خدمات طراحی، ساخت و تجهیز انواع دیواره سنگنوردی در مدارس، مهدکودک‌ها، باشگاه‌ها و منازل توسط آکادمی سنگنوردی داوینو در سراسر ایران.',
@@ -151,15 +152,17 @@ export default function WallConstruction() {
               <div style={{ fontSize: 16, fontWeight: 800, color: 'var(--text)', marginBottom: 16 }}>
                 برای دریافت مشاوره و بازدید، با ما در تماس باشید
               </div>
-              <a href={`tel:${phoneHref}`} style={{
+              {mobile && (
+              <a href={`tel:${mobile}`} style={{
                 display: 'inline-flex', alignItems: 'center', gap: 10,
                 background: 'var(--accent)', color: '#fff', textDecoration: 'none',
                 fontSize: 16, fontWeight: 800, padding: '14px 30px', borderRadius: 14,
                 boxShadow: '0 8px 26px rgba(39,94,170,0.35)', direction: 'ltr',
               }}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.19 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14v2.92z"/></svg>
-                {phoneDisplay}
+                {mobile}
               </a>
+              )}
             </div>
           </div>
         </section>
