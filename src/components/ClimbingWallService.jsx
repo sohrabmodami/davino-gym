@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useAdmin } from '../data/adminStore.jsx'
 
 const CheckIcon = ({ size = 15 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -62,8 +63,8 @@ const tint = (hex, a) => {
 }
 
 export default function ClimbingWallService() {
-  const phoneDisplay = '۰۹۱۲۱۲۴۶۰۵۷'
-  const phoneHref = '09121246057'
+  const { settings } = useAdmin()
+  const mobile = settings.mobile
 
   return (
     <section id="climbing-wall" style={{
@@ -158,8 +159,9 @@ export default function ClimbingWallService() {
               مشاهده اطلاعات کامل و خدمات
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
             </Link>
+            {mobile && (
             <a
-              href={`tel:${phoneHref}`}
+              href={`tel:${mobile}`}
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: 10,
                 background: 'var(--surface)', color: 'var(--text)', textDecoration: 'none',
@@ -168,8 +170,9 @@ export default function ClimbingWallService() {
               }}
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.19 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14v2.92z"/></svg>
-              {phoneDisplay}
+              {mobile}
             </a>
+            )}
           </div>
         </div>
       </div>
