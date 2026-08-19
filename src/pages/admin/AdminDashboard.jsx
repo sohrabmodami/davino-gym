@@ -1,5 +1,6 @@
 import { useAdmin } from '../../data/adminStore.jsx'
 import { Link } from 'react-router-dom'
+import { APP_VERSION, currentRelease, releases } from '../../data/releases'
 
 const CSS = `
   @keyframes adUp { from{transform:translateY(12px)} to{transform:translateY(0)} }
@@ -66,15 +67,58 @@ export default function AdminDashboard() {
           <p style={{ fontSize: 13, color: 'var(--ad-text3)' }}>خلاصه وضعیت باشگاه داوینو</p>
         </div>
         <div style={{ background: 'var(--ad-chip)', border: '1px solid var(--ad-card-b)', borderRadius: 10, padding: '7px 14px', textAlign: 'left' }}>
-          <div style={{ fontSize: 10, color: 'var(--ad-text3)', fontWeight: 600, marginBottom: 2 }}>نسخه سایت</div>
-          <div style={{ fontSize: 13, fontWeight: 800, color: 'var(--ad-text2)', fontFamily: 'monospace' }}>v1.2.0</div>
-          <div style={{ fontSize: 10, color: 'var(--ad-text3)', marginTop: 1 }}>2026-06-11</div>
+          <div style={{ fontSize: 10, color: 'var(--ad-text3)', fontWeight: 600, marginBottom: 2 }}>نسخه فعلی</div>
+          <div style={{ fontSize: 13, fontWeight: 800, color: 'var(--ad-text2)', fontFamily: 'monospace' }}>v{APP_VERSION}</div>
+          <div style={{ fontSize: 10, color: 'var(--ad-text3)', marginTop: 1 }}>{currentRelease.date}</div>
         </div>
       </div>
 
       {/* Stats */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16, marginBottom: 32 }}>
         {stats.map((s, i) => <StatCard key={s.label} {...s} delay={i * 60} />)}
+      </div>
+
+      {/* Release history */}
+      <div style={{ background: 'var(--ad-card)', borderRadius: 16, border: '1px solid var(--ad-card-b)', overflow: 'hidden', marginBottom: 32, transition: 'background .3s' }}>
+        <div style={{ padding: '18px 24px', borderBottom: '1px solid var(--ad-side-b)' }}>
+          <h2 style={{ fontSize: 15, fontWeight: 800, color: 'var(--text)', marginBottom: 4 }}>تاریخچه نسخه‌ها</h2>
+          <p style={{ fontSize: 12, color: 'var(--ad-text3)', margin: 0 }}>خلاصه تغییرات هر deploy</p>
+        </div>
+        <div style={{ padding: '8px 0' }}>
+          {releases.map((release, index) => (
+            <div
+              key={release.version}
+              style={{
+                padding: '16px 24px',
+                borderBottom: index < releases.length - 1 ? '1px solid var(--ad-side-b)' : 'none',
+                background: index === 0 ? 'rgba(39,94,170,.06)' : 'transparent',
+              }}
+            >
+              <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 10, marginBottom: 10 }}>
+                <span style={{
+                  fontFamily: 'monospace', fontSize: 13, fontWeight: 800, color: index === 0 ? '#275EAA' : 'var(--text)',
+                  background: index === 0 ? 'rgba(39,94,170,.12)' : 'var(--ad-rowh)',
+                  border: `1px solid ${index === 0 ? 'rgba(39,94,170,.25)' : 'var(--ad-card-b)'}`,
+                  borderRadius: 8, padding: '4px 10px', direction: 'ltr',
+                }}>
+                  v{release.version}
+                </span>
+                <span style={{ fontSize: 12, color: 'var(--ad-text3)', direction: 'ltr' }}>{release.date}</span>
+                {index === 0 && (
+                  <span style={{ fontSize: 10, fontWeight: 800, color: '#15803d', background: '#dcfce7', padding: '3px 8px', borderRadius: 999 }}>
+                    فعلی
+                  </span>
+                )}
+                <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--ad-text2)' }}>{release.label}</span>
+              </div>
+              <ul style={{ margin: 0, paddingRight: 20, color: 'var(--ad-text2)', fontSize: 13, lineHeight: 1.9 }}>
+                {release.changes.map(item => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Trainers table */}

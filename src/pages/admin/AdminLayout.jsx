@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useAdmin } from '../../data/adminStore.jsx'
+import { APP_VERSION } from '../../data/releases'
 
 const PAGE_TITLES = {
   '/admin': 'داشبورد',
@@ -168,6 +169,9 @@ export default function AdminLayout({ children, onLogout }) {
         {/* Bottom */}
         {!collapsed && (
           <div style={{ padding: '6px 8px', borderTop: '1px solid var(--ad-side-b)' }}>
+            <div style={{ padding: '8px 12px 4px', fontSize: 10, color: 'var(--ad-text3)', fontFamily: 'monospace', direction: 'ltr', textAlign: 'center' }}>
+              v{APP_VERSION}
+            </div>
             <Link to="/" style={{
               display: 'flex', alignItems: 'center', gap: 10,
               padding: '9px 12px', borderRadius: 10, marginBottom: 2,

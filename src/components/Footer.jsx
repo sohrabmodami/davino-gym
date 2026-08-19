@@ -1,5 +1,6 @@
 import Logo from './Logo'
 import { useAdmin } from '../data/adminStore.jsx'
+import { APP_VERSION } from '../data/releases'
 
 const InstagramIcon = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -175,6 +176,9 @@ export default function Footer() {
           <p style={{ fontSize: 12, color: 'rgba(255,255,255,.2)' }}>
             © ۱۴۰۳ داوینو کلایمینگ — تمامی حقوق محفوظ است
           </p>
+          <span style={{ fontSize: 11, color: 'rgba(255,255,255,.25)', fontFamily: 'var(--font-latin)', letterSpacing: '.04em', direction: 'ltr' }}>
+            v{APP_VERSION}
+          </span>
           <a href="https://sohrabmodami.com" target="_blank" rel="noopener noreferrer"
             style={{ fontSize: 12, color: 'rgba(255,255,255,.3)', fontFamily: 'var(--font-latin)', letterSpacing: '.02em', direction: 'ltr', textDecoration: 'none', transition: 'color .2s' }}
             onMouseEnter={e => e.currentTarget.style.color = '#275EAA'}
