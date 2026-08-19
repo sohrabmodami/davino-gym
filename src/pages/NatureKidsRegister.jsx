@@ -5,7 +5,15 @@ import Logo from '../components/Logo'
 import BankCard from '../components/BankCard'
 import useSeo from '../hooks/useSeo'
 
-const PRICE = '۱،۲۵۰،۰۰۰'
+const PRICE = '۲،۵۰۰،۰۰۰'
+const TELEGRAM_PHONE = '09201246057'
+const TELEGRAM_DISPLAY = '۰۹۲۰۱۲۴۶۰۵۷'
+
+const CONSENT_PARAGRAPHS = [
+  'اینجانب با آگاهی کامل از ماهیت فعالیت سنگ‌نوردی و خطرات احتمالی آن، رضایت خود را برای حضور فرزندم در این برنامه اعلام می‌کنم.',
+  'همچنین تأیید می‌کنم فرزندم فاقد هرگونه بیماری، آسیب‌دیدگی یا شرایط جسمانی شناخته‌شده‌ای است که انجام فعالیت ورزشی و سنگ‌نوردی برای وی ممنوع یا محدودکننده باشد و متعهد می‌شوم در صورت وجود هرگونه شرایط خاص، مراتب را پیش از شروع برنامه به مسئولان اطلاع دهم.',
+  'با مطالعه نکات و مقررات ایمنی برنامه، متعهد به رعایت آن‌ها هستم.',
+]
 
 const GEAR = [
   'لباس مناسب و راحت برای فعالیت ورزشی',
@@ -194,10 +202,10 @@ export default function NatureKidsRegister() {
               <p style={{ fontSize: 14.5, color: 'var(--t60)', margin: '0 0 18px' }}>
                 برای نهایی شدن ثبت‌نام، مبلغ <strong style={{ color: 'var(--text)' }}>{PRICE} تومان</strong> را به کارت زیر واریز کنید:
               </p>
-              <BankCard />
+              <BankCard variant="natureKids" />
               <p style={{ fontSize: 14.5, color: 'var(--t60)', margin: 0 }}>
-                سپس تصویر رسید واریز را در پیام‌رسان بله یا تلگرام به شماره{' '}
-                <a href="tel:09201246057" dir="ltr" style={{ color: 'var(--accent)', fontWeight: 800, whiteSpace: 'nowrap' }}>0920&nbsp;124&nbsp;6057</a>
+                سپس لطفاً تصویر فیش واریزی را از طریق تلگرام به شماره{' '}
+                <a href={`tel:${TELEGRAM_PHONE}`} dir="ltr" style={{ color: 'var(--accent)', fontWeight: 800, whiteSpace: 'nowrap' }}>{TELEGRAM_DISPLAY}</a>
                 {' '}ارسال کنید تا ثبت‌نام شما قطعی شود.
               </p>
             </div>
@@ -211,7 +219,7 @@ export default function NatureKidsRegister() {
               <h1 style={{ fontSize: 'clamp(26px, 5vw, 38px)', lineHeight: 1.3, marginBottom: 12 }}>سنگ‌نوردی طبیعت ویژه کودکان</h1>
               <p style={{ color: 'var(--t60)', lineHeight: 1.9 }}>
                 آکادمی سنگ‌نوردی داوینو در نظر دارد برنامه آموزشی سنگ‌نوردی طبیعت ویژه کودکان را برگزار کند.
-                در این برنامه، کودکان در کنار تجربه حضور در طبیعت، با اصول اولیه سنگ‌نوردی در طبیعت آشنا می‌شوند.
+                در این برنامه، کودکان در کنار تجربه حضور در طبیعت، بر روی دیواره‌های طبیعی با حمایت مربیان سنگنوردی می‌کنند.
               </p>
             </div>
 
@@ -222,12 +230,16 @@ export default function NatureKidsRegister() {
                   <div className="v">دوشنبه ۲ شهریورماه</div>
                 </div>
                 <div className="nk-meta-item">
+                  <div className="k">ساعت حضور</div>
+                  <div className="v">۸ صبح</div>
+                </div>
+                <div className="nk-meta-item">
                   <div className="k">محل برگزاری</div>
                   <div className="v">منطقه گسیل، جاده چالوس</div>
                 </div>
                 <div className="nk-meta-item" style={{ gridColumn: '1 / -1' }}>
                   <div className="k">پذیرایی</div>
-                  <div className="v">یک وعده صبحانه مختصر برای شرکت‌کنندگان در نظر گرفته شده است.</div>
+                  <div className="v">یک وعده صبحانه مختصر برای کودکان در نظر گرفته شده است.</div>
                 </div>
                 <div className="nk-meta-item" style={{ gridColumn: '1 / -1' }}>
                   <div className="k">هزینه ثبت‌نام</div>
@@ -355,12 +367,33 @@ export default function NatureKidsRegister() {
                 )}
               </section>
 
+              <section className="nk-card">
+                <div className="nk-section-title">
+                  <span>۶</span>
+                  <h2>پرداخت و ارسال فیش</h2>
+                </div>
+                <p style={{ fontSize: 14.5, color: 'var(--t60)', lineHeight: 1.9, margin: '0 0 18px' }}>
+                  پس از ثبت‌نام، مبلغ <strong style={{ color: 'var(--text)' }}>{PRICE} تومان</strong> را به کارت زیر واریز کنید.
+                  سپس لطفاً تصویر فیش واریزی را از طریق تلگرام به شماره{' '}
+                  <a href={`tel:${TELEGRAM_PHONE}`} dir="ltr" style={{ color: 'var(--accent)', fontWeight: 800 }}>{TELEGRAM_DISPLAY}</a>
+                  {' '}ارسال کنید.
+                </p>
+                <BankCard variant="natureKids" />
+              </section>
+
               <section className="nk-card" style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+                <div className="nk-section-title" style={{ marginBottom: 4 }}>
+                  <span>۷</span>
+                  <h2>رضایت والدین</h2>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 4 }}>
+                  {CONSENT_PARAGRAPHS.map(text => (
+                    <p key={text} style={{ fontSize: 13.5, color: 'var(--t60)', lineHeight: 1.95, margin: 0 }}>{text}</p>
+                  ))}
+                </div>
                 <label className="nk-check">
                   <input type="checkbox" checked={consent} onChange={e => setConsent(e.target.checked)} />
-                  <span>
-                    به‌عنوان والد / ولی، رضایت خود را برای حضور کودک در این برنامه اعلام می‌کنم و فهرست وسایل و نکات ایمنی را مطالعه کرده‌ام.
-                  </span>
+                  <span>متن رضایت‌نامه را مطالعه کرده‌ام و می‌پذیرم.</span>
                 </label>
                 {error && (
                   <div id="nk-form-error" role="alert" style={{ fontSize: 13, color: '#ef4444', background: 'rgba(239,68,68,.1)', border: '1px solid rgba(239,68,68,.25)', padding: '12px 14px', borderRadius: 11, lineHeight: 1.7 }}>

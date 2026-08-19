@@ -85,7 +85,7 @@ const WORKSHOP_HEARD = new Set(['اینستاگرام', 'دوستان و آشن�
 const WORKSHOP_GENDERS = new Set(['پسر', 'دختر'])
 const NATURE_RELATIONS = new Set(['پدر', 'مادر', 'ولی'])
 const NATURE_HEARD = new Set(['اینستاگرام', 'دوستان و آشنایان', 'سایت داوینو', 'کانال تلگرام', 'سایر'])
-const NATURE_KIDS_PRICE = '۱،۲۵۰،۰۰۰'
+const NATURE_KIDS_PRICE = '۲،۵۰۰،۰۰۰'
 
 function encryptRegistration(reg) {
   const r = { ...reg }
