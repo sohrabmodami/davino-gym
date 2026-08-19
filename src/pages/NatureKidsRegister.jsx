@@ -103,7 +103,7 @@ export default function NatureKidsRegister() {
 
   useSeo({
     title: 'ثبت‌نام سنگ‌نوردی طبیعت کودکان | آکادمی داوینو',
-    description: 'ثبت‌نام برنامه آموزشی سنگ‌نوردی طبیعت ویژه کودکان — دوشنبه ۲ شهریور، منطقه گسیل، جاده چالوس.',
+    description: 'ثبت‌نام برنامه آموزشی سنگ‌نوردی طبیعت ویژه کودکان — چهارشنبه ۴ شهریور، منطقه گسیل، جاده چالوس.',
     keywords: 'سنگ‌نوردی کودکان, سنگ‌نوردی طبیعت, داوینو, گسیل, جاده چالوس',
   })
 
@@ -227,7 +227,7 @@ export default function NatureKidsRegister() {
               <div className="nk-meta">
                 <div className="nk-meta-item">
                   <div className="k">زمان برنامه</div>
-                  <div className="v">دوشنبه ۲ شهریورماه</div>
+                  <div className="v">چهارشنبه ۴ شهریورماه</div>
                 </div>
                 <div className="nk-meta-item">
                   <div className="k">ساعت حضور</div>
