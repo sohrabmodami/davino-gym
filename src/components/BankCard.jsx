@@ -1,16 +1,38 @@
 import { useState } from 'react'
 
-const CARD_NUMBER = '5022291080100272'
-const CARD_NUMBER_DISPLAY = '5022  2910  8010  0272'
-const CARD_HOLDER = 'الهه ویشه'
+const PRESETS = {
+  workshop: {
+    number: '5022291080100272',
+    display: '5022  2910  8010  0272',
+    holder: 'الهه ویشه',
+    bankLabel: 'DEBIT',
+    brand: 'davino',
+    themeClass: 'ws-bank-card--blue',
+  },
+  natureKids: {
+    number: '6219861884441865',
+    display: '6219  8618  8444  1865',
+    holder: 'محمد مهدی بنهری',
+    bankLabel: 'blu bank',
+    brand: 'blu',
+    themeClass: 'ws-bank-card--blu',
+  },
+}
 
 const CSS = `
   .ws-bank-card {
     position: relative; width: 100%; max-width: 380px; margin: 0 auto 18px;
     aspect-ratio: 1.586; border-radius: 18px; overflow: hidden;
-    background: linear-gradient(145deg, #163a6e 0%, #275EAA 48%, #1E4A8A 100%);
-    color: #fff; box-shadow: 0 18px 40px rgba(39, 94, 170, .32), 0 2px 0 rgba(255,255,255,.08) inset;
+    color: #fff; box-shadow: 0 18px 40px rgba(0, 0, 0, .22), 0 2px 0 rgba(255,255,255,.08) inset;
     text-align: left; direction: ltr; isolation: isolate;
+  }
+  .ws-bank-card--blue {
+    background: linear-gradient(145deg, #163a6e 0%, #275EAA 48%, #1E4A8A 100%);
+    box-shadow: 0 18px 40px rgba(39, 94, 170, .32), 0 2px 0 rgba(255,255,255,.08) inset;
+  }
+  .ws-bank-card--blu {
+    background: linear-gradient(145deg, #6b4a28 0%, #a67c52 42%, #8b6238 100%);
+    box-shadow: 0 18px 40px rgba(107, 74, 40, .35), 0 2px 0 rgba(255,255,255,.1) inset;
   }
   .ws-bank-card::before {
     content: ''; position: absolute; inset: -40% -20% auto auto; width: 70%; height: 90%;
@@ -60,13 +82,20 @@ const CSS = `
     backdrop-filter: blur(6px); cursor: pointer; white-space: nowrap;
   }
   .ws-bank-copy:hover { background: rgba(255,255,255,.16); }
+  .ws-bank-blu-logo {
+    font: 800 22px var(--font-latin); letter-spacing: -.02em; line-height: 1;
+  }
+  .ws-bank-blu-tag {
+    font: 600 9px var(--font-latin); letter-spacing: .04em; color: rgba(255,255,255,.55); margin-top: 4px;
+  }
 `
 
-export default function BankCard() {
+export default function BankCard({ variant = 'workshop' }) {
+  const preset = PRESETS[variant] || PRESETS.workshop
   const [copied, setCopied] = useState(false)
   const copyNumber = async () => {
     try {
-      await navigator.clipboard.writeText(CARD_NUMBER)
+      await navigator.clipboard.writeText(preset.number)
       setCopied(true)
       setTimeout(() => setCopied(false), 1800)
     } catch { /* ignore */ }
@@ -74,12 +103,19 @@ export default function BankCard() {
   return (
     <>
       <style>{CSS}</style>
-      <div className="ws-bank-card" role="img" aria-label={`شماره کارت ${CARD_NUMBER_DISPLAY} به نام ${CARD_HOLDER}`}>
+      <div className={`ws-bank-card ${preset.themeClass}`} role="img" aria-label={`شماره کارت ${preset.display} به نام ${preset.holder}`}>
         <div className="ws-bank-shine" aria-hidden="true" />
         <div className="ws-bank-inner">
           <div className="ws-bank-top">
             <div>
-              <img src="/davino-logo-light.png" alt="Davino" style={{ height: 28, width: 'auto', display: 'block' }} />
+              {preset.brand === 'blu' ? (
+                <div>
+                  <div className="ws-bank-blu-logo">blu</div>
+                  <div className="ws-bank-blu-tag">bank, but lovely</div>
+                </div>
+              ) : (
+                <img src="/davino-logo-light.png" alt="Davino" style={{ height: 28, width: 'auto', display: 'block' }} />
+              )}
               <div style={{ marginTop: 14 }} className="ws-bank-chip" aria-hidden="true" />
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 10 }}>
@@ -89,15 +125,15 @@ export default function BankCard() {
               <button type="button" className="ws-bank-copy" onClick={copyNumber}>{copied ? 'کپی شد' : 'کپی شماره'}</button>
             </div>
           </div>
-          <div className="ws-bank-number">{CARD_NUMBER_DISPLAY}</div>
+          <div className="ws-bank-number">{preset.display}</div>
           <div className="ws-bank-bottom">
             <div>
               <div className="ws-bank-label">Card Holder</div>
-              <div className="ws-bank-name">{CARD_HOLDER}</div>
+              <div className="ws-bank-name">{preset.holder}</div>
             </div>
             <div style={{ textAlign: 'right' }}>
               <div className="ws-bank-label">Bank Card</div>
-              <div style={{ font: '700 12px var(--font-latin)', color: 'rgba(255,255,255,.7)', letterSpacing: '.08em' }}>DEBIT</div>
+              <div style={{ font: '700 12px var(--font-latin)', color: 'rgba(255,255,255,.7)', letterSpacing: '.08em' }}>{preset.bankLabel}</div>
             </div>
           </div>
         </div>
